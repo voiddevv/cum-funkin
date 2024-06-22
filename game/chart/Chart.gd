@@ -38,14 +38,14 @@ static func load_chart(name:String,diff:String):
 				if sexi > 0: 
 					_time += (60.0/_bpm) * 4.0
 				if sex.get("changeBPM",false):
-					_chart.bpms.append(BpmChangeEvent.new(_time,sex.get("bpm",100.0)))
+					_chart.bpms.append(BpmChangeEvent.new(_time,sex.get("bpm",100.0),16*sexi))
 				sexi += 1
 				
 				for cum in sex.sectionNotes:
 					var player_id:int = int(cum[1])/4
 					if sex.mustHitSection:
 						player_id += 1
-					var note_data:NoteData = NoteData.new(cum[0]*0.001,int(cum[1])%4,cum[2]*0.001,"normal",player_id%_chart.meta.players)
+					var note_data:NoteData = NoteData.new(cum[0]*0.001,int(cum[1])%4,(cum[2])*0.001,"normal",player_id%_chart.meta.players)
 					_chart.notes.append(note_data)
 	return _chart
 

@@ -5,6 +5,8 @@ func _ready():
 	save = load_data()
 	save_data()
 	init_binds()
+	VolumeMan.volume = get_data("volume",1.0)
+	
 func get_data(setting:String,fb:Variant = null):
 	var _ret = save.get(setting)
 	if _ret == null:
@@ -15,17 +17,16 @@ func set_data(setting:String,value:Variant):
 	save.set(setting,value)
 
 func save_data():
-	var fa = FileAccess.open(SETTINGS_PATH,FileAccess.WRITE)
-	fa.store_string(var_to_str(save).replace("\n",""))
-	fa.flush()
+	ResourceSaver.save(save,SETTINGS_PATH)
 
 func load_data() -> SaveDat:
 	var _ret:SaveDat = SaveDat.new()
 	if FileAccess.file_exists(SETTINGS_PATH):
-		_ret = str_to_var(FileAccess.get_file_as_string(SETTINGS_PATH))
+		_ret = ResourceLoader.load(SETTINGS_PATH)
 	if !is_instance_valid(_ret):
 		print("fallbnac daba")
 		_ret = SaveDat.new()
+		save_data()
 	print("DATA LOADED: %s"%_ret)
 	return _ret
 func init_binds():

@@ -23,6 +23,7 @@ driver/enable_input=true
 [autoload]
 
 SaveMan="*res://game/save/SaveMan.gd"
+VolumeMan="*res://game/volume_man.tscn"
 Conductor="*res://game/Conductor.gd"
 Fps="*res://game/FPS.tscn"
 
@@ -56,3 +57,16 @@ note_right={
 "deadzone": 0.5,
 "events": []
 }
+volume_down={
+"deadzone": 0.5,
+"events": []
+}
+volume_up={
+"deadzone": 0.5,
+"events": []
+}
+
+[rendering]
+
+gl_compatibility/force_angle_on_devices=[]
+viewport/hdr_2d=true

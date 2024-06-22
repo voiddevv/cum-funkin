@@ -3,12 +3,14 @@ static var chart:Chart = null
 @onready var ui_layer = $"UI Layer"
 @onready var tracks = $tracks
 @onready var players = $"UI Layer/players"
-
+var song_player:AudioStreamPlayer = null ## is set on play music shit
 
 func _ready():
 	Conductor.beat_hit.connect(beat_hitt)
 	Conductor.step_hit.connect(step_hitt)
-	chart = Chart.load_chart("silly-billy","normal")
+	chart = Chart.load_chart("manual-blast","hard")
+	for i in chart.bpms:
+		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm
 	var q = 0
 	for i:Player in players.get_children():
@@ -32,6 +34,7 @@ func _ready():
 		player.stream.set_sync_stream(s+1,i)
 		s += 1
 	player.play()
+	song_player = player
 		
 #endregion
 #region stage shits
@@ -56,8 +59,17 @@ func _ready():
 	
 	
 #endregion
+var last_stream_time:float = 0.0
 func _process(delta):
+	
+	if last_stream_time != 0:
+		if song_player.get_playback_position() < last_stream_time:
+			get_tree().change_scene_to_file("res://titlescreen.tscn")
+	# some dumb code to fix sync stream for beta 2 till this gets patched :3
+	
 	Conductor.update()
+	last_stream_time = song_player.get_playback_position()
+	
 
 func beat_hitt(b):
 	pass
@@ -69,6 +81,10 @@ func step_hitt(b):
 
 func _input(event):
 	if event is InputEventKey:
+		if event.keycode == KEY_F3:
+			song_player.seek(song_player.get_playback_position() + 30)
+			Conductor.time += 30.0
+			Conductor.update()
 		if event.keycode == KEY_F5:
 			if not event.is_echo():
 				if event.is_pressed(): 

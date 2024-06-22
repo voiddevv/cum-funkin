@@ -1,4 +1,4 @@
-class_name SaveDat extends Object
+class_name SaveDat extends Resource
 @export var fps:int = 120:
 	set(v): 
 		fps = v
@@ -13,9 +13,17 @@ class_name SaveDat extends Object
 @export var downscroll:bool = true
 @export var center_notefeild:bool = false
 @export var scroll_speed:float = 1.0
+@export var volume:float = 1.0:
+	set(v):
+		volume = v
+		AudioServer.set_bus_volume_db(0,linear_to_db(volume))
+		
 @export var keybinds:Dictionary = {
 	"note_left" : ["left","d"],
 	"note_down" : ["down","f"],
 	"note_up" : ["up","j"],
 	"note_right" : ["right","k"],
+	"volume_down" : ["minus","kp subtract"],
+	"volume_up" : ["equal","kp add"]
+	
 }
