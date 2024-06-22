@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://sogs1kxwes4l"]
+
+[ext_resource type="Script" path="res://titlescreen.gd" id="1_66eyn"]
+[ext_resource type="Texture2D" uid="uid://q5njjjkw7ikf" path="res://icon.svg" id="1_d5i2i"]
+
+[sub_resource type="Shader" id="Shader_5rj16"]
+code = "shader_type canvas_item;
+vec2 rotate(vec2 uv, vec2 pivot, float angle)
+{
+	mat2 rotation = mat2(vec2(sin(angle), -cos(angle)),
+						vec2(cos(angle), sin(angle)));
+	
+	uv -= pivot;
+	uv = uv * rotation;
+	uv += pivot;
+	return uv;
+}
+void vertex() {
+	VERTEX = rotate(VERTEX.xy,vec2(0.5),TIME*PI/4.0);
+	
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR = texture(TEXTURE,fract(UV*5.0));
+	// Called for every pixel the material is visible on.
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgrug"]
+shader = SubResource("Shader_5rj16")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dsleg"]
+font_size = 64
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Titlescreen" type="Node2D"]
+script = ExtResource("1_66eyn")
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mgrug")
+position = Vector2(640, 360)
+texture = ExtResource("1_d5i2i")
+
+[node name="layer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="layer"]
+offset_right = 1280.0
+offset_bottom = 115.0
+text = "WIP MENU"
+label_settings = SubResource("LabelSettings_dsleg")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="layer"]
+offset_top = 536.0
+offset_right = 1280.0
+offset_bottom = 651.0
+text = "PRESS {UI_ENETER}"
+label_settings = SubResource("LabelSettings_dsleg")
+horizontal_alignment = 1

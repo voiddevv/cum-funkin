@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://duatui684ppy3"]
+
+[ext_resource type="Script" path="res://game/player/Player.gd" id="1_cvkhn"]
+[ext_resource type="Script" path="res://game/player/NoteField.gd" id="3_cyb7x"]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("notefield")]
+script = ExtResource("1_cvkhn")
+notefield = NodePath("NoteField")
+
+[node name="NoteField" type="Node2D" parent="."]
+script = ExtResource("3_cyb7x")

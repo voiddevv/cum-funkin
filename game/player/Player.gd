@@ -1,0 +1,74 @@
+class_name Player extends Node2D
+@export var notefield:NoteField
+@export var does_input:bool = true
+@export var autoplay:bool = false
+signal notehit(note)
+var notehit_callback:Callable = note_hit
+var pressed:Array[bool] = []
+var keycount:int = 4
+var note_actions:PackedStringArray = ["note_left","note_down","note_up","note_right"]
+var id:int = -1
+var chars:Array[Character] = []
+## ffmpreg
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	Input.use_accumulated_input = false
+	pressed.resize(keycount)
+	pressed.fill(false)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	for note:Note in notefield.notes.get_children():
+		if note.was_hit:
+			note.sprite.visible = false
+			note.sustain_length -= delta
+			if note.sustain_length <= 0.0:
+				note.queue_free()
+			else:
+				note.sustain_tick_timer -= delta
+				if note.sustain_tick_timer <= -delta:
+					notehit_callback.call(note)
+					notehit.emit(note)
+		if note.time < Conductor.time and autoplay:
+			note.was_hit = true
+			notehit_callback.call(note)
+			notehit.emit(note)
+			
+	pass
+func ev_to_dir(ev:InputEvent) -> int:
+	var i = 0
+	for act in note_actions:
+		if ev.is_action(note_actions[i]):
+			return i
+		i += 1
+	return -1
+
+func _unhandled_input(event):
+	var dir:int = ev_to_dir(event)
+	if dir == -1 or event.is_echo() or !does_input:
+		return
+	pressed[dir] = event.is_pressed()
+	## note shit do later
+	
+	var strum = notefield.strums.get_child(dir)
+	if event.is_pressed():
+		if notefield:
+			var hit_notes = notefield.notes.get_children()
+			hit_notes = hit_notes.filter(func(n:Note): if n.can_hit and not n.too_late and not n.missed and not n.was_hit and n.column == dir: return n)
+			if not hit_notes.is_empty():
+				Conductor.update()
+				hit_notes.front().was_hit = true
+				notehit_callback.call(hit_notes.front())
+		if not strum.animation.contains("confirm"): 
+			notefield.strums.get_child(dir).play_anim(Strum.PRESSED)
+	else:
+		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
+func note_hit(note:Note):
+	note.sustain_tick_timer = Conductor.step_crochet*1.5
+	var strum:Strum = note.notefield.strums.get_child(note.column)
+	strum.play_anim(Strum.CONFIRM,true)
+	for i in chars:
+		i.sing(note.column)
+
+func rating_shit(hit_time:float):
+	pass

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://37hhlhkot4na"]
+
+[ext_resource type="Script" path="res://game/player/PlayField.gd" id="1_u1bg2"]
+[ext_resource type="Script" path="res://game/player/NoteField.gd" id="2_ide3r"]
+
+[node name="PlayField" type="Node2D"]
+script = ExtResource("1_u1bg2")
+does_input = true
+
+[node name="NoteField" type="Node2D" parent="."]
+script = ExtResource("2_ide3r")

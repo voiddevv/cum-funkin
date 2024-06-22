@@ -1,0 +1,7 @@
+# Godot 4+ specific ignores
+.godot/
+.vs/
+bin/
+*.tmp
+*.zip
+~*

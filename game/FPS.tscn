@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cldmxm7mafjaw"]
+
+[ext_resource type="Script" path="res://game/FPS.gd" id="1_ndocp"]
+
+[node name="Fps" type="CanvasLayer"]
+layer = 128
+script = ExtResource("1_ndocp")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
+text = "FPS:"

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4lu5fw4w2dij"]
+
+[ext_resource type="Script" path="res://game/notes/Note.gd" id="1_ubnsc"]
+[ext_resource type="Texture2D" uid="uid://dlksulo0th8h8" path="res://sus.png" id="2_c3fkb"]
+[ext_resource type="SpriteFrames" uid="uid://bu4em153wbot4" path="res://assets/NOTE_assets.res" id="2_gltk4"]
+
+[node name="Normal" type="Node2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_ubnsc")
+
+[node name="sustain" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 220)
+width = 50.0
+texture = ExtResource("2_c3fkb")
+texture_mode = 1
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_gltk4")
+animation = &"left"

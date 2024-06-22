@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpda1dqxbimtc"]
+
+[ext_resource type="Script" path="res://game/player/NoteField.gd" id="1_d11d0"]
+
+[node name="NoteField" type="Node2D"]
+position = Vector2(8, 0)
+script = ExtResource("1_d11d0")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ChartMeta" load_steps=5 format=3 uid="uid://cl31o2ai5m7u2"]
+
+[ext_resource type="Script" path="res://game/chart/ChartMeta.gd" id="1_j7mbi"]
+[ext_resource type="AudioStream" uid="uid://cdy1ytbs3fnhw" path="res://assets/songs/silly-billy/Inst.ogg" id="1_y55jn"]
+[ext_resource type="PackedScene" uid="uid://cyd7777vg0jb3" path="res://game/stages/stage.tscn" id="3_51t10"]
+[ext_resource type="AudioStream" uid="uid://dkaqvpr055ud" path="res://assets/songs/silly-billy/Voices.ogg" id="3_sq0yq"]
+
+[resource]
+script = ExtResource("1_j7mbi")
+inst = ExtResource("1_y55jn")
+voices = Array[AudioStream]([ExtResource("3_sq0yq")])
+format = 0
+stage = ExtResource("3_51t10")
+players = 2

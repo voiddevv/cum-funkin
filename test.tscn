@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddt0pkyg6v64f"]
+
+[ext_resource type="Texture2D" uid="uid://dlksulo0th8h8" path="res://sus.png" id="2_t3kmu"]
+
+[sub_resource type="GDScript" id="GDScript_flc5q"]
+script/source = "extends Node2D
+#func _ready():
+	#print(-0.00000001)
+	#var img:Image = sus.texture.get_image()
+	#img.rotate_90(CLOCKWISE)
+	#img.save_png(\"res://sus.png\")
+
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmsyb"]
+albedo_texture = ExtResource("2_t3kmu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pf8yr"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_rnli4"]
+material = SubResource("StandardMaterial3D_pf8yr")
+
+[sub_resource type="GDScript" id="GDScript_xqai5"]
+script/source = "extends MeshInstance3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Test" type="Node2D"]
+script = SubResource("GDScript_flc5q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.181931, 0.325534, -0.927863, -0.0508043, 0.945462, 0.321747, 0.981998, -0.0113963, 0.188547, -1.27451, 2.44879, 0.818787)
+material_override = SubResource("StandardMaterial3D_lmsyb")
+mesh = SubResource("QuadMesh_rnli4")
+skeleton = NodePath("")
+script = SubResource("GDScript_xqai5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0117982, 0.012443, -0.999853, 0, 0.999923, 0.0124439, 0.99993, -0.000146815, 0.0117973, -4.7661, 2.18635, -0.0210052)
