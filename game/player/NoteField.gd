@@ -55,7 +55,10 @@ func queue_notes():
 		notes.add_child(note)
 		note.sprite.play(Strum.column_to_str(note.column))
 		note.global_position.x = strums.get_child(note.column).global_position.x
-		note.sustain.points[1].y = ((450*note.og_sustain_length)*note.scroll_speed*down_scroll_mult)/0.7
+		note.sustain.points[1].y = (((450*note.og_sustain_length)*note.scroll_speed*down_scroll_mult)/note.scale.y)
+		note.tail.position = note.sustain.get_point_position(1) + Vector2(0,32)*down_scroll_mult
+		if down_scroll_mult == -1:
+			note.tail.flip_v = true
 		_i += 1
 		note_index += 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,3 +76,5 @@ func _process(delta):
 		if note.was_hit:
 			note.global_position = strum.global_position
 			note.sustain.points[1].y = ((450*note.sustain_length)*note.scroll_speed*down_scroll_mult)/note.scale.y
+			note.tail.position = note.sustain.get_point_position(1) + Vector2(0,32)*down_scroll_mult
+			

@@ -1,7 +1,8 @@
 class_name Note extends Node2D
 ## nodes ##
 @onready var sprite:AnimatedSprite2D = $sprite
-@onready var sustain = $sustain
+@onready var sustain:Line2D = $sustain
+@onready var tail: Sprite2D = $tail
 var notefield:NoteField = null
 ## backend ##
 var cumlumn:int:
@@ -13,7 +14,10 @@ var column:int
 
 var og_sustain_length:float
 
-var sustain_length:float
+var sustain_length:float:
+	set(v):
+		sustain_length = v
+		queue_redraw()
 
 var sustain_ticking:bool = false
 

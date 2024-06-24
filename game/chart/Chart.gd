@@ -10,7 +10,9 @@ var notes:Array[NoteData] = []
 var bpms:Array[BpmChangeEvent] = []
 var scroll_speed:float = 1.0
 
-
+var bf:StringName = "bf"
+var cpu:StringName = "dad"
+var speaker:StringName = "gf"
 static func load_chart(name:String,diff:String):
 	
 	var _chart:Chart = Chart.new()
@@ -26,6 +28,13 @@ static func load_chart(name:String,diff:String):
 			var exists:bool = ResourceLoader.exists(chart_path)
 			assert(exists,"CHART DOES NOT EXIST IN ASSETS")
 			var raw:Dictionary = load(chart_path).data.song
+			_chart.cpu = raw.get("player2","dad")
+			_chart.bf = raw.get("player1","bf")
+			_chart.speaker = raw.get("gfVersion","gf")
+			if raw.has("player3"):
+				_chart.speaker = raw.get("player3","gf")
+				
+			
 			_chart.bpms.append(BpmChangeEvent.new(0.0,float(raw.get("bpm",100.0))))
 			_chart.scroll_speed = raw.get("speed",1.0)
 			var sexi:int = 0

@@ -1,6 +1,4 @@
 extends Node2D
-var update_thread:Thread = Thread.new()
-
 signal beat_hit(beat:int)
 signal step_hit(step:int)
 var audio:AudioStreamPlayer = null
@@ -29,7 +27,7 @@ var stepi:int:
 	get:
 		return floor(step)
 var _last_time:float = 0.0
-var _last_change:BpmChangeEvent = null
+var _last_change:BpmChangeEvent = BpmChangeEvent.new()
 
 func queue_bpm_change(change_event:BpmChangeEvent):
 	if not bpm_changes.has(change_event):
@@ -59,13 +57,14 @@ func update():
 		_last_change = BpmChangeEvent.new(0.0,bpm,0.0)
 	beat = _last_change.step/4.0 + ((time - _last_change.time)/beat_crochet)
 	step = _last_change.step + ((time - _last_change.time)/step_crochet)
+	## some of this code i dont know how it works and i made it sorry :[
 	if floori(step) != floori(last_step):
-		var step_diff:int = step - last_step
-		for i in range(step,step + step_diff+1):
+		var step_diff:int = (step - last_step)
+		for i in range(step - step_diff -1,step):
 			step_hit.emit(floor(i))
 	if floori(beat) != floori(last_beat):
-		var beat_diff:int = beat - last_beat
-		for i in range(beat,beat + beat_diff+1):
+		var beat_diff:int = (beat - last_beat)
+		for i in range(beat - beat_diff - 1,beat):
 			beat_hit.emit(floori(i))
 	_last_time += delta
 func reset():

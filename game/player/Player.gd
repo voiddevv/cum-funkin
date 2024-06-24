@@ -22,7 +22,7 @@ func _process(delta):
 		if note.was_hit:
 			note.sprite.visible = false
 			note.sustain_length -= delta
-			if note.sustain_length <= 0.0:
+			if note.sustain_length <= -delta:
 				note.queue_free()
 			else:
 				note.sustain_tick_timer -= delta

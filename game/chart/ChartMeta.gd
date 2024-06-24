@@ -3,4 +3,5 @@ class_name ChartMeta extends Resource
 @export var voices:Array[AudioStream] = []
 @export var format:Chart.ChartFormat = 0
 @export var stage:PackedScene = PackedScene.new()
+@export var song_scripts:Array[Script] = []
 @export var players:int = 2

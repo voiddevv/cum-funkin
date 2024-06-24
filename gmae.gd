@@ -4,7 +4,9 @@ static var chart:Chart = null
 @onready var tracks = $tracks
 @onready var players = $"UI Layer/players"
 var song_player:AudioStreamPlayer = null ## is set on play music shit
-
+var stage:Stage = null
+## remove later
+var song_script_objs:Array[Object] = []
 func _ready():
 	Conductor.beat_hit.connect(beat_hitt)
 	Conductor.step_hit.connect(step_hitt)
@@ -43,25 +45,29 @@ func _ready():
 		col.size = Vector2(1920,1080)
 		col.color = Color.BLACK
 		chart.meta.stage.pack(col)
-	var stage:Stage = chart.meta.stage.instantiate()
+	stage = chart.meta.stage.instantiate()
 	add_child(stage,true,Node.INTERNAL_MODE_FRONT)
 	
 #region character shits
-	var bf:Character = preload("res://game/characters/bf.tscn").instantiate()
+	var bf:Character = load("res://game/characters/%s.tscn"%chart.bf).instantiate()
 	bf.position = stage.player.position
-	var dad =  preload("res://game/characters/dad.tscn").instantiate()
+	var dad =  load("res://game/characters/%s.tscn"%chart.cpu).instantiate()
 	dad.position = stage.cpu.position
 	stage.add_child(bf)
 	stage.add_child(dad)
 	players.get_child(1).chars.append(bf)
 	players.get_child(0).chars.append(dad)
 #endregion
-	
-	
+## song script stuff
+	for i:Script in chart.meta.song_scripts:
+		var type = i.get_instance_base_type()
+		var obj = ClassDB.instantiate(type)
+		obj.set_script(i)
+		if obj is Node:
+			add_child(obj)
 #endregion
 var last_stream_time:float = 0.0
 func _process(delta):
-	
 	if last_stream_time != 0:
 		if song_player.get_playback_position() < last_stream_time:
 			get_tree().change_scene_to_file("res://titlescreen.tscn")
@@ -76,17 +82,23 @@ func beat_hitt(b):
 	#print(b)
 
 func step_hitt(b):
+	#if b == 16:
+		#var ch = preload("res://game/characters/bf.tscn").instantiate()
+		#stage.add_child(ch)
+		#ch.position = stage.cpu.position*1.05
+		#players.get_child(0).chars.append(ch)
 	pass
 	#print(b)
 
 func _input(event):
 	if event is InputEventKey:
-		if event.keycode == KEY_F3:
-			song_player.seek(song_player.get_playback_position() + 30)
-			Conductor.time += 30.0
-			Conductor.update()
-		if event.keycode == KEY_F5:
-			if not event.is_echo():
-				if event.is_pressed(): 
-					Conductor.time = 0
-					get_tree().reload_current_scene()
+		if event.is_pressed():
+			if event.keycode == KEY_F3:
+				song_player.seek(song_player.get_playback_position() + 30)
+				Conductor.time += 30.0
+				Conductor.update()
+			if event.keycode == KEY_F5:
+				if not event.is_echo():
+					if event.is_pressed(): 
+						Conductor.time = 0
+						get_tree().reload_current_scene()
