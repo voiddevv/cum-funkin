@@ -19,20 +19,23 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	for note:Note in notefield.notes.get_children():
+		if autoplay:
+			if note.time < Conductor.time and not note.was_hit:
+				note.was_hit = true
+				notehit_callback.call(note)
+				notehit.emit(note)
+				note.sustain_ticking = true
 		if note.was_hit:
 			note.sprite.visible = false
 			note.sustain_length -= delta
+			if note.sustain_ticking:
+				note.sustain_tick_timer -= delta
 			if note.sustain_length <= -delta:
 				note.queue_free()
-			else:
-				note.sustain_tick_timer -= delta
-				if note.sustain_tick_timer <= -delta:
-					notehit_callback.call(note)
-					notehit.emit(note)
-		if note.time < Conductor.time and autoplay:
-			note.was_hit = true
-			notehit_callback.call(note)
-			notehit.emit(note)
+			if note.sustain_tick_timer <= 0.0:
+				notehit_callback.call(note)
+				notehit.emit(note)
+
 			
 	pass
 func ev_to_dir(ev:InputEvent) -> int:
@@ -58,6 +61,7 @@ func _unhandled_input(event):
 			if not hit_notes.is_empty():
 				Conductor.update()
 				hit_notes.front().was_hit = true
+				hit_notes.front().sustain_ticking = true
 				notehit_callback.call(hit_notes.front())
 		if not strum.animation.contains("confirm"): 
 			notefield.strums.get_child(dir).play_anim(Strum.PRESSED)
@@ -67,8 +71,10 @@ func note_hit(note:Note):
 	note.sustain_tick_timer = Conductor.step_crochet*1.5
 	var strum:Strum = note.notefield.strums.get_child(note.column)
 	strum.play_anim(Strum.CONFIRM,true)
+	if not strum.animation_finished.is_connected(strum.play_anim.bind(0)) and autoplay:
+		strum.animation_finished.connect(strum.play_anim.bind(0),CONNECT_ONE_SHOT)
+			
 	for i in chars:
 		i.sing(note.column)
-
 func rating_shit(hit_time:float):
 	pass

@@ -26,7 +26,7 @@ func _ready():
 		strum.play_anim(Strum.STATIC)
 		strums.add_child(strum)
 #endregion
-	pass # Replace with function body.
+
 var note_index:int = 0
 func queue_notes():
 	var last_data:NoteData
