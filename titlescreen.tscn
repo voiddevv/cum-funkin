@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://sogs1kxwes4l"]
+[gd_scene load_steps=7 format=3 uid="uid://sogs1kxwes4l"]
 
 [ext_resource type="Script" path="res://titlescreen.gd" id="1_66eyn"]
 [ext_resource type="Texture2D" uid="uid://q5njjjkw7ikf" path="res://icon.svg" id="1_d5i2i"]
+[ext_resource type="SpriteFrames" path="res://assets/titlescreen/logoBumpin.res" id="3_yhsu3"]
 
 [sub_resource type="Shader" id="Shader_5rj16"]
 code = "shader_type canvas_item;
@@ -25,7 +26,7 @@ void fragment() {
 	vec2 uv = UV;
 	
 	
-	COLOR = texture(TEXTURE,fract(tan(uv * PI)));
+	COLOR = texture(TEXTURE,fract(cos(tan(uv * PI))));
 	// Called for every pixel the material is visible on.
 }"
 
@@ -44,6 +45,11 @@ script = ExtResource("1_66eyn")
 material = SubResource("ShaderMaterial_mgrug")
 position = Vector2(640, 360)
 texture = ExtResource("1_d5i2i")
+
+[node name="logo" type="AnimatedSprite2D" parent="."]
+position = Vector2(640, 360)
+sprite_frames = ExtResource("3_yhsu3")
+animation = &"logo bumpin"
 
 [node name="layer" type="CanvasLayer" parent="."]
 
