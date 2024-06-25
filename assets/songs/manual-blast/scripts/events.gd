@@ -21,7 +21,4 @@ func step(_step:int) -> void:
 			i.queue_free()
 		cpu_player.chars.clear()
 		cpu_player.chars.append(newchar)
-		
 		newchar.position = game.stage.cpu.position
-		
-	pass
