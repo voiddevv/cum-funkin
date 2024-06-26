@@ -36,11 +36,14 @@ func _process(delta):
 		if note.was_hit and not note.missed:
 			
 			note.sprite.visible = false
-			if not pressed[note.column] and not note.missed and not autoplay:
-				note.missed = true
-				notemiss_callback.call(note)
-				notemiss.emit(note)
-				return
+			if not pressed[note.column]:
+				if not note.missed:
+					if note.sustain_length <= Conductor.step_crochet:
+						if not autoplay:
+							note.missed = true
+							notemiss_callback.call(note)
+							notemiss.emit(note)
+							return
 			note.sustain_length -= delta
 			if note.sustain_ticking:
 				note.sustain_tick_timer -= delta

@@ -46,16 +46,21 @@ func _ready():
 		chart.meta.stage.pack(col)
 	stage = chart.meta.stage.instantiate()
 	add_child(stage,true,Node.INTERNAL_MODE_FRONT)
-	
+#endregion
 #region character shits
-	var bf:Character = load("res://game/characters/%s.tscn"%chart.bf).instantiate()
-	bf.position = stage.player.position
-	var dad =  load("res://game/characters/%s.tscn"%chart.cpu).instantiate()
-	dad.position = stage.cpu.position
-	stage.add_child(bf)
-	stage.add_child(dad)
-	players.get_child(1).chars.append(bf)
-	players.get_child(0).chars.append(dad)
+	if chart.meta.player_character:
+		if chart.meta.player_character.can_instantiate():
+			var bf:Character = chart.meta.player_character.instantiate()
+			bf.position = stage.player.position
+			stage.add_child(bf)
+			players.get_child(1).chars.append(bf)
+			
+	if chart.meta.cpu_character:
+		if chart.meta.cpu_character.can_instantiate():
+			var dad = chart.meta.cpu_character.instantiate()
+			dad.position = stage.cpu.position
+			stage.add_child(dad)
+			players.get_child(0).chars.append(dad)
 #endregion
 ## song script stuff
 	for i:Script in chart.meta.song_scripts:
