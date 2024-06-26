@@ -8,6 +8,7 @@ var stage:Stage = null
 ## remove later
 var song_script_objs:Array[Object] = []
 func _ready():
+	Conductor.reset()
 	chart = Chart.load_chart("manual-blast","hard")
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
