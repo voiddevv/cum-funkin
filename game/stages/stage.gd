@@ -15,18 +15,5 @@ class_name Stage extends Node2D
  
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Conductor.beat_hit.connect(beat_hit)
 	if camera:
 		camera.make_current()
-	pass # Replace with function body.
-
-func beat_hit(beat:int):
-	if beat%4 == 0:
-		if camera:
-			camera.zoom += Vector2.ONE*0.05
-	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if camera:
-		camera.zoom = lerp(camera.zoom,Vector2(zoom,zoom),delta*lerp_speed)
-	pass

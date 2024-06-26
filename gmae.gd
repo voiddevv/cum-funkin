@@ -8,8 +8,6 @@ var stage:Stage = null
 ## remove later
 var song_script_objs:Array[Object] = []
 func _ready():
-	Conductor.beat_hit.connect(beat_hitt)
-	Conductor.step_hit.connect(step_hitt)
 	chart = Chart.load_chart("manual-blast","hard")
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
@@ -62,33 +60,23 @@ func _ready():
 	for i:Script in chart.meta.song_scripts:
 		var type = i.get_instance_base_type()
 		var obj = ClassDB.instantiate(type)
+		print(obj)
 		obj.set_script(i)
+		print(i)
 		if obj is Node:
 			add_child(obj)
 #endregion
 var last_stream_time:float = 0.0
 func _process(delta):
 	if last_stream_time != 0:
-		if song_player.get_playback_position() < last_stream_time:
+		if (song_player.get_playback_position()) < last_stream_time:
 			get_tree().change_scene_to_file("res://titlescreen.tscn")
-	# some dumb code to fix sync stream for beta 2 till this gets patched :3
+		# some dumb code to fix sync stream for beta 2 till this gets patched :3
 	
-	Conductor.update()
-	last_stream_time = song_player.get_playback_position()
+	Conductor.update(delta)
+	last_stream_time = (song_player.get_playback_position())
 	
 
-func beat_hitt(b):
-	pass
-	#print(b)
-
-func step_hitt(b):
-	#if b == 16:
-		#var ch = preload("res://game/characters/bf.tscn").instantiate()
-		#stage.add_child(ch)
-		#ch.position = stage.cpu.position*1.05
-		#players.get_child(0).chars.append(ch)
-	pass
-	#print(b)
 
 func _input(event):
 	if event is InputEventKey:

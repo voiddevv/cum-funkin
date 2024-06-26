@@ -6,7 +6,8 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Conductor.beat_hit.connect(beat)
-	Conductor.time = 0
+	Conductor.reset()
+	
 
 func _process(delta):
 	Conductor.update()

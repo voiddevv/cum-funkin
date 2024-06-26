@@ -3,7 +3,8 @@ class_name Character extends Node2D
 @export var icon:Texture
 @export var sing_length:float = 4.0
 @export var dance_steps:PackedStringArray = ["idle"]
-
+@export var is_player:bool = false:
+	set = set_is_player 
 @export_category("nodes")
 @export var anim_player:AnimationPlayer
 @export var sprite:AnimatedSprite2D
@@ -12,7 +13,12 @@ var _cur_anim:StringName = "NONE"
 var _sing_timer:float = 0.0
 var cur_dance_step:int = 0
 
+func set_is_player(v:bool):
+	is_player = v
+	print(v)
+
 func _ready():
+	set_is_player(is_player)
 	Conductor.beat_hit.connect(on_beat)
 	dance()
 

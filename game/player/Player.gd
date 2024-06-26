@@ -30,7 +30,7 @@ func _process(delta):
 			note.sustain_length -= delta
 			if note.sustain_ticking:
 				note.sustain_tick_timer -= delta
-			if note.sustain_length <= -delta:
+			if note.sustain_length < 0:
 				note.queue_free()
 			if note.sustain_tick_timer <= 0.0:
 				notehit_callback.call(note)
@@ -61,19 +61,18 @@ func _unhandled_input(event):
 			if not hit_notes.is_empty():
 				Conductor.update()
 				hit_notes.front().was_hit = true
-				hit_notes.front().sustain_ticking = true
 				notehit_callback.call(hit_notes.front())
+				hit_notes.front().sustain_ticking = true
 		if not strum.animation.contains("confirm"): 
 			notefield.strums.get_child(dir).play_anim(Strum.PRESSED)
 	else:
 		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
 func note_hit(note:Note):
-	note.sustain_tick_timer = Conductor.step_crochet*1.5
+	note.sustain_tick_timer = Conductor.step_crochet
 	var strum:Strum = note.notefield.strums.get_child(note.column)
 	strum.play_anim(Strum.CONFIRM,true)
 	if not strum.animation_finished.is_connected(strum.play_anim.bind(0)) and autoplay:
 		strum.animation_finished.connect(strum.play_anim.bind(0),CONNECT_ONE_SHOT)
-			
 	for i in chars:
 		i.sing(note.column)
 func rating_shit(hit_time:float):

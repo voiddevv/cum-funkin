@@ -47,8 +47,7 @@ func _process(delta):
 	if audio:
 		if abs(audio.get_playback_position() - Conductor.time) > 0.015:
 			Conductor.time = audio.get_playback_position()
-func update():
-	var delta = (Time.get_ticks_usec()*0.000001) - _last_time
+func update(delta:float = get_process_delta_time()):
 	time += delta
 	var last_step = step
 	var last_beat = beat
@@ -59,16 +58,15 @@ func update():
 	step = _last_change.step + ((time - _last_change.time)/step_crochet)
 	## some of this code i dont know how it works and i made it sorry :[
 	if floori(step) != floori(last_step):
-		var step_diff:int = (step - last_step)
-		for i in range(step - step_diff -1,step):
-			step_hit.emit(floor(i))
+		for i in range(last_step + 1, step + 1):
+			step_hit.emit(floori(i))
 	if floori(beat) != floori(last_beat):
-		var beat_diff:int = (beat - last_beat)
-		for i in range(beat - beat_diff - 1,beat):
+		for i in range(last_beat + 1, beat + 1):
 			beat_hit.emit(floori(i))
-	_last_time += delta
+	_last_time = time
 func reset():
 	bpm_changes.clear()
 	time = 0.0
+	_last_time = 0.0
 	bpm = 100.0
 	update()

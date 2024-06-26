@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 func step(_step:int) -> void:
 	if _step == 750:
 		print('swap to burned person')
-		var newchar:Character = preload("res://game/characters/scorched.tscn").instantiate()
+		var newchar:Character = load("res://game/characters/scorched.tscn").instantiate()
 		game.add_child(newchar)
 		var cpu_player:Player = game.players.get_child(0) as Player
 		for i in cpu_player.chars:
