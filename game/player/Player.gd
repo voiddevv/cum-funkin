@@ -4,7 +4,7 @@ class_name Player extends Node2D
 @export var autoplay:bool = false
 signal notehit(note:Note)
 signal notemiss(note:Note)
-var notemiss_callback:Callable
+var notemiss_callback:Callable = note_miss
 var notehit_callback:Callable = note_hit
 var pressed:Array[bool] = []
 var keycount:int = 4
@@ -27,8 +27,20 @@ func _process(delta):
 				notehit_callback.call(note)
 				notehit.emit(note)
 				note.sustain_ticking = true
-		if note.was_hit:
+		## dumb ass miss code :3
+		if Conductor.time - (note.time + note.og_sustain_length) > 0.180 and not note.missed:
+			note.missed = true
+			note.sprite.modulate = Color.DIM_GRAY
+			notemiss_callback.call(note)
+			notemiss.emit(note)
+		if note.was_hit and not note.missed:
+			
 			note.sprite.visible = false
+			if not pressed[note.column] and not note.missed and not autoplay:
+				note.missed = true
+				notemiss_callback.call(note)
+				notemiss.emit(note)
+				return
 			note.sustain_length -= delta
 			if note.sustain_ticking:
 				note.sustain_tick_timer -= delta
@@ -69,7 +81,12 @@ func _unhandled_input(event):
 			notefield.strums.get_child(dir).play_anim(Strum.PRESSED)
 	else:
 		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
+func note_miss(note:Note):
+	print("missed a note")
+	pass
 func note_hit(note:Note):
+	if does_input and not note.sustain_ticking:
+		print("hit time: %1.3f" % ((Conductor.time - note.time)*1000.0))
 	if not note.sustain_ticking:
 		if note.og_sustain_length > 0.0:
 			note.og_sustain_length -= (Conductor.time - note.time)

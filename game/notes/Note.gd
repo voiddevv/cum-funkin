@@ -29,6 +29,6 @@ var can_hit:bool:
 		return absf((time) - Conductor.time) <= 0.180
 var too_late:bool:
 	get:
-		return (Conductor.time - (self.time + og_sustain_length)) > 0.240
+		return (Conductor.time - (self.time + og_sustain_length)) > 0.300
 var missed:bool = false
 var was_hit:bool = false
