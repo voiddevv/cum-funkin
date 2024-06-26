@@ -68,6 +68,10 @@ func _unhandled_input(event):
 	else:
 		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
 func note_hit(note:Note):
+	if not note.sustain_ticking:
+		if note.og_sustain_length > 0.0:
+			note.og_sustain_length += (Conductor.time - note.time)
+			note.sustain_length = note.og_sustain_length
 	note.sustain_tick_timer = Conductor.step_crochet
 	var strum:Strum = note.notefield.strums.get_child(note.column)
 	strum.play_anim(Strum.CONFIRM,true)
