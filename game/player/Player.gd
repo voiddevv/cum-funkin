@@ -70,7 +70,7 @@ func _unhandled_input(event):
 func note_hit(note:Note):
 	if not note.sustain_ticking:
 		if note.og_sustain_length > 0.0:
-			note.og_sustain_length += (Conductor.time - note.time)
+			note.og_sustain_length -= (Conductor.time - note.time)
 			note.sustain_length = note.og_sustain_length
 	note.sustain_tick_timer = Conductor.step_crochet
 	var strum:Strum = note.notefield.strums.get_child(note.column)

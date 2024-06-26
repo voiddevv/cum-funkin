@@ -84,6 +84,7 @@ func _input(event):
 			if event.keycode == KEY_F3:
 				song_player.seek(song_player.get_playback_position() + 30)
 				Conductor.time += 30.0
+				
 				Conductor.update()
 			if event.keycode == KEY_F5:
 				if not event.is_echo():

@@ -12,7 +12,6 @@ const temp_note = preload("res://game/notes/normal.tscn")
 func _ready():
 	if SaveMan.get_data("downscroll",false):
 		position.y = 720 - position.y
-	Conductor.step_hit.connect(step_hit)
 #region gen_strums
 	add_child(strums)
 	add_child(notes)
@@ -37,7 +36,6 @@ func queue_notes():
 				note_data.erase(last_data)
 		last_data = i
 		
-	var _i:int = 0
 	for i in range(note_index,note_data.size()):
 		var data = note_data[i]
 		var scrollspeed = Game.chart.scroll_speed if SaveMan.get_data("scroll_speed",1.0) == 1.0 else SaveMan.get_data("scroll_speed",1.0)
@@ -59,13 +57,10 @@ func queue_notes():
 		note.tail.position = note.sustain.get_point_position(1) + Vector2(0,32)*down_scroll_mult
 		if down_scroll_mult == -1:
 			note.tail.flip_v = true
-		_i += 1
 		note_index += 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func step_hit(step:int):
-	queue_notes()
-
 func _process(delta):
+	queue_notes()
 	var down_scroll_mult = 1.0 if not SaveMan.get_data("downscroll",false) else -1.0
 	
 	for note:Note in notes.get_children():
