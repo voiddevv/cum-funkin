@@ -19,13 +19,13 @@ visibility_layer = 2
 position = Vector2(330, 100)
 script = ExtResource("2_2k7a6")
 notefield = NodePath("../../NoteField")
+does_input = false
+autoplay = true
 
 [node name="Player2" type="Node2D" parent="UI Layer/players" node_paths=PackedStringArray("notefield")]
 position = Vector2(970, 100)
 script = ExtResource("2_2k7a6")
 notefield = NodePath("../../NoteField2")
-does_input = false
-autoplay = true
 
 [node name="NoteField" type="Node2D" parent="UI Layer" node_paths=PackedStringArray("player")]
 position = Vector2(330, 100)

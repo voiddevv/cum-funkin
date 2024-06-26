@@ -2,7 +2,9 @@ class_name Player extends Node2D
 @export var notefield:NoteField
 @export var does_input:bool = true
 @export var autoplay:bool = false
-signal notehit(note)
+signal notehit(note:Note)
+signal notemiss(note:Note)
+var notemiss_callback:Callable
 var notehit_callback:Callable = note_hit
 var pressed:Array[bool] = []
 var keycount:int = 4

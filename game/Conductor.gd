@@ -1,6 +1,14 @@
 extends Node2D
 signal beat_hit(beat:int)
 signal step_hit(step:int)
+
+var rate:float = 1.0:
+	set(v):
+		rate = v
+		Engine.time_scale = rate
+		if audio:
+			audio.pitch_scale = rate
+
 var audio:AudioStreamPlayer = null
 # bpm change balls
 var bpm_changes:Array[BpmChangeEvent] = []:
@@ -69,4 +77,5 @@ func reset():
 	time = 0.0
 	_last_time = 0.0
 	bpm = 100.0
+	rate = 1.0
 	update()

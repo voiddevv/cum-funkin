@@ -40,7 +40,7 @@ func queue_notes():
 		var data = note_data[i]
 		var scrollspeed = Game.chart.scroll_speed if SaveMan.get_data("scroll_speed",1.0) == 1.0 else SaveMan.get_data("scroll_speed",1.0)
 		var down_scroll_mult = 1.0 if not SaveMan.get_data("downscroll",false) else -1.0
-		if data.time > Conductor.time + (2.2/scrollspeed):
+		if data.time > Conductor.time + (2.2/(scrollspeed/Conductor.rate)):
 			break
 		
 		var note = temp_note.instantiate()
@@ -53,7 +53,7 @@ func queue_notes():
 		notes.add_child(note)
 		note.sprite.play(Strum.column_to_str(note.column))
 		note.global_position.x = strums.get_child(note.column).global_position.x
-		note.sustain.points[1].y = (((450*note.og_sustain_length)*note.scroll_speed*down_scroll_mult)/note.scale.y)
+		note.sustain.points[1].y = ((450*note.sustain_length)*(note.scroll_speed/Conductor.rate)*down_scroll_mult)/note.scale.y
 		note.tail.position = note.sustain.get_point_position(1) + Vector2(0,32)*down_scroll_mult
 		if down_scroll_mult == -1:
 			note.tail.flip_v = true
@@ -67,9 +67,9 @@ func _process(delta):
 		var strum = strums.get_child(note.column)
 		if note.too_late:
 			note.queue_free()
-		note.global_position.y = strum.global_position.y - (450 * (Conductor.time - note.time)) * note.scroll_speed * down_scroll_mult
+		note.global_position.y = strum.global_position.y - (450 * (Conductor.time - note.time)) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
 		if note.was_hit:
 			note.global_position = strum.global_position
-			note.sustain.points[1].y = ((450*note.sustain_length)*note.scroll_speed*down_scroll_mult)/note.scale.y
+			note.sustain.points[1].y = ((450*note.sustain_length)*(note.scroll_speed/Conductor.rate)*down_scroll_mult)/note.scale.y
 			note.tail.position = note.sustain.get_point_position(1) + Vector2(0,32)*down_scroll_mult
 			
