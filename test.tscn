@@ -3,13 +3,13 @@
 [sub_resource type="GDScript" id="GDScript_flc5q"]
 script/source = "extends Node2D
 
-@onready var sus: Sprite2D = $sus
-
-
-func _ready():
-	var img:Image = sus.texture.get_image()
-	img.rotate_90(CLOCKWISE)
-	img.save_png(\"res://sustain.png\")
+#@onready var sus: Sprite2D = $sus
+#
+#
+#func _ready():
+	#var img:Image = sus.texture.get_image()
+	#img.rotate_90(CLOCKWISE)
+	#img.save_png(\"res://sustain.png\")
 "
 
 [node name="Test" type="Node2D"]

@@ -270,7 +270,7 @@ sprite = NodePath("sprite")
 camera_position = NodePath("sprite/camera_position")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -175)
+position = Vector2(3, -150.385)
 sprite_frames = ExtResource("3_occl8")
 animation = &"HogIdle"
 script = ExtResource("4_l64ed")

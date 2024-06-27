@@ -87,8 +87,6 @@ func _process(delta):
 	Conductor.update(delta)
 	last_stream_time = (song_player.get_playback_position())
 
-	
-
 
 func _input(event):
 	if event is InputEventKey:
@@ -101,5 +99,5 @@ func _input(event):
 			if event.keycode == KEY_F5:
 				if not event.is_echo():
 					if event.is_pressed(): 
-						Conductor.time = 0
+						Conductor.reset()
 						get_tree().reload_current_scene()

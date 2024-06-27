@@ -11,6 +11,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_WINDOW_FOCUS_IN:
+			get_tree().paused = false
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+			get_tree().paused = true
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("fullscreen"):
 		if not fullscreen:

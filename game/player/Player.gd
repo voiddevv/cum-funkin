@@ -6,6 +6,7 @@ signal notehit(note:Note)
 signal notemiss(note:Note)
 var notemiss_callback:Callable = note_miss
 var notehit_callback:Callable = note_hit
+var stats:PlayerStats = PlayerStats.new()
 var pressed:Array[bool] = []
 var keycount:int = 4
 var note_actions:PackedStringArray = ["note_left","note_down","note_up","note_right"]
@@ -85,13 +86,16 @@ func _unhandled_input(event):
 	else:
 		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
 func note_miss(note:Note):
+	stats.combo_breaks += 1
 	for i in chars:
 		i.sing(note.column)
 	print("missed a note")
 	pass
 func note_hit(note:Note):
-	if does_input and not note.sustain_ticking:
-		print("hit time: %1.3f" % ((Conductor.time - note.time)*1000.0))
+	if not note.sustain_ticking:
+		stats.score += 350
+		if does_input:
+			print("hit time: %1.3f" % ((Conductor.time - note.time)*1000.0))
 	if not note.sustain_ticking:
 		if note.og_sustain_length > 0.0:
 			note.og_sustain_length -= (Conductor.time - note.time)

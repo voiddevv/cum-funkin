@@ -10,7 +10,7 @@ vec2 rotate(vec2 uv, vec2 pivot, float angle)
 {
 	mat2 rotation = mat2(vec2(sin(angle), -cos(angle)),
 						vec2(cos(angle), sin(angle)));
-	
+
 	uv -= pivot;
 	uv = uv * rotation;
 	uv += pivot;
@@ -18,14 +18,14 @@ vec2 rotate(vec2 uv, vec2 pivot, float angle)
 }
 void vertex() {
 	VERTEX = rotate(VERTEX.xy,vec2(0.5),TIME*PI/4.0);
-	
+
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
 	vec2 uv = UV;
-	
-	
+
+
 	COLOR = texture(TEXTURE,fract(cos(tan(uv * PI))));
 	// Called for every pixel the material is visible on.
 }"

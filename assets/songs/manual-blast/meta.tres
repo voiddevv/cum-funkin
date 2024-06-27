@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="ChartMeta" load_steps=10 format=3 uid="uid://cu3wafn8n2ndd"]
+[gd_resource type="Resource" script_class="ChartMeta" load_steps=11 format=3 uid="uid://cu3wafn8n2ndd"]
 
 [ext_resource type="PackedScene" uid="uid://bgjrf8fuyfn4p" path="res://game/characters/hog.tscn" id="1_50l2k"]
 [ext_resource type="AudioStream" uid="uid://oov70115uwd6" path="res://assets/songs/manual-blast/inst.ogg" id="1_fd2oo"]
 [ext_resource type="Script" path="res://game/chart/ChartMeta.gd" id="1_vhccv"]
+[ext_resource type="Script" path="res://game/events/Event.gd" id="2_p61c0"]
 [ext_resource type="Script" path="res://assets/songs/default_song_scripts/cameraBump.gd" id="3_3vfkl"]
-[ext_resource type="PackedScene" uid="uid://cyd7777vg0jb3" path="res://game/stages/stage.tscn" id="3_6kuyi"]
 [ext_resource type="Script" path="res://assets/songs/manual-blast/scripts/events.gd" id="3_ot5ej"]
 [ext_resource type="PackedScene" uid="uid://bc6bkwlvdvn5k" path="res://game/characters/bf.tscn" id="3_prdkf"]
 [ext_resource type="AudioStream" uid="uid://bvv2f3u0poi2e" path="res://assets/songs/manual-blast/voices.ogg" id="4_45glu"]
 [ext_resource type="Script" path="res://assets/songs/default_song_scripts/pause.gd" id="4_85prp"]
+[ext_resource type="PackedScene" uid="uid://b2dmpq5biyhs2" path="res://game/stages/hog.tscn" id="9_tokcw"]
 
 [resource]
 script = ExtResource("1_vhccv")
@@ -17,6 +18,8 @@ voices = Array[AudioStream]([ExtResource("4_45glu")])
 cpu_character = ExtResource("1_50l2k")
 player_character = ExtResource("3_prdkf")
 song_scripts = Array[Script]([ExtResource("3_3vfkl"), ExtResource("4_85prp"), ExtResource("3_ot5ej")])
+script_packs = Array[Script]([])
+events = Array[ExtResource("2_p61c0")]([])
 format = 0
-stage = ExtResource("3_6kuyi")
+stage = ExtResource("9_tokcw")
 players = 2

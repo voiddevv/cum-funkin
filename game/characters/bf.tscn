@@ -224,18 +224,17 @@ script = ExtResource("1_2oji4")
 icon = ExtResource("2_4gedk")
 anim_player = NodePath("anim_player")
 sprite = NodePath("sprite")
-camera_position = NodePath("sprite/camera_position")
+camera_position = NodePath("camera_position")
+
+[node name="camera_position" type="Marker2D" parent="."]
+position = Vector2(-109, -301)
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -186)
 sprite_frames = ExtResource("3_4ddhw")
-animation = &"BF NOTE UP"
-frame = 14
-frame_progress = 1.0
+animation = &"BF idle dance"
 offset = Vector2(25, -10)
 script = ExtResource("4_6h3o4")
-
-[node name="camera_position" type="Marker2D" parent="sprite"]
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {
