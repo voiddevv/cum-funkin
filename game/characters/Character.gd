@@ -38,9 +38,9 @@ func dance():
 	_sing_timer = 0
 	play_anim(dance_steps[cur_dance_step%dance_steps.size()])
 	
-func sing(dir:int):
+func sing(dir:int,suffix:String = ""):
 	_sing_timer = 0
-	play_anim("sing_%s"%Strum.column_to_str(dir),true)
+	play_anim("sing_%s%s"%[Strum.column_to_str(dir),suffix],true)
 
 func _process(delta):
 	if _cur_anim.begins_with("sing"):

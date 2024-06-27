@@ -2,19 +2,14 @@
 
 [sub_resource type="GDScript" id="GDScript_flc5q"]
 script/source = "extends Node2D
-#func _ready():
-	#print(-0.00000001)
-	#var img:Image = sus.texture.get_image()
-	#img.rotate_90(CLOCKWISE)
-	#img.save_png(\"res://sus.png\")
+
+@onready var sus: Sprite2D = $sus
+
 
 func _ready():
-	Conductor.beat_hit.connect(print)
-	Conductor.bpm_changes.append(BpmChangeEvent.new(0.0,300.0,0.0))
-	Conductor.bpm_changes.append(BpmChangeEvent.new(9.6,30,64.0*3.0))
-	pass
-func _process(delta: float) -> void:
-	Conductor.update()
+	var img:Image = sus.texture.get_image()
+	img.rotate_90(CLOCKWISE)
+	img.save_png(\"res://sustain.png\")
 "
 
 [node name="Test" type="Node2D"]

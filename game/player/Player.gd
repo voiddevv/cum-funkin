@@ -85,6 +85,8 @@ func _unhandled_input(event):
 	else:
 		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
 func note_miss(note:Note):
+	for i in chars:
+		i.sing(note.column)
 	print("missed a note")
 	pass
 func note_hit(note:Note):
