@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgla7xsm2aocj"]
+[gd_scene load_steps=5 format=3 uid="uid://cgla7xsm2aocj"]
 
 [ext_resource type="Script" path="res://gmae.gd" id="1_eo62h"]
 [ext_resource type="Script" path="res://game/player/Player.gd" id="2_2k7a6"]
 [ext_resource type="Script" path="res://game/player/NoteField.gd" id="3_35ewl"]
+[ext_resource type="Script" path="res://game/event_manager.gd" id="4_w5otg"]
 
 [node name="gmae" type="Node2D"]
 script = ExtResource("1_eo62h")
@@ -38,3 +39,6 @@ position = Vector2(970, 100)
 script = ExtResource("3_35ewl")
 player = NodePath("../players/Player2")
 metadata/_edit_lock_ = true
+
+[node name="event_manager" type="Node" parent="."]
+script = ExtResource("4_w5otg")

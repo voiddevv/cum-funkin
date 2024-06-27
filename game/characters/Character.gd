@@ -8,6 +8,7 @@ class_name Character extends Node2D
 @export_category("nodes")
 @export var anim_player:AnimationPlayer
 @export var sprite:AnimatedSprite2D
+@export var camera_position:Marker2D
 
 var _cur_anim:StringName = "NONE"
 var _sing_timer:float = 0.0

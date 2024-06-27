@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://game/volume_man.gd" id="1_l6tne"]
 
 [node name="VolumeMan" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_l6tne")

@@ -13,8 +13,10 @@ class_name ChartMeta extends Resource
 	preload("res://assets/songs/default_song_scripts/cameraBump.gd"),
 	preload("res://assets/songs/default_song_scripts/pause.gd")
 ]
+@export var script_packs:Array[Script]
 
 @export_category("other")
+@export var events:Array[Event] = []
 @export var format:Chart.ChartFormat = 0
 @export var stage:PackedScene = PackedScene.new()
 @export var players:int = 2

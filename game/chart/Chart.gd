@@ -43,12 +43,16 @@ static func load_chart(name:String,diff:String):
 			var _time:float = 0
 			
 			for sex in raw.notes:
+				var cam_event:CameraFocusEvent = null
 				var _bpm:float = _chart.bpms.back().bpm
 				if sexi > 0: 
 					_time += (60.0/_bpm) * 4.0
 				if sex.get("changeBPM",false):
 					_chart.bpms.append(BpmChangeEvent.new(_time,sex.get("bpm",100.0),16*sexi))
 				sexi += 1
+				cam_event = CameraFocusEvent.new(_time,sex.mustHitSection)
+				_chart.meta.events.append(cam_event)
+				
 				
 				for cum in sex.sectionNotes:
 					var player_id:int = int(cum[1])/4

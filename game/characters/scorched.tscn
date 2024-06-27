@@ -261,11 +261,13 @@ _data = {
 "sing_up": SubResource("Animation_f36jo")
 }
 
-[node name="scorched" type="Node2D" node_paths=PackedStringArray("anim_player", "sprite")]
+[node name="scorched" type="Node2D" node_paths=PackedStringArray("anim_player", "sprite", "camera_position")]
 script = ExtResource("1_2nsns")
 icon = ExtResource("2_md7eq")
+sing_length = 6.0
 anim_player = NodePath("anim_player")
 sprite = NodePath("sprite")
+camera_position = NodePath("sprite/camera_position")
 
 [node name="sprite2" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -281,6 +283,9 @@ sprite_frames = ExtResource("3_k8ome")
 animation = &"Idle"
 frame_progress = 0.317491
 script = ExtResource("4_i3ciq")
+
+[node name="camera_position" type="Marker2D" parent="sprite"]
+position = Vector2(110, -140)
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {

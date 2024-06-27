@@ -1,11 +1,12 @@
 class_name Game extends Node2D
 static var chart:Chart = null
+static var instance:Game = null
 @onready var ui_layer = $"UI Layer"
 @onready var tracks = $tracks
 @onready var players = $"UI Layer/players"
+@onready var event_manager: Node = $event_manager
 var song_player:AudioStreamPlayer = null ## is set on play music shit
 var stage:Stage = null
-## remove later
 var song_script_objs:Array[Object] = []
 func _ready():
 	Conductor.reset()
@@ -20,6 +21,9 @@ func _ready():
 		i.notefield.note_data = chart.notes.duplicate()
 		i.notefield.queue_notes()
 		q += 1
+	chart.meta.events.sort_custom(func(a,b): return a.time < b.time)
+	instance = self
+
 	
 	
 #region music shits
@@ -62,7 +66,7 @@ func _ready():
 			stage.add_child(dad)
 			players.get_child(0).chars.append(dad)
 #endregion
-## song script stuff
+#region song scripts shits
 	for i:Script in chart.meta.song_scripts:
 		var type = i.get_instance_base_type()
 		var obj = ClassDB.instantiate(type)
@@ -73,6 +77,7 @@ func _ready():
 			add_child(obj)
 #endregion
 var last_stream_time:float = 0.0
+var cur_event:int = 0
 func _process(delta):
 	if last_stream_time != 0:
 		if (song_player.get_playback_position()) < last_stream_time:
@@ -81,6 +86,7 @@ func _process(delta):
 	
 	Conductor.update(delta)
 	last_stream_time = (song_player.get_playback_position())
+
 	
 
 

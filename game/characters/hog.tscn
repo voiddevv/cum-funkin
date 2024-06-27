@@ -261,18 +261,22 @@ _data = {
 "sing_up": SubResource("Animation_f36jo")
 }
 
-[node name="Hog" type="Node2D" node_paths=PackedStringArray("anim_player", "sprite")]
+[node name="Hog" type="Node2D" node_paths=PackedStringArray("anim_player", "sprite", "camera_position")]
 scale = Vector2(1.3, 1.3)
 script = ExtResource("1_urlgs")
 icon = ExtResource("2_fkmcc")
 anim_player = NodePath("anim_player")
 sprite = NodePath("sprite")
+camera_position = NodePath("sprite/camera_position")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -175)
 sprite_frames = ExtResource("3_occl8")
 animation = &"HogIdle"
 script = ExtResource("4_l64ed")
+
+[node name="camera_position" type="Marker2D" parent="sprite"]
+position = Vector2(110, -110)
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {
