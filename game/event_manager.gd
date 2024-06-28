@@ -16,4 +16,8 @@ func _process(delta: float) -> void:
 			cur_event += 1
 			event_fired.emit(ev)
 			ev.fire()
-	pass
+func fire_event(ev:Event):
+	ev.fire()
+func queue_event(ev:Event):
+	Game.chart.meta.events.append(ev)
+	Game.chart.meta.events.sort_custom(func(a,b): a.time < b.time)
