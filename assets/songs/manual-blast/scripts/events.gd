@@ -29,7 +29,7 @@ func step(_step:int) -> void:
 		cpu_player.chars.clear()
 		cpu_player.chars.append(newchar)
 		newchar.position = game.stage.cpu.position
-	if _step == 4060:
+	if _step == 4160:
 		var newchar = scorched_glitch.instantiate()
 		game.stage.add_child(newchar)
 		var cpu_player:Player = game.players.get_child(0) as Player
