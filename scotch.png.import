@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6v4a1it057n7"
-path.s3tc="res://.godot/imported/scotch.png-da8f2fe8dcb8e7506a18e00d4f10ac09.s3tc.ctex"
+path="res://.godot/imported/scotch.png-da8f2fe8dcb8e7506a18e00d4f10ac09.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://scotch.png"
-dest_files=["res://.godot/imported/scotch.png-da8f2fe8dcb8e7506a18e00d4f10ac09.s3tc.ctex"]
+dest_files=["res://.godot/imported/scotch.png-da8f2fe8dcb8e7506a18e00d4f10ac09.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

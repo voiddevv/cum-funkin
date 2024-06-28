@@ -75,13 +75,14 @@ func _ready():
 		print(i)
 		if obj is Node:
 			add_child(obj)
+		song_script_objs.append(obj)
 #endregion
 var last_stream_time:float = 0.0
 var cur_event:int = 0
 func _process(delta):
 	if last_stream_time != 0:
 		if (song_player.get_playback_position()) < last_stream_time:
-			get_tree().change_scene_to_file("res://titlescreen.tscn")
+			get_tree().change_scene_to_file("res://game/menus/titlescreen.tscn")
 		# some dumb code to fix sync stream for beta 2 till this gets patched :3
 	
 	Conductor.update(delta)
@@ -101,3 +102,9 @@ func _input(event):
 					if event.is_pressed(): 
 						Conductor.reset()
 						get_tree().reload_current_scene()
+	
+func _exit_tree() -> void:
+	chart = null
+	for i:Object in song_script_objs:
+		i.free()
+		

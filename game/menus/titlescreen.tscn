@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://sogs1kxwes4l"]
 
-[ext_resource type="Script" path="res://titlescreen.gd" id="1_66eyn"]
+[ext_resource type="Script" path="res://game/menus/titlescreen.gd" id="1_66eyn"]
 [ext_resource type="Texture2D" uid="uid://q5njjjkw7ikf" path="res://icon.svg" id="1_d5i2i"]
 [ext_resource type="SpriteFrames" path="res://assets/titlescreen/logoBumpin.res" id="3_yhsu3"]
 
