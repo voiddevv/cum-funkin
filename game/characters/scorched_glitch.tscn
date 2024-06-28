@@ -129,7 +129,7 @@ tracks/1/path = NodePath("sprite:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(-0.01),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"Down"]
@@ -158,7 +158,7 @@ tracks/0/path = NodePath("sprite:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.01),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-192, 0)]
@@ -240,7 +240,7 @@ tracks/0/path = NodePath("sprite:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.02),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(0.933033),
 "update": 0,
 "values": [Vector2(-68, -27)]
@@ -340,7 +340,7 @@ tracks/1/path = NodePath("sprite2:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(-0.01),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-16, 8)]
@@ -352,7 +352,7 @@ tracks/2/path = NodePath("sprite2:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(-0.01),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -510,7 +510,7 @@ tracks/2/path = NodePath("sprite2:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(-0.01),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -541,8 +541,6 @@ position = Vector2(137, -568)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("3_euq2b")
 animation = &"Idle"
-frame = 19
-frame_progress = 1.0
 script = ExtResource("4_ajqwv")
 
 [node name="sprite2" type="AnimatedSprite2D" parent="."]

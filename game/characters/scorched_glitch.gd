@@ -11,4 +11,5 @@ var cur_char:int = 0:
 		
 func play_anim(anim:StringName,force:bool = false):
 	cur_char = randi()%2
+	anim_player.seek(0,true)
 	super.play_anim(anim,force)
