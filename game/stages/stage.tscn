@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyd7777vg0jb3"]
+[gd_scene load_steps=8 format=3 uid="uid://cyd7777vg0jb3"]
 
 [ext_resource type="Script" path="res://game/stages/stage.gd" id="1_e4jx4"]
 [ext_resource type="Texture2D" uid="uid://2sb4ut0i3p4j" path="res://assets/stages/stage/stageback.png" id="1_eeh70"]
 [ext_resource type="Texture2D" uid="uid://t3dpo8j4rskj" path="res://assets/stages/stage/stagefront.png" id="2_s50vc"]
 [ext_resource type="Texture2D" uid="uid://dxf8v4slmnur1" path="res://assets/stages/stage/stagecurtains.png" id="3_wq786"]
+[ext_resource type="SpriteFrames" uid="uid://bchs2ev7wrtx5" path="res://assets/characters/bf/BOYFRIEND.res" id="5_o767s"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/dad/DADDY_DEAREST.res" id="6_78qi3"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/gf/GF_assets.res" id="7_5l2ha"]
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("camera", "player", "cpu", "speaker")]
 script = ExtResource("1_e4jx4")
@@ -43,10 +46,29 @@ texture = ExtResource("3_wq786")
 centered = false
 
 [node name="player" type="Marker2D" parent="."]
-position = Vector2(1219, 778)
+position = Vector2(963, 834)
 
 [node name="speaker" type="Marker2D" parent="."]
 position = Vector2(800, 778)
 
 [node name="cpu" type="Marker2D" parent="."]
-position = Vector2(488, 778)
+position = Vector2(280, 882)
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+z_as_relative = false
+position = Vector2(400, 130)
+sprite_frames = ExtResource("7_5l2ha")
+animation = &"GF Dancing Beat"
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(770, 450)
+sprite_frames = ExtResource("5_o767s")
+animation = &"BF idle dance"
+centered = false
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("6_78qi3")
+animation = &"Dad idle dance"
+centered = false
+offset = Vector2(100, 100)

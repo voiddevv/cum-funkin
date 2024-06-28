@@ -267,16 +267,16 @@ script = ExtResource("1_urlgs")
 icon = ExtResource("2_fkmcc")
 anim_player = NodePath("anim_player")
 sprite = NodePath("sprite")
-camera_position = NodePath("sprite/camera_position")
+camera_position = NodePath("camera_position")
+
+[node name="camera_position" type="Marker2D" parent="."]
+position = Vector2(103, -175.385)
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -150.385)
 sprite_frames = ExtResource("3_occl8")
 animation = &"HogIdle"
 script = ExtResource("4_l64ed")
-
-[node name="camera_position" type="Marker2D" parent="sprite"]
-position = Vector2(110, -110)
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {

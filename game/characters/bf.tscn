@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game/characters/Character.gd" id="1_2oji4"]
 [ext_resource type="Texture2D" uid="uid://q5njjjkw7ikf" path="res://icon.svg" id="2_4gedk"]
-[ext_resource type="SpriteFrames" path="res://assets/characters/bf/BOYFRIEND.res" id="3_4ddhw"]
+[ext_resource type="SpriteFrames" uid="uid://bchs2ev7wrtx5" path="res://assets/characters/bf/BOYFRIEND.res" id="3_4ddhw"]
 [ext_resource type="Script" path="res://game/characters/AnimatedSprite.gd" id="4_6h3o4"]
 
 [sub_resource type="Animation" id="Animation_ylxbb"]
@@ -219,22 +219,22 @@ _data = {
 "sing_up": SubResource("Animation_f36jo")
 }
 
-[node name="Dad" type="Node2D" node_paths=PackedStringArray("anim_player", "sprite", "camera_position")]
+[node name="boyfriend" type="Node2D" node_paths=PackedStringArray("anim_player", "sprite", "camera_position")]
 script = ExtResource("1_2oji4")
 icon = ExtResource("2_4gedk")
 anim_player = NodePath("anim_player")
 sprite = NodePath("sprite")
-camera_position = NodePath("camera_position")
-
-[node name="camera_position" type="Marker2D" parent="."]
-position = Vector2(-109, -301)
+camera_position = NodePath("sprite/camera_position")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -186)
+position = Vector2(3, -175)
 sprite_frames = ExtResource("3_4ddhw")
 animation = &"BF idle dance"
 offset = Vector2(25, -10)
 script = ExtResource("4_6h3o4")
+
+[node name="camera_position" type="Marker2D" parent="sprite"]
+position = Vector2(-100, -100)
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {

@@ -75,4 +75,6 @@ fullscreen={
 [rendering]
 
 gl_compatibility/force_angle_on_devices=[]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 viewport/hdr_2d=true

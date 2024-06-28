@@ -19,7 +19,7 @@ static func load_chart(name:String,diff:String):
 	var meta_path:String = "res://assets/songs/%s/meta.tres"%name
 	_chart.meta = ChartMeta.new()
 	if ResourceLoader.exists(meta_path):
-		_chart.meta = load(meta_path)
+		_chart.meta = ResourceLoader.load(meta_path,"",ResourceLoader.CACHE_MODE_REPLACE_DEEP)
 	match _chart.meta.format:
 		ChartFormat.PSYCH,_:
 			

@@ -224,7 +224,7 @@ script = ExtResource("1_v3v0c")
 icon = ExtResource("2_q808h")
 anim_player = NodePath("anim_player")
 sprite = NodePath("sprite")
-camera_position = NodePath("camera_position")
+camera_position = NodePath("sprite/camera_position")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(19, -383)
@@ -234,10 +234,10 @@ frame = 12
 frame_progress = 1.0
 script = ExtResource("4_oparj")
 
+[node name="camera_position" type="Marker2D" parent="sprite"]
+position = Vector2(150, -100)
+
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6013n")
 }
-
-[node name="camera_position" type="Marker2D" parent="."]
-position = Vector2(273, -612)
