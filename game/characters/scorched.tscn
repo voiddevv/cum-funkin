@@ -270,7 +270,7 @@ sprite = NodePath("sprite")
 camera_position = NodePath("camera_position")
 
 [node name="camera_position" type="Marker2D" parent="."]
-position = Vector2(-37, -485.154)
+position = Vector2(43, -485.154)
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -525.154)

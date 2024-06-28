@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mbubr8834yqb"
-path.bptc="res://.godot/imported/boyfriend.png-89749296f085be5d766a65d8882c4242.bptc.ctex"
+path.bptc="res://.godot/imported/BOYFRIEND.png-239e85b67fd69049bc8c85ab83a003a6.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/characters/bf/boyfriend.png"
-dest_files=["res://.godot/imported/boyfriend.png-89749296f085be5d766a65d8882c4242.bptc.ctex"]
+source_file="res://assets/characters/bf/BOYFRIEND.png"
+dest_files=["res://.godot/imported/BOYFRIEND.png-239e85b67fd69049bc8c85ab83a003a6.bptc.ctex"]
 
 [params]
 

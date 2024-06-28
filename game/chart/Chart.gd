@@ -31,7 +31,7 @@ static func load_chart(name:String,diff:String):
 			_chart.cpu = raw.get("player2","dad")
 			_chart.bf = raw.get("player1","bf")
 			_chart.speaker = raw.get("gfVersion","gf")
-			if raw.has("player3"):
+			if raw.has("player3") and raw.get("player3") != null:
 				_chart.speaker = raw.get("player3","gf")
 				
 			
