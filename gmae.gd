@@ -8,6 +8,7 @@ static var instance:Game = null
 var song_player:AudioStreamPlayer = null ## is set on play music shit
 var stage:Stage = null
 var song_script_objs:Array[Object] = []
+static var shaders:bool = true
 func _ready():
 	Conductor.reset()
 	chart = Chart.load_chart("manual-blast","hard")

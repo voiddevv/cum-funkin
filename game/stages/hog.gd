@@ -7,20 +7,28 @@ extends Stage
 @onready var bg: Sprite2D = $Parallax2D/bg
 @onready var water: AnimatedSprite2D = $water
 @onready var loops: AnimatedSprite2D = $Parallax2D2/loops
+var do_glitch:bool = false
+@onready var glitch: ColorRect = $shaders/glitch
+var glitchamount:float = 0.3:
+	set(v):
+		glitchamount = min(v,1.0)
+		glitch.material.set_shader_parameter("Amount",glitchamount)
 var new_loops:Sprite2D = Sprite2D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Conductor.beat_hit.connect(beathit)
 	Conductor.step_hit.connect(step)
+	if Game.instance:
+		var cpu_player:Player = Game.instance.players.get_child(0) as Player
+		cpu_player.notehit.connect(cpu_note_hit)
+	
 	pass # Replace with function body.
 func step(s):
 	match s:
 		864:
 			change_bg()
-			
-			
-			
-	pass
+
 func change_bg():
 	overlay.queue_free()
 	trees.texture = load("res://assets/stages/hog/hog 2/Plants.png")
@@ -39,7 +47,17 @@ func change_bg():
 	new_loops.centered = false
 	loops.add_sibling(new_loops)
 	loops.queue_free()
-	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if do_glitch:
+		glitchamount = lerp(glitchamount,0.3,delta*3.125)
+	else:
+		glitchamount = 0.0
+
+func beathit(beat:int):
+	if do_glitch and beat%2 == 0:
+		glitchamount += 0.2
+	
+func cpu_note_hit(note:Note):
+	if note.sustain_ticking and do_glitch:
+		glitchamount += 0.075

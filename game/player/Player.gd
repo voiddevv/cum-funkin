@@ -29,7 +29,7 @@ func _process(delta):
 				notehit.emit(note)
 				note.sustain_ticking = true
 		## dumb ass miss code :3
-		if Conductor.time - (note.time + note.og_sustain_length) > 0.180 and not note.missed:
+		if Conductor.time - (note.time + note.og_sustain_length) > 0.180 and not note.missed and not autoplay:
 			note.missed = true
 			note.sprite.modulate = Color.DIM_GRAY
 			notemiss_callback.call(note)
@@ -39,7 +39,7 @@ func _process(delta):
 			note.sprite.visible = false
 			if not pressed[note.column]:
 				if not note.missed:
-					if note.sustain_length <= Conductor.step_crochet:
+					if note.sustain_length >= Conductor.step_crochet:
 						if not autoplay:
 							note.missed = true
 							notemiss_callback.call(note)
@@ -104,7 +104,7 @@ func note_hit(note:Note):
 	
 	var strum:Strum = note.notefield.strums.get_child(note.column)
 	strum.play_anim(Strum.CONFIRM,true)
-	if not strum.animation_finished.is_connected(strum.play_anim.bind(0)) and autoplay:
+	if not strum.animation_finished.is_connected(strum.play_anim.bind(0)):
 		strum.animation_finished.connect(strum.play_anim.bind(0),CONNECT_ONE_SHOT)
 		
 	for i in chars:

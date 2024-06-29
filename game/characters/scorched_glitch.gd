@@ -8,7 +8,11 @@ var cur_char:int = 0:
 		sprite = chars[cur_char%2]
 		anim_player = player[cur_char%2]
 		sprite.visible = true
-		
+		play_anim(_cur_anim)
 func play_anim(anim:StringName,force:bool = false):
-	cur_char = randi()%2
 	super.play_anim(anim,force)
+	
+func _process(delta: float) -> void:
+	super._process(delta)
+	await sprite.frame_changed
+	cur_char = randi()%2

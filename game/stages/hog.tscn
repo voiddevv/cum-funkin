@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2dmpq5biyhs2"]
+[gd_scene load_steps=14 format=3 uid="uid://b2dmpq5biyhs2"]
 
 [ext_resource type="Script" path="res://game/stages/hog.gd" id="1_o4a6v"]
 [ext_resource type="Texture2D" uid="uid://8oxwo5vdi5qw" path="res://assets/stages/hog/bg.png" id="2_hj011"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b1xlpoowpdq6l" path="res://assets/stages/hog/trees.png" id="6_2x5bm"]
 [ext_resource type="Texture2D" uid="uid://11wn5hbrwxy6" path="res://assets/stages/hog/rocks.png" id="8_hb5y6"]
 [ext_resource type="Texture2D" uid="uid://d05om544sijbx" path="res://assets/stages/hog/overlay.png" id="9_vh1ug"]
+[ext_resource type="Shader" path="res://game/stages/glitch.gdshader" id="10_afnpr"]
 
 [sub_resource type="Shader" id="Shader_4am1q"]
 code = "shader_type canvas_item;
@@ -26,6 +27,10 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kp87p"]
 shader = SubResource("Shader_4am1q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eltjq"]
+shader = ExtResource("10_afnpr")
+shader_parameter/Amount = 0.3
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("camera", "player", "cpu", "speaker")]
 script = ExtResource("1_o4a6v")
@@ -112,3 +117,15 @@ position = Vector2(-1256, -688)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("9_vh1ug")
 centered = false
+
+[node name="shaders" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="glitch" type="ColorRect" parent="shaders"]
+visible = false
+material = SubResource("ShaderMaterial_eltjq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
