@@ -47,8 +47,8 @@ func queue_notes():
 		var note = temp_note.instantiate()
 		note.column = data.column
 		note.time = data.time
-		note.sustain_length = max(data.length - Conductor.step_crochet,0.0)
-		note.og_sustain_length = max(data.length - Conductor.step_crochet,0.0)
+		note.sustain_length = max(data.length,0.0)
+		note.og_sustain_length = max(data.length,0.0)
 		note.scroll_speed = scrollspeed
 		note.notefield = self
 		notes.add_child(note)

@@ -87,7 +87,7 @@ func _unhandled_input(event):
 func note_miss(note:Note):
 	stats.combo_breaks += 1
 	for i in chars:
-		i.sing(note.column)
+		i.sing(note.column,"_miss")
 	print("missed a note")
 	pass
 	
@@ -95,10 +95,10 @@ func note_hit(note:Note):
 	if not note.sustain_ticking:
 		stats.score += 350
 			
-	if not note.sustain_ticking:
-		if note.og_sustain_length > 0.0:
-			note.og_sustain_length -= (Conductor.time - note.time)
-			note.sustain_length = note.og_sustain_length
+	#if not note.sustain_ticking:
+		#if note.og_sustain_length > 0.0:
+			#note.og_sustain_length -= (Conductor.time - note.time)
+			#note.sustain_length = note.og_sustain_length
 			
 	note.sustain_tick_timer = Conductor.step_crochet
 	

@@ -19,9 +19,9 @@ var new_loops:Sprite2D = Sprite2D.new()
 func _ready() -> void:
 	Conductor.beat_hit.connect(beathit)
 	Conductor.step_hit.connect(step)
-	if Game.instance:
-		var cpu_player:Player = Game.instance.players.get_child(0) as Player
-		cpu_player.notehit.connect(cpu_note_hit)
+	#if Game.instance:
+		#var cpu_player:Player = Game.instance.players.get_child(0) as Player
+		#cpu_player.notehit.connect(cpu_note_hit)
 	
 	pass # Replace with function body.
 func step(s):
@@ -50,14 +50,14 @@ func change_bg():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if do_glitch:
-		glitchamount = lerp(glitchamount,0.3,delta*3.125)
+		glitchamount = lerp(glitchamount,0.3,delta*5.0)
 	else:
 		glitchamount = 0.0
 
 func beathit(beat:int):
-	if do_glitch and beat%2 == 0:
+	if do_glitch and (beat%2 == 0 or beat%1 == 0):
 		glitchamount += 0.2
 	
-func cpu_note_hit(note:Note):
-	if note.sustain_ticking and do_glitch:
-		glitchamount += 0.075
+#func cpu_note_hit(note:Note):
+	#if do_glitch and note.sustain_ticking:
+		#glitchamount += 0.075

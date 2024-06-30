@@ -50,8 +50,8 @@ float noise(float p)
     return mix(rand(fl), rand(fl + 1.0), fc);
 }
 
-float rand2(vec2 n) 
-{ 
+float rand2(vec2 n)
+{
     return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
 }
 
@@ -73,14 +73,14 @@ vec3 edge(sampler2D sampler, vec2 uv, float sampleSize)
     float dy = sampleSize / vec2(textureSize(SCREEN_TEXTURE,0)).y;
     return (
     mix(downsample(sampler, uv - vec2(dx, 0.0), sampleSize), downsample(sampler, uv + vec2(dx, 0.0), sampleSize), mod(uv.x, dx) / dx) +
-    mix(downsample(sampler, uv - vec2(0.0, dy), sampleSize), downsample(sampler, uv + vec2(0.0, dy), sampleSize), mod(uv.y, dy) / dy)    
+    mix(downsample(sampler, uv - vec2(0.0, dy), sampleSize), downsample(sampler, uv + vec2(0.0, dy), sampleSize), mod(uv.y, dy) / dy)
     ).rgb / 2.0 - texture(sampler, uv).rgb;
 }
 
 vec3 distort(sampler2D sampler, vec2 uv, float edgeSize)
 {
     vec2 pixel = vec2(1.0) / vec2(textureSize(SCREEN_TEXTURE,0)).y;
-    vec3 field = rgb2hsv(edge(sampler, uv, edgeSize));
+    vec3 field = rgb2hsv(edge(sampler, uv, edgeSize));;
     vec2 distort = pixel * sin((field.rb) * PI * 2.0);
     float shiftx = noise2(vec2(quantize(uv.y + 31.5, vec2(textureSize(SCREEN_TEXTURE,0)).y / TILE_SIZE) * TIME, fract(TIME) * 300.0));
     float shifty = noise2(vec2(quantize(uv.x + 11.5, vec2(textureSize(SCREEN_TEXTURE,0)).x / TILE_SIZE) * TIME, fract(TIME) * 100.0));
@@ -92,8 +92,8 @@ vec3 distort(sampler2D sampler, vec2 uv, float edgeSize)
 void fragment()
 {
 	vec2 uv = SCREEN_UV;
-    wow = clamp(mod(noise(TIME + uv.y), 1.0), 0.0, 1.0) * 2.0 - 1.0;    
-    vec3 finalColor;
+    wow = clamp(mod(noise(TIME + uv.y), 1.0), 0.0, 1.0) * 2.0 - 1.0;
+    vec3 finalColor = vec3(0.0);
     finalColor += distort(SCREEN_TEXTURE, uv, 8.0);
     COLOR = vec4(finalColor, 1.0);
 }

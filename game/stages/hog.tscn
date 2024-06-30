@@ -30,7 +30,7 @@ shader = SubResource("Shader_4am1q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eltjq"]
 shader = ExtResource("10_afnpr")
-shader_parameter/Amount = 0.3
+shader_parameter/Amount = 0.1
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("camera", "player", "cpu", "speaker")]
 script = ExtResource("1_o4a6v")
@@ -122,7 +122,6 @@ centered = false
 layer = 4
 
 [node name="glitch" type="ColorRect" parent="shaders"]
-visible = false
 material = SubResource("ShaderMaterial_eltjq")
 anchors_preset = 15
 anchor_right = 1.0
