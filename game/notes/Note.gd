@@ -2,7 +2,8 @@ class_name Note extends Node2D
 ## nodes ##
 @onready var sprite:AnimatedSprite2D = $sprite
 @onready var sustain:Line2D = $sustain
-@onready var tail: Sprite2D = $tail
+@onready var tail: Sprite2D = $sustain/tail
+@export var note_colors:Array[Color] = []
 var notefield:NoteField = null
 ## backend ##
 var cumlumn:int:

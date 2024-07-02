@@ -11,7 +11,7 @@ var song_script_objs:Array[Object] = []
 static var shaders:bool = true
 func _ready():
 	Conductor.reset()
-	chart = Chart.load_chart("silly-billy","normal")
+	chart = Chart.load_chart("manual-blast","hard")
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm

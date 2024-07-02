@@ -31,7 +31,6 @@ z_as_relative = false
 position = Vector2(330, 100)
 script = ExtResource("3_35ewl")
 player = NodePath("../players/player")
-metadata/_edit_lock_ = true
 
 [node name="NoteField2" type="Node2D" parent="UI Layer" node_paths=PackedStringArray("player")]
 z_index = 1

@@ -1,24 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4lu5fw4w2dij"]
+[gd_scene load_steps=7 format=3 uid="uid://b4lu5fw4w2dij"]
 
 [ext_resource type="Script" path="res://game/notes/Note.gd" id="1_ubnsc"]
 [ext_resource type="Texture2D" uid="uid://cuf3xcpnm8ujr" path="res://assets/sustain.png" id="2_4ls32"]
 [ext_resource type="SpriteFrames" uid="uid://bu4em153wbot4" path="res://assets/NOTE_assets.res" id="2_gltk4"]
+[ext_resource type="Shader" path="res://color_shader.gdshader" id="2_lahc0"]
 [ext_resource type="Texture2D" uid="uid://bxms331wos77t" path="res://assets/tail.png" id="3_ke161"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vcc8m"]
+resource_local_to_scene = true
+shader = ExtResource("2_lahc0")
+shader_parameter/col = Color(0.760784, 0.294118, 0.6, 1)
 
 [node name="Normal" type="Node2D"]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_ubnsc")
+note_colors = Array[Color]([Color(0.760784, 0.294118, 0.6, 1), Color(0, 1, 1, 1), Color(0.0705882, 0.980392, 0.0196078, 1), Color(0.976471, 0.223529, 0.247059, 1)])
 
 [node name="sustain" type="Line2D" parent="."]
 z_as_relative = false
+material = SubResource("ShaderMaterial_vcc8m")
 points = PackedVector2Array(0, 0, 0, 220)
 width = 50.0
 texture = ExtResource("2_4ls32")
 texture_mode = 1
 
-[node name="tail" type="Sprite2D" parent="."]
+[node name="tail" type="Sprite2D" parent="sustain"]
 z_index = -1
+use_parent_material = true
 position = Vector2(-1.19209e-07, 251.429)
+scale = Vector2(1, 1)
 texture = ExtResource("3_ke161")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]

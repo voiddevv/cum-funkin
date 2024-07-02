@@ -1,8 +1,8 @@
 shader_type canvas_item;
-#define TILE_SIZE 8.0
+#define TILE_SIZE 16.0
 varying float wow;
 uniform float Amount = 1.0;
-
+varying vec2 size;
 uniform sampler2D SCREEN_TEXTURE:hint_screen_texture,filter_linear_mipmap;
 
 vec3 rgb2hsv(vec3 c)
@@ -35,7 +35,7 @@ float quantize(float n, float steps)
 
 vec4 downsample(sampler2D sampler, vec2 uv, float pixelSize)
 {
-    return texture(sampler, uv - mod(uv, vec2(pixelSize) / vec2(textureSize(SCREEN_TEXTURE,0).xy)));
+    return texture(sampler, uv - mod(uv, vec2(pixelSize) / size));
 }
 
 float rand(float n)
@@ -69,8 +69,8 @@ float noise2(vec2 p)
 
 vec3 edge(sampler2D sampler, vec2 uv, float sampleSize)
 {
-    float dx = sampleSize / vec2(textureSize(SCREEN_TEXTURE,0)).x;
-    float dy = sampleSize / vec2(textureSize(SCREEN_TEXTURE,0)).y;
+    float dx = sampleSize / size.x;
+    float dy = sampleSize / size.y;
     return (
     mix(downsample(sampler, uv - vec2(dx, 0.0), sampleSize), downsample(sampler, uv + vec2(dx, 0.0), sampleSize), mod(uv.x, dx) / dx) +
     mix(downsample(sampler, uv - vec2(0.0, dy), sampleSize), downsample(sampler, uv + vec2(0.0, dy), sampleSize), mod(uv.y, dy) / dy)
@@ -79,11 +79,11 @@ vec3 edge(sampler2D sampler, vec2 uv, float sampleSize)
 
 vec3 distort(sampler2D sampler, vec2 uv, float edgeSize)
 {
-    vec2 pixel = vec2(1.0) / vec2(textureSize(SCREEN_TEXTURE,0)).y;
-    vec3 field = rgb2hsv(edge(sampler, uv, edgeSize));;
+    vec2 pixel = vec2(1.0) / size.y;
+    vec3 field = rgb2hsv(edge(sampler, uv, edgeSize));
     vec2 distort = pixel * sin((field.rb) * PI * 2.0);
-    float shiftx = noise2(vec2(quantize(uv.y + 31.5, vec2(textureSize(SCREEN_TEXTURE,0)).y / TILE_SIZE) * TIME, fract(TIME) * 300.0));
-    float shifty = noise2(vec2(quantize(uv.x + 11.5, vec2(textureSize(SCREEN_TEXTURE,0)).x / TILE_SIZE) * TIME, fract(TIME) * 100.0));
+    float shiftx = noise2(vec2(quantize(uv.y + 31.5, size.y / TILE_SIZE) * TIME, fract(TIME) * 300.0));
+    float shifty = noise2(vec2(quantize(uv.x + 11.5, size.x / TILE_SIZE) * TIME, fract(TIME) * 100.0));
     vec3 rgb = texture(sampler, uv + (distort + (pixel - pixel / 2.0) * vec2(shiftx, shifty) * (50.0 + 100.0 * Amount)) * Amount).rgb;
     vec3 hsv = rgb2hsv(rgb);
     return posterize(hsv2rgb(hsv), floor(mix(256.0, pow(1.0 - hsv.z - 0.5, 2.0) * 64.0 * shiftx + 4.0, 1.0 - pow(1.0 - Amount, 5.0))));
@@ -91,6 +91,7 @@ vec3 distort(sampler2D sampler, vec2 uv, float edgeSize)
 
 void fragment()
 {
+	size = 1.0/SCREEN_PIXEL_SIZE;
 	vec2 uv = SCREEN_UV;
     wow = clamp(mod(noise(TIME + uv.y), 1.0), 0.0, 1.0) * 2.0 - 1.0;
     vec3 finalColor;

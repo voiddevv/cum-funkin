@@ -22,6 +22,8 @@ func _ready() -> void:
 	if Game.instance:
 		var cpu_player:Player = Game.instance.players.get_child(0) as Player
 		cpu_player.notehit.connect(cpu_note_hit)
+	await RenderingServer.frame_post_draw
+	glitch.visible = false
 	
 	pass # Replace with function body.
 func step(s):
