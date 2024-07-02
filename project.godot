@@ -23,10 +23,10 @@ driver/enable_input=true
 [autoload]
 
 SaveMan="*res://game/save/SaveMan.gd"
+Globals="*res://game/Globals.tscn"
 VolumeMan="*res://game/volume_man.tscn"
 Conductor="*res://game/Conductor.gd"
 Fps="*res://game/FPS.tscn"
-Globals="*res://game/globals.gd"
 
 [display]
 

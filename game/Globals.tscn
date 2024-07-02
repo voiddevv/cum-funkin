@@ -1,6 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://chhfywguny1gg"]
+[gd_scene load_steps=5 format=3 uid="uid://chhfywguny1gg"]
 
 [ext_resource type="Script" path="res://game/globals.gd" id="1_c14he"]
 
-[node name="Globals" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jalla"]
+bg_color = Color(0.1248, 0.48, 0.20768, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1jny"]
+bg_color = Color(0.234, 0.9, 0.3894, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2b40"]
+font_size = 24
+
+[node name="Globals" type="Node2D" node_paths=PackedStringArray("overlay")]
 script = ExtResource("1_c14he")
+overlay = NodePath("CanvasLayer/overlay")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="overlay" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.234
+anchor_bottom = 1.0
+offset_right = 0.47998
+grow_vertical = 2
+alignment = 2
+
+[node name="voume bar" type="ProgressBar" parent="CanvasLayer/overlay"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_jalla")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s1jny")
+max_value = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/overlay/voume bar"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = -61.0
+offset_right = 29.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "volume"
+label_settings = SubResource("LabelSettings_g2b40")

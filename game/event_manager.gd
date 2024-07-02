@@ -1,4 +1,4 @@
-extends Node
+class_name EventHandler extends Node
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +16,8 @@ func _process(delta: float) -> void:
 			cur_event += 1
 			event_fired.emit(ev)
 			ev.fire()
+		else:
+			break
 func fire_event(ev:Event):
 	ev.fire()
 func queue_event(ev:Event):

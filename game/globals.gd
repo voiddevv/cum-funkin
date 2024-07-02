@@ -1,14 +1,29 @@
 extends Node2D
 
 var fullscreen:bool = false
+@export var overlay:VBoxContainer
+@onready var voume_bar: ProgressBar = $"CanvasLayer/overlay/voume bar"
+
+var overlay_pos:Vector2
+var timer:float = 0.0
+func show_overlay():
+	overlay_pos = Vector2.ZERO
+	timer = 1.0
+func hide_overlay():
+	overlay_pos = Vector2(-overlay.size.x,0.0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	process_mode = PROCESS_MODE_ALWAYS
+	overlay_pos = -overlay.size
+	show_overlay()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	overlay.position = lerp(overlay.position,overlay_pos,delta*pow(5.0,2.0))
+	timer -= delta
+	if timer < 0.0:
+		hide_overlay()
 	pass
 
 func _notification(what: int) -> void:

@@ -3,7 +3,10 @@ extends Node2D
 var volume:float:
 	set(v):
 		volume = clampf(v,0.0,1.0)
+		if Globals.voume_bar:
+			Globals.voume_bar.value = volume
 		AudioServer.set_bus_volume_db(0,linear_to_db(volume))
+		Globals.show_overlay()
 		SaveMan.set_data("volume",volume)
 		SaveMan.save_data()
 		

@@ -1,5 +1,5 @@
 shader_type canvas_item;
-#define TILE_SIZE 16.0
+#define TILE_SIZE 8.0
 varying float wow;
 uniform float Amount = 1.0;
 
@@ -93,7 +93,7 @@ void fragment()
 {
 	vec2 uv = SCREEN_UV;
     wow = clamp(mod(noise(TIME + uv.y), 1.0), 0.0, 1.0) * 2.0 - 1.0;
-    vec3 finalColor = vec3(0.0);
-    finalColor += distort(SCREEN_TEXTURE, uv, 8.0);
+    vec3 finalColor;
+    finalColor = distort(SCREEN_TEXTURE, uv, 8.0);
     COLOR = vec4(finalColor, 1.0);
 }
