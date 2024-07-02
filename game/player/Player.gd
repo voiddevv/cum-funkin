@@ -1,4 +1,4 @@
-class_name Player extends Node2D
+class_name Player extends Node
 @export var notefield:NoteField
 @export var does_input:bool = true
 @export var autoplay:bool = false
@@ -95,10 +95,10 @@ func note_hit(note:Note):
 	if not note.sustain_ticking:
 		stats.score += 350
 			
-	#if not note.sustain_ticking:
-		#if note.og_sustain_length > 0.0:
-			#note.og_sustain_length -= (Conductor.time - note.time)
-			#note.sustain_length = note.og_sustain_length
+	if not note.sustain_ticking:
+		if note.og_sustain_length > 0.0:
+			note.og_sustain_length -= (Conductor.time - note.time)
+			note.sustain_length = note.og_sustain_length
 			
 	note.sustain_tick_timer = Conductor.step_crochet
 	

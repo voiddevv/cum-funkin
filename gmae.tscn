@@ -15,30 +15,30 @@ metadata/_edit_horizontal_guides_ = [-264.0]
 
 [node name="players" type="Node2D" parent="UI Layer"]
 
-[node name="player" type="Node2D" parent="UI Layer/players" node_paths=PackedStringArray("notefield")]
-visibility_layer = 2
-position = Vector2(330, 100)
+[node name="player" type="Node" parent="UI Layer/players" node_paths=PackedStringArray("notefield")]
 script = ExtResource("2_2k7a6")
 notefield = NodePath("../../NoteField")
 does_input = false
 autoplay = true
 
-[node name="Player2" type="Node2D" parent="UI Layer/players" node_paths=PackedStringArray("notefield")]
-position = Vector2(970, 100)
+[node name="Player2" type="Node" parent="UI Layer/players" node_paths=PackedStringArray("notefield")]
 script = ExtResource("2_2k7a6")
 notefield = NodePath("../../NoteField2")
 
 [node name="NoteField" type="Node2D" parent="UI Layer" node_paths=PackedStringArray("player")]
+z_index = 1
+z_as_relative = false
 position = Vector2(330, 100)
 script = ExtResource("3_35ewl")
 player = NodePath("../players/player")
 metadata/_edit_lock_ = true
 
 [node name="NoteField2" type="Node2D" parent="UI Layer" node_paths=PackedStringArray("player")]
+z_index = 1
+z_as_relative = false
 position = Vector2(970, 100)
 script = ExtResource("3_35ewl")
 player = NodePath("../players/Player2")
-metadata/_edit_lock_ = true
 
 [node name="event_manager" type="Node" parent="."]
 script = ExtResource("4_w5otg")

@@ -70,13 +70,13 @@ func _process(delta):
 			note.queue_free()
 			
 		note.global_position.y = strum.global_position.y - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
-		#note.global_position.y = strum.global_position.y - (450 * (Conductor.time - note.time)) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
 		if note.was_hit:
-			if not note.missed:
-				note.global_position = strum.global_position
-			note.sustain.points[1].y = (((450*note.sustain_length)*(note.scroll_speed/Conductor.rate)*down_scroll_mult)/note.scale.y) -31 * down_scroll_mult
+			note.global_position = strum.global_position
+			note.sustain.points[1].y = ((((450*note.sustain_length)*(note.scroll_speed/Conductor.rate)*down_scroll_mult)/note.scale.y) -31 * down_scroll_mult)
 			note.tail.position = note.sustain.get_point_position(1) + Vector2(0,31)*down_scroll_mult
-			
+		if note.missed:
+			note.global_position.y = strum.global_position.y - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
+
 func step_hit(step:int) -> void:
 	if step == Conductor.stepi:
 		queue_notes()

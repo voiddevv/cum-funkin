@@ -5,7 +5,7 @@ func _ready():
 	save = load_data()
 	save_data()
 	init_binds()
-	VolumeMan.volume = get_data("volume",1.0)
+	
 	
 func get_data(setting:String,fb:Variant = null):
 	var _ret = save.get(setting)

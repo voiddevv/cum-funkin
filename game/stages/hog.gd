@@ -55,9 +55,9 @@ func _process(delta: float) -> void:
 		glitchamount = 0.0
 
 func beathit(beat:int):
-	if do_glitch and (beat%2 == 0 or beat%1 == 0):
+	if do_glitch:
 		glitchamount += 0.2
 	
 func cpu_note_hit(note:Note):
 	if note.sustain_ticking and do_glitch:
-		glitchamount += 0.06
+		glitchamount += 0.06 * (1.0 + note.og_sustain_length*Conductor.step_crochet)

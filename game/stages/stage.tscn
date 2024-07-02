@@ -8,10 +8,9 @@
 [ext_resource type="SpriteFrames" path="res://assets/characters/dad/DADDY_DEAREST.res" id="6_78qi3"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/gf/GF_assets.res" id="7_5l2ha"]
 
-[node name="Stage" type="Node2D" node_paths=PackedStringArray("camera", "player", "cpu", "speaker")]
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("player", "cpu", "speaker")]
 script = ExtResource("1_e4jx4")
 zoom = 0.9
-camera = NodePath("Camera2D")
 player = NodePath("player")
 cpu = NodePath("cpu")
 speaker = NodePath("speaker")
