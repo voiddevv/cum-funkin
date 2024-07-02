@@ -17,6 +17,7 @@ script = ExtResource("1_ubnsc")
 note_colors = Array[Color]([Color(0.760784, 0.294118, 0.6, 1), Color(0, 1, 1, 1), Color(0.0705882, 0.980392, 0.0196078, 1), Color(0.976471, 0.223529, 0.247059, 1)])
 
 [node name="sustain" type="Line2D" parent="."]
+modulate = Color(1, 1, 1, 0.6)
 z_as_relative = false
 material = SubResource("ShaderMaterial_vcc8m")
 points = PackedVector2Array(0, 0, 0, 220)
