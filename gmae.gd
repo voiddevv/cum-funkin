@@ -20,7 +20,6 @@ func _ready():
 	hud.queue_free()
 	
 	hud = chart.meta.hud.instantiate()
-	ui_layer.add_child(hud)
 	for i in chart.meta.players.size():
 		var config:PlayerConfig = chart.meta.players[i]
 		
@@ -43,7 +42,6 @@ func _ready():
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm
-	hud.move_to_front()
 	#var q = 0
 	#for i:Player in players.get_children():
 		#if not i: continue
@@ -107,6 +105,8 @@ func _ready():
 			add_child(obj)
 		song_script_objs.append(obj)
 #endregion
+	ui_layer.add_child(hud)
+
 var last_stream_time:float = 0.0
 var cur_event:int = 0
 func _process(delta):

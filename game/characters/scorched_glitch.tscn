@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://c12ga8xwpqmch"]
+[gd_scene load_steps=21 format=3 uid="uid://c12ga8xwpqmch"]
 
 [ext_resource type="Script" path="res://game/characters/scorched_glitch.gd" id="1_phkgx"]
+[ext_resource type="Texture2D" uid="uid://bagnam16f3om6" path="res://assets/icons/icon-scorched.png" id="2_xqsnj"]
 [ext_resource type="SpriteFrames" uid="uid://tg0h8x1uqogq" path="res://assets/characters/hog/ScorchedGlitch.res" id="3_euq2b"]
 [ext_resource type="Script" path="res://game/characters/AnimatedSprite.gd" id="4_ajqwv"]
 [ext_resource type="SpriteFrames" uid="uid://3o1t45yatw5j" path="res://assets/characters/hog/scorchedwithglitch2.res" id="5_jbvxo"]
@@ -528,6 +529,7 @@ _data = {
 
 [node name="scorched" type="Node2D" node_paths=PackedStringArray("anim_player", "sprite", "camera_position")]
 script = ExtResource("1_phkgx")
+icon = ExtResource("2_xqsnj")
 sing_length = 6.0
 anim_player = NodePath("anim_player")
 sprite = NodePath("sprite")

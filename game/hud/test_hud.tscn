@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bygu84dd16y4y"]
+[gd_scene load_steps=9 format=3 uid="uid://bygu84dd16y4y"]
 
 [ext_resource type="Script" path="res://game/hud/test_hud.gd" id="1_wwsv7"]
 [ext_resource type="Texture2D" uid="uid://bsh61uo75nybm" path="res://game/hud/healthBar.png" id="3_jye8c"]
 [ext_resource type="Texture2D" uid="uid://b82b7frs61q87" path="res://assets/icons/icon-dad.png" id="3_nml61"]
 [ext_resource type="Texture2D" uid="uid://itkedehud53n" path="res://assets/icons/icon-bf.png" id="3_p8rli"]
+[ext_resource type="Script" path="res://game/hud/HealthIcon.gd" id="5_bxdm7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ceq6j"]
+font_size = 24
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3hgo"]
 bg_color = Color(1, 0, 0, 1)
@@ -18,15 +24,30 @@ offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("1_wwsv7")
 
+[node name="score text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -37.5
+offset_right = 96.0
+offset_bottom = 37.5
+grow_vertical = 2
+text = "score - 100;
+misses - 0;
+accuracy - 0;"
+label_settings = SubResource("LabelSettings_ceq6j")
+
 [node name="health_bar_overlay" type="TextureRect" parent="."]
+z_index = -1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -300.5
-offset_top = 50.0
+offset_top = 100.0
 offset_right = 300.5
-offset_bottom = 69.0
+offset_bottom = 119.0
 grow_horizontal = 2
 texture = ExtResource("3_jye8c")
 
@@ -50,9 +71,11 @@ position = Vector2(296, 0)
 position = Vector2(-42, 0)
 texture = ExtResource("3_nml61")
 hframes = 2
+script = ExtResource("5_bxdm7")
 
 [node name="player_icon" type="Sprite2D" parent="health_bar_overlay/bar/icons"]
 position = Vector2(54, 0)
 texture = ExtResource("3_p8rli")
 flip_h = true
 hframes = 2
+script = ExtResource("5_bxdm7")
