@@ -33,7 +33,7 @@ func _process(delta):
 				notehit.emit(note)
 				note.sustain_ticking = true
 		## dumb ass miss code :3
-		if Conductor.time - (note.time + note.og_sustain_length) > 0.180 and not note.missed and not autoplay:
+		if Conductor.time - (note.time) > 0.180 and not note.missed and not note.was_hit and not autoplay:
 			note.missed = true
 			note.sprite.modulate = Color.DIM_GRAY
 			notemiss_callback.call(note)
