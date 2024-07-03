@@ -90,15 +90,21 @@ func _unhandled_input(event):
 	else:
 		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
 func note_miss(note:Note):
+	stats.health -= 0.04/(1.0 + note.sustain_length)
 	stats.combo_breaks += 1
 	for i in chars:
 		i.sing(note.column,"_miss")
+	if Game.instance.hud:
+		Game.instance.hud.on_note_miss(self,note)
 	print("missed a note")
 	pass
 	
 func note_hit(note:Note):
 	if not note.sustain_ticking:
+		stats.health += 0.023
 		stats.score += 350
+	else:
+		stats.health += 0.004
 			
 	if not note.sustain_ticking:
 		if note.og_sustain_length > 0.0:
@@ -114,6 +120,8 @@ func note_hit(note:Note):
 		
 	for i in chars:
 		i.sing(note.column)
+	if Game.instance.hud:
+		Game.instance.hud.on_note_hit(self,note)
 		
 func rating_shit(hit_time:float):
 	pass

@@ -13,7 +13,6 @@ metadata/_edit_horizontal_guides_ = [-264.0]
 [node name="UI Layer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="UI Layer"]
-unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

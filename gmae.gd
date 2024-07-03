@@ -4,36 +4,46 @@ static var instance:Game = null
 @onready var ui_layer = $"UI Layer"
 @onready var tracks = $tracks
 @onready var event_manager: EventHandler = %event_manager
-@onready var hud: BaseHud = %HUD
+@onready var hud: BaseHud = $"UI Layer/HUD"
 
 var song_player:AudioStreamPlayer = null ## is set on play music shit
 var stage:Stage = null
 var song_script_objs:Array[Object] = []
 var player_list:Array[Player] = []
 static var shaders:bool = true
+func beat_hit(beat:int):
+	hud.on_beat_hit(beat)
 func _ready():
 	Conductor.reset()
 	chart = Chart.load_chart("manual-blast","hard")
+	Conductor.beat_hit.connect(beat_hit)
+	hud.queue_free()
+	
 	hud = chart.meta.hud.instantiate()
+	ui_layer.add_child(hud)
 	for i in chart.meta.players.size():
 		var config:PlayerConfig = chart.meta.players[i]
 		
 		var nfield:NoteField = NoteField.new()
 		nfield.global_position.y = 100
 		nfield.global_position.x = 110*3 + 640 * i
-		ui_layer.add_child(nfield)
+		hud.add_child(nfield)
 		var pler:Player = Player.new(nfield,config.has_input,config.autoplay)
 		pler.id = i
 		nfield.player = pler
 		nfield.note_data = chart.notes.duplicate()
 
 		player_list.append(pler)
-		ui_layer.add_child(pler)
+		if pler.does_input:
+			hud.stats = pler.stats
+		hud.add_child(pler)
 		if hud:
-			pler.notehit.connect(hud.on_note_hit)
+			#pler.notehit.connect(hud.on_note_hit)
+			hud.pivot_offset = hud.size / 2.0
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm
+	hud.move_to_front()
 	#var q = 0
 	#for i:Player in players.get_children():
 		#if not i: continue
