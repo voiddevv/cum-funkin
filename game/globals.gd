@@ -20,7 +20,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	overlay.position = lerp(overlay.position,overlay_pos,delta*pow(5.0,2.0))
+	overlay.position = lerp(overlay.position,overlay_pos,delta*12.0)
 	timer -= delta
 	if timer < 0.0:
 		hide_overlay()

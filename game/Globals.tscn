@@ -4,9 +4,17 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jalla"]
 bg_color = Color(0.1248, 0.48, 0.20768, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1jny"]
 bg_color = Color(0.234, 0.9, 0.3894, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_g2b40"]
 font_size = 24

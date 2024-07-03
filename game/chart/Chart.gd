@@ -58,7 +58,7 @@ static func load_chart(name:String,diff:String):
 					var player_id:int = int(cum[1])/4
 					if sex.mustHitSection:
 						player_id += 1
-					var note_data:NoteData = NoteData.new(cum[0]*0.001,int(cum[1])%4,(cum[2])*0.001,"normal",player_id%_chart.meta.players)
+					var note_data:NoteData = NoteData.new(cum[0]*0.001,int(cum[1])%4,(cum[2])*0.001,"normal",player_id%_chart.meta.players.size())
 					_chart.notes.append(note_data)
 	return _chart
 

@@ -9,7 +9,7 @@ func _init(_time:float,_target:int) -> void:
 func fire():
 	if Game.instance:
 		var game = Game.instance
-		var character:Character = game.players.get_child(target).chars.front()
+		var character:Character = game.player_list[target].chars.front()
 		if Game.instance.stage.camera:
 			if character.camera_position:
 				game.stage.camera.position = character.camera_position.global_position

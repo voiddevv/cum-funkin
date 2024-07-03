@@ -23,6 +23,6 @@ func _process(delta: float) -> void:
 	pass
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("volume_down"):
-		volume -= 0.05
+		volume -= 0.1
 	if event.is_action_pressed("volume_up"):
-		volume += 0.05
+		volume += 0.1

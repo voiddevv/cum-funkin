@@ -10,13 +10,12 @@ var notes:Node2D = Node2D.new()
 var temp_note = load("res://game/notes/normal.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Conductor.step_hit.connect(step_hit)
 	if SaveMan.get_data("downscroll",false):
 		position.y = 720 - position.y
 #region gen_strums
 	add_child(strums)
 	add_child(notes)
-	for i in player.keycount:
+	for i in 4:
 		var strum:Strum = Strum.new()
 		strum.column = i
 		strum.sprite_frames = preload("res://assets/NOTE_assets.res")
@@ -62,6 +61,8 @@ func queue_notes():
 		note_index += 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	queue_notes()
+	
 	var down_scroll_mult = 1.0 if not SaveMan.get_data("downscroll",false) else -1.0
 	
 	for note:Note in notes.get_children():
@@ -78,7 +79,4 @@ func _process(delta):
 		if note.missed:
 			note.global_position.y = strum.global_position.y - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
 
-func step_hit(step:int) -> void:
-	if step == Conductor.stepi:
-		queue_notes()
 	

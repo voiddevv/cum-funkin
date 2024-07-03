@@ -3,25 +3,41 @@ static var chart:Chart = null
 static var instance:Game = null
 @onready var ui_layer = $"UI Layer"
 @onready var tracks = $tracks
-@onready var players = $"UI Layer/players"
-@onready var event_manager: Node = $event_manager
+@onready var event_manager: EventHandler = %event_manager
+
 var song_player:AudioStreamPlayer = null ## is set on play music shit
 var stage:Stage = null
 var song_script_objs:Array[Object] = []
+var player_list:Array[Player] = []
 static var shaders:bool = true
 func _ready():
 	Conductor.reset()
 	chart = Chart.load_chart("manual-blast","hard")
+	for i in chart.meta.players.size():
+		var config:PlayerConfig = chart.meta.players[i]
+		
+		var nfield:NoteField = NoteField.new()
+		nfield.global_position.y = 100
+		nfield.global_position.x = 110*3 + 640 * i
+		ui_layer.add_child(nfield)
+		var pler:Player = Player.new(nfield,config.has_input,config.autoplay)
+		pler.id = i
+		nfield.player = pler
+		nfield.note_data = chart.notes.duplicate()
+
+		player_list.append(pler)
+		ui_layer.add_child(pler)
+		
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm
-	var q = 0
-	for i:Player in players.get_children():
-		if not i: continue
-		i.id = q
-		i.notefield.note_data = chart.notes.duplicate()
-		i.notefield.queue_notes()
-		q += 1
+	#var q = 0
+	#for i:Player in players.get_children():
+		#if not i: continue
+		#i.id = q
+		#i.notefield.note_data = chart.notes.duplicate()
+		#i.notefield.queue_notes()
+		#q += 1
 	chart.meta.events.sort_custom(func(a,b): return a.time < b.time)
 	instance = self
 
@@ -58,14 +74,14 @@ func _ready():
 			var bf:Character = chart.meta.player_character.instantiate()
 			bf.position = stage.player.position
 			stage.add_child(bf)
-			players.get_child(1).chars.append(bf)
+			player_list[1].chars.append(bf)
 			
 	if chart.meta.cpu_character:
 		if chart.meta.cpu_character.can_instantiate():
 			var dad = chart.meta.cpu_character.instantiate()
 			dad.position = stage.cpu.position
 			stage.add_child(dad)
-			players.get_child(0).chars.append(dad)
+			player_list[0].chars.append(dad)
 #endregion
 #region song scripts shits
 	for i:Script in chart.meta.song_scripts:

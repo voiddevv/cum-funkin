@@ -21,13 +21,13 @@ func _process(delta: float) -> void:
 	#preloaded_stuffs.clear()
 func step(_step:int) -> void:
 	if _step == 560:
-		var cpu_player:Player = game.players.get_child(0) as Player
+		var cpu_player:Player = game.player_list[0] as Player
 		for i in cpu_player.chars:
 			i.play_anim("transrights",true)
 	if _step == 864:
 		var newchar = scorched.instantiate()
 		game.stage.add_child(newchar)
-		var cpu_player:Player = game.players.get_child(0) as Player
+		var cpu_player:Player = game.player_list[0] as Player
 		game.chart.meta.cpu_character = scorched
 		for i in cpu_player.chars:
 			i.queue_free()
@@ -41,7 +41,7 @@ func step(_step:int) -> void:
 		var newchar = scorched_glitch.instantiate()
 		game.stage.add_child(newchar)
 		
-		var cpu_player:Player = game.players.get_child(0) as Player
+		var cpu_player:Player = game.player_list[0] as Player
 		game.chart.meta.cpu_character = scorched_glitch
 		
 		for i in cpu_player.chars:

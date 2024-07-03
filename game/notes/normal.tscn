@@ -28,8 +28,7 @@ texture_mode = 1
 [node name="tail" type="Sprite2D" parent="sustain"]
 z_index = -1
 use_parent_material = true
-position = Vector2(-1.19209e-07, 251.429)
-scale = Vector2(1, 1)
+position = Vector2(0, 251.5)
 texture = ExtResource("3_ke161")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]

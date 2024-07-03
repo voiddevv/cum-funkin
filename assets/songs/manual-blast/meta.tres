@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ChartMeta" load_steps=11 format=3 uid="uid://cu3wafn8n2ndd"]
+[gd_resource type="Resource" script_class="ChartMeta" load_steps=14 format=3 uid="uid://cu3wafn8n2ndd"]
 
 [ext_resource type="PackedScene" uid="uid://bgjrf8fuyfn4p" path="res://game/characters/hog.tscn" id="1_50l2k"]
 [ext_resource type="AudioStream" uid="uid://oov70115uwd6" path="res://assets/songs/manual-blast/inst.ogg" id="1_fd2oo"]
@@ -9,7 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://bc6bkwlvdvn5k" path="res://game/characters/bf.tscn" id="3_prdkf"]
 [ext_resource type="AudioStream" uid="uid://bvv2f3u0poi2e" path="res://assets/songs/manual-blast/voices.ogg" id="4_45glu"]
 [ext_resource type="Script" path="res://assets/songs/default_song_scripts/pause.gd" id="4_85prp"]
+[ext_resource type="Script" path="res://game/player/data/player_config.gd" id="5_7fl63"]
 [ext_resource type="PackedScene" uid="uid://b2dmpq5biyhs2" path="res://game/stages/hog.tscn" id="9_tokcw"]
+
+[sub_resource type="Resource" id="Resource_8tsxr"]
+script = ExtResource("5_7fl63")
+has_input = false
+autoplay = true
+
+[sub_resource type="Resource" id="Resource_ak25h"]
+script = ExtResource("5_7fl63")
+has_input = true
+autoplay = false
 
 [resource]
 script = ExtResource("1_vhccv")
@@ -22,4 +33,4 @@ script_packs = Array[Script]([])
 events = Array[ExtResource("2_p61c0")]([])
 format = 0
 stage = ExtResource("9_tokcw")
-players = 2
+players = Array[ExtResource("5_7fl63")]([SubResource("Resource_8tsxr"), SubResource("Resource_ak25h")])

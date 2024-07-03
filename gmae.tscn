@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgla7xsm2aocj"]
+[gd_scene load_steps=3 format=3 uid="uid://cgla7xsm2aocj"]
 
 [ext_resource type="Script" path="res://gmae.gd" id="1_eo62h"]
-[ext_resource type="Script" path="res://game/player/Player.gd" id="2_2k7a6"]
-[ext_resource type="Script" path="res://game/player/NoteField.gd" id="3_35ewl"]
 [ext_resource type="Script" path="res://game/event_manager.gd" id="4_w5otg"]
 
 [node name="gmae" type="Node2D"]
@@ -13,31 +11,6 @@ metadata/_edit_horizontal_guides_ = [-264.0]
 
 [node name="UI Layer" type="CanvasLayer" parent="."]
 
-[node name="players" type="Node2D" parent="UI Layer"]
-
-[node name="player" type="Node" parent="UI Layer/players" node_paths=PackedStringArray("notefield")]
-script = ExtResource("2_2k7a6")
-notefield = NodePath("../../NoteField")
-does_input = false
-autoplay = true
-
-[node name="Player2" type="Node" parent="UI Layer/players" node_paths=PackedStringArray("notefield")]
-script = ExtResource("2_2k7a6")
-notefield = NodePath("../../NoteField2")
-
-[node name="NoteField" type="Node2D" parent="UI Layer" node_paths=PackedStringArray("player")]
-z_index = 1
-z_as_relative = false
-position = Vector2(330, 100)
-script = ExtResource("3_35ewl")
-player = NodePath("../players/player")
-
-[node name="NoteField2" type="Node2D" parent="UI Layer" node_paths=PackedStringArray("player")]
-z_index = 1
-z_as_relative = false
-position = Vector2(970, 100)
-script = ExtResource("3_35ewl")
-player = NodePath("../players/Player2")
-
 [node name="event_manager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_w5otg")

@@ -13,6 +13,10 @@ var note_actions:PackedStringArray = ["note_left","note_down","note_up","note_ri
 var id:int = -1
 var chars:Array[Character] = []
 ## ffmpreg
+func _init(_notefield:NoteField,_has_input:bool = true,_autoplay:bool = false) -> void:
+	self.autoplay = _autoplay
+	self.does_input = _has_input
+	self.notefield = _notefield
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.use_accumulated_input = false
