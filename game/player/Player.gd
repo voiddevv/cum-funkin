@@ -2,8 +2,8 @@ class_name Player extends Node
 @export var notefield:NoteField
 @export var does_input:bool = true
 @export var autoplay:bool = false
-signal notehit(note:Note)
-signal notemiss(note:Note)
+signal notehit(player:Player,note:Note)
+signal notemiss(player:Player,note:Note)
 var notemiss_callback:Callable = note_miss
 var notehit_callback:Callable = note_hit
 var stats:PlayerStats = PlayerStats.new()
@@ -30,7 +30,7 @@ func _process(delta):
 			if note.time < Conductor.time and not note.was_hit:
 				note.was_hit = true
 				notehit_callback.call(note)
-				notehit.emit(note)
+				notehit.emit(self,note)
 				note.sustain_ticking = true
 		## dumb ass miss code :3
 		if Conductor.time - (note.time) > 0.180 and not note.missed and not note.was_hit and not autoplay:
@@ -47,7 +47,7 @@ func _process(delta):
 						if not autoplay:
 							note.missed = true
 							notemiss_callback.call(note)
-							notemiss.emit(note)
+							notemiss.emit(self,note)
 							return
 			note.sustain_length -= delta
 			if note.sustain_ticking:
@@ -56,7 +56,7 @@ func _process(delta):
 				note.queue_free()
 			if note.sustain_tick_timer <= 0.0:
 				notehit_callback.call(note)
-				notehit.emit(note)
+				notehit.emit(self,note)
 
 			
 	pass
@@ -83,6 +83,7 @@ func _unhandled_input(event):
 			if not hit_notes.is_empty():
 				hit_notes.front().was_hit = true
 				notehit_callback.call(hit_notes.front())
+				notehit.emit(self,hit_notes.front())
 				hit_notes.front().sustain_ticking = true
 		if not strum.animation.contains("confirm"): 
 			notefield.strums.get_child(dir).play_anim(Strum.PRESSED)

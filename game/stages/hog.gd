@@ -61,6 +61,6 @@ func beathit(beat:int):
 	if do_glitch:
 		glitchamount += 0.2
 	
-func cpu_note_hit(note:Note):
+func cpu_note_hit(player:Player,note:Note):
 	if note.sustain_ticking and do_glitch:
 		glitchamount += 0.06 * (1.0 + note.og_sustain_length*Conductor.step_crochet)

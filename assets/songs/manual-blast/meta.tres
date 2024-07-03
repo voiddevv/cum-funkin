@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ChartMeta" load_steps=14 format=3 uid="uid://cu3wafn8n2ndd"]
+[gd_resource type="Resource" script_class="ChartMeta" load_steps=15 format=3 uid="uid://cu3wafn8n2ndd"]
 
 [ext_resource type="PackedScene" uid="uid://bgjrf8fuyfn4p" path="res://game/characters/hog.tscn" id="1_50l2k"]
 [ext_resource type="AudioStream" uid="uid://oov70115uwd6" path="res://assets/songs/manual-blast/inst.ogg" id="1_fd2oo"]
 [ext_resource type="Script" path="res://game/chart/ChartMeta.gd" id="1_vhccv"]
 [ext_resource type="Script" path="res://game/events/Event.gd" id="2_p61c0"]
 [ext_resource type="Script" path="res://assets/songs/default_song_scripts/cameraBump.gd" id="3_3vfkl"]
+[ext_resource type="PackedScene" uid="uid://bygu84dd16y4y" path="res://game/hud/test_hud.tscn" id="3_jrf7y"]
 [ext_resource type="Script" path="res://assets/songs/manual-blast/scripts/events.gd" id="3_ot5ej"]
 [ext_resource type="PackedScene" uid="uid://bc6bkwlvdvn5k" path="res://game/characters/bf.tscn" id="3_prdkf"]
 [ext_resource type="AudioStream" uid="uid://bvv2f3u0poi2e" path="res://assets/songs/manual-blast/voices.ogg" id="4_45glu"]
@@ -34,3 +35,4 @@ events = Array[ExtResource("2_p61c0")]([])
 format = 0
 stage = ExtResource("9_tokcw")
 players = Array[ExtResource("5_7fl63")]([SubResource("Resource_8tsxr"), SubResource("Resource_ak25h")])
+hud = ExtResource("3_jrf7y")

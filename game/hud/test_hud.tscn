@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bygu84dd16y4y"]
+
+[ext_resource type="Script" path="res://game/hud/test_hud.gd" id="1_wwsv7"]
+
+[node name="TestHud" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_wwsv7")

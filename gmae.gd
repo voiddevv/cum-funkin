@@ -4,6 +4,7 @@ static var instance:Game = null
 @onready var ui_layer = $"UI Layer"
 @onready var tracks = $tracks
 @onready var event_manager: EventHandler = %event_manager
+@onready var hud: BaseHud = %HUD
 
 var song_player:AudioStreamPlayer = null ## is set on play music shit
 var stage:Stage = null
@@ -13,6 +14,7 @@ static var shaders:bool = true
 func _ready():
 	Conductor.reset()
 	chart = Chart.load_chart("manual-blast","hard")
+	hud = chart.meta.hud.instantiate()
 	for i in chart.meta.players.size():
 		var config:PlayerConfig = chart.meta.players[i]
 		
@@ -27,7 +29,8 @@ func _ready():
 
 		player_list.append(pler)
 		ui_layer.add_child(pler)
-		
+		if hud:
+			pler.notehit.connect(hud.on_note_hit)
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm

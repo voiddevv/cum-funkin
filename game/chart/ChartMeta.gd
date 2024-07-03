@@ -20,3 +20,4 @@ class_name ChartMeta extends Resource
 @export var format:Chart.ChartFormat = 0
 @export var stage:PackedScene = PackedScene.new()
 @export var players:Array[PlayerConfig] = []
+@export var hud:PackedScene = null
