@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 	cpu_icon.health = 2.0 - player_icon.health
 	pass
 func update_score_text():
-	score_text.text = "score : %s;\ncombo breaks : %s"%[stats.score,stats.combo_breaks]
+	score_text.text = "score : %s\ncombo breaks : %s\naccuracy : %0.3f%%\ncombo : %s\nmax combo : %s"%[stats.score,stats.combo_breaks,stats.accuracy*100.0,stats.combo,stats.max_combo]
 	pass
 func on_beat_hit(beat:int):
 	icons.scale += Vector2(0.2,0.2)

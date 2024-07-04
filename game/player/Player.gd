@@ -46,6 +46,7 @@ func _process(delta):
 					if note.sustain_length >= Conductor.step_crochet:
 						if not autoplay:
 							note.missed = true
+							stats.notes_hit -= 1
 							notemiss_callback.call(note)
 							notemiss.emit(self,note)
 							return
@@ -90,6 +91,8 @@ func _unhandled_input(event):
 	else:
 		notefield.strums.get_child(dir).play_anim(Strum.STATIC)
 func note_miss(note:Note):
+	
+	stats.combo = 0
 	stats.health -= 0.04/(1.0 + note.sustain_length)
 	stats.combo_breaks += 1
 	for i in chars:
@@ -101,6 +104,8 @@ func note_miss(note:Note):
 	
 func note_hit(note:Note):
 	if not note.sustain_ticking:
+		stats.combo += 1
+		stats.notes_hit += 1
 		stats.health += 0.023
 		stats.score += 350
 	else:
