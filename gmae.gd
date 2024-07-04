@@ -133,6 +133,7 @@ func skip_time(time_to:float):
 		Conductor.time = time_to
 		Conductor.update()
 		i.notefield.queue_notes()
-		for n:Note in i.notefield.notes.get_children():
-			if Conductor.time - (n.time + n.sustain_length) < 0.1:
-				n.free()
+		if i.does_input:
+			for n:Note in i.notefield.notes.get_children():
+				if Conductor.time - (n.time + n.sustain_length) < 0.3:
+					n.free()
