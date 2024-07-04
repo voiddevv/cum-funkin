@@ -37,18 +37,10 @@ func _ready():
 			hud.stats = pler.stats
 		hud.add_child(pler)
 		if hud:
-			#pler.notehit.connect(hud.on_note_hit)
 			hud.pivot_offset = hud.size / 2.0
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm
-	#var q = 0
-	#for i:Player in players.get_children():
-		#if not i: continue
-		#i.id = q
-		#i.notefield.note_data = chart.notes.duplicate()
-		#i.notefield.queue_notes()
-		#q += 1
 	chart.meta.events.sort_custom(func(a,b): return a.time < b.time)
 	instance = self
 

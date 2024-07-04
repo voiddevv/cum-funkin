@@ -8,11 +8,16 @@ extends BaseHud
 @onready var icons: Node2D = $health_bar_overlay/bar/icons
 
 const icon_offset:float = 26.0
-
-func _ready() -> void:
+func reload_icon_textures():
 	cpu_icon.texture = Game.instance.player_list[0].chars[0].icon
+	player_icon.texture = Game.instance.player_list[1].chars[0].icon
+	
+	pass
+func _ready() -> void:
+	reload_icon_textures()
 	if not SaveMan.get_data("downscroll"):
 		health_bar_overlay.global_position.y = 720 - health_bar_overlay.global_position.y
+	update_score_text()
 func on_note_miss(player:Player,note:Note):
 	if player.does_input:
 		update_score_text()

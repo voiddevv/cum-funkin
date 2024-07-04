@@ -34,6 +34,7 @@ func step(_step:int) -> void:
 		cpu_player.chars.clear()
 		cpu_player.chars.append(newchar)
 		newchar.position = game.stage.cpu.position
+		game.hud.reload_icon_textures()
 	if _step == 4160:
 		if Game.shaders:
 			game.stage.glitch.visible = true
