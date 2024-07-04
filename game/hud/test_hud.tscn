@@ -42,6 +42,7 @@ text = "score - 100;
 misses - 0;
 accuracy - 0;"
 label_settings = SubResource("LabelSettings_ceq6j")
+horizontal_alignment = 2
 
 [node name="health_bar_overlay" type="TextureRect" parent="."]
 z_index = -1
