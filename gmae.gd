@@ -115,10 +115,7 @@ func _input(event):
 	if event is InputEventKey:
 		if event.is_pressed():
 			if event.keycode == KEY_F3:
-				song_player.seek(song_player.get_playback_position() + 30)
-				Conductor.time += 30.0
-				
-				Conductor.update()
+				skip_time(Conductor.time + 30.0)
 			if event.keycode == KEY_F5:
 				if not event.is_echo():
 					if event.is_pressed(): 
@@ -130,3 +127,12 @@ func _exit_tree() -> void:
 	for i:Object in song_script_objs:
 		i.free()
 		
+func skip_time(time_to:float):
+	for i in player_list:
+		song_player.seek(time_to)
+		Conductor.time = time_to
+		Conductor.update()
+		i.notefield.queue_notes()
+		for n:Note in i.notefield.notes.get_children():
+			if Conductor.time - (n.time + n.sustain_length) < 0.1:
+				n.free()
