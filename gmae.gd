@@ -42,6 +42,18 @@ func _ready():
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm
 	chart.meta.events.sort_custom(func(a,b): return a.time < b.time)
+	var cool_players = player_list.filter(func(p:Player): return p.does_input)
+	if cool_players.size() == 1:
+		var p = cool_players.front()
+		if SaveMan.get_data("autoplay"):
+			p.autoplay = true
+		if SaveMan.get_data("center_notefeild"):
+			for i in player_list:
+				i.notefield.visible = false
+			p.notefield.visible = true
+			p.notefield.position.x = 640
+			
+		
 	instance = self
 
 	

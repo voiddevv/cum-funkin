@@ -71,7 +71,7 @@ func ev_to_dir(ev:InputEvent) -> int:
 
 func _unhandled_input(event):
 	var dir:int = ev_to_dir(event)
-	if dir == -1 or event.is_echo() or !does_input:
+	if dir == -1 or event.is_echo() or not does_input or autoplay:
 		return
 	pressed[dir] = event.is_pressed()
 	## note shit do later
