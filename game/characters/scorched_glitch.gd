@@ -14,5 +14,6 @@ func play_anim(anim:StringName,force:bool = false):
 	
 func _process(delta: float) -> void:
 	super._process(delta)
-	await sprite.frame_changed
+	for i in randi_range(1,4):
+		await sprite.frame_changed
 	cur_char = randi()%2

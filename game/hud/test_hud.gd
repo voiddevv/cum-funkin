@@ -31,7 +31,8 @@ func on_note_hit(player:Player,note:Note):
 func _process(delta: float) -> void:
 	scale = lerp(scale,Vector2.ONE,delta*5.0)
 	var percent = (1.0 - health_bar.value / health_bar.max_value)
-	icons.scale = lerp(icons.scale,Vector2.ONE,delta*19.0)
+	var bps = (Conductor.bpm/60.0)*4.0
+	icons.scale = lerp(icons.scale,Vector2.ONE,delta*bps)
 	icons.global_position.x = (health_bar.global_position.x *  scale.x + (health_bar.size.x * percent))
 	player_icon.health = stats.health
 	cpu_icon.health = 2.0 - player_icon.health

@@ -27,15 +27,17 @@ offset_bottom = 720.0
 script = ExtResource("1_wwsv7")
 
 [node name="score text" type="Label" parent="."]
+z_index = -1
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -107.0
-offset_top = -28.0
-offset_bottom = 17.0
+offset_left = -170.0
+offset_top = -32.5
+offset_right = -32.0
+offset_bottom = 21.5
 grow_horizontal = 0
 grow_vertical = 2
 text = "score - 100;
@@ -71,16 +73,16 @@ fill_mode = 1
 show_percentage = false
 
 [node name="icons" type="Node2D" parent="health_bar_overlay/bar"]
-position = Vector2(296, 0)
+position = Vector2(296, 6)
 
 [node name="cpu_icon" type="Sprite2D" parent="health_bar_overlay/bar/icons"]
-position = Vector2(-42, 0)
+position = Vector2(-42, -5)
 texture = ExtResource("3_nml61")
 hframes = 2
 script = ExtResource("5_bxdm7")
 
 [node name="player_icon" type="Sprite2D" parent="health_bar_overlay/bar/icons"]
-position = Vector2(54, 0)
+position = Vector2(54, -5)
 texture = ExtResource("3_p8rli")
 flip_h = true
 hframes = 2
