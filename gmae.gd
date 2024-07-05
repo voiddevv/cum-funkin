@@ -43,15 +43,15 @@ func _ready():
 	Conductor.bpm = chart.bpms[0].bpm
 	chart.meta.events.sort_custom(func(a,b): return a.time < b.time)
 	var cool_players = player_list.filter(func(p:Player): return p.does_input)
-	if cool_players.size() == 1:
-		var p = cool_players.front()
-		if SaveMan.get_data("autoplay"):
-			p.autoplay = true
-		if SaveMan.get_data("center_notefeild"):
-			for i in player_list:
-				i.notefield.visible = false
-			p.notefield.visible = true
-			p.notefield.position.x = 640
+	## it is possible for you to make more than 1 player with input, thats just dumb
+	var p = cool_players.front()
+	if SaveMan.get_data("autoplay"):
+		p.autoplay = true
+	if SaveMan.get_data("center_notefeild"):
+		for i in player_list:
+			i.notefield.visible = false
+		p.notefield.visible = true
+		p.notefield.position.x = 640
 			
 		
 	instance = self
@@ -145,7 +145,9 @@ func skip_time(time_to:float):
 		Conductor.time = time_to
 		Conductor.update()
 		i.notefield.queue_notes()
+		i.notefield.process_mode = Node.PROCESS_MODE_DISABLED
 		if i.does_input:
 			for n:Note in i.notefield.notes.get_children():
-				if Conductor.time - (n.time + n.sustain_length) < 0.3:
+				if (n.time) - Conductor.time < n.og_sustain_length:
 					n.free()
+		i.notefield.process_mode = Node.PROCESS_MODE_INHERIT

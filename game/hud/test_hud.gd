@@ -14,6 +14,7 @@ func reload_icon_textures():
 	
 	pass
 func _ready() -> void:
+	pivot_offset = Vector2(640,360)
 	reload_icon_textures()
 	if not SaveMan.get_data("downscroll"):
 		health_bar_overlay.global_position.y = 720 - health_bar_overlay.global_position.y
