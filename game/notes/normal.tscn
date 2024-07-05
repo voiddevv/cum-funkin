@@ -27,6 +27,7 @@ texture = ExtResource("2_4ls32")
 texture_mode = 1
 
 [node name="tail" type="Sprite2D" parent="sustain"]
+texture_filter = 2
 use_parent_material = true
 position = Vector2(0, 251.5)
 texture = ExtResource("3_ke161")
