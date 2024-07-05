@@ -11,6 +11,7 @@ var stage:Stage = null
 var song_script_objs:Array[Object] = []
 var player_list:Array[Player] = []
 static var shaders:bool = true
+var song_started:bool = false
 func beat_hit(beat:int):
 	hud.on_beat_hit(beat)
 func _ready():
@@ -53,11 +54,13 @@ func _ready():
 		p.notefield.visible = true
 		p.notefield.position.x = 640
 			
-		
+	Conductor.time = -Conductor.beat_crochet*5.0
+
 	instance = self
 
 	
-	
+	const countdown_streams = [preload("res://assets/countdown/intro3.ogg"), preload("res://assets/countdown/intro2.ogg"), preload("res://assets/countdown/intro1.ogg"), preload("res://assets/countdown/introGo.ogg")]
+	const countdown_textures = [preload("res://assets/countdown/ready.png"),preload("res://assets/countdown/set.png"),preload("res://assets/countdown/go.png")]
 #region music shits
 	var player:AudioStreamPlayer = AudioStreamPlayer.new()
 	player.stream = AudioStreamSynchronized.new()
@@ -70,7 +73,6 @@ func _ready():
 	for i in chart.meta.voices:
 		player.stream.set_sync_stream(s+1,i)
 		s += 1
-	player.play()
 	song_player = player
 		
 #endregion
@@ -110,16 +112,42 @@ func _ready():
 		song_script_objs.append(obj)
 #endregion
 	ui_layer.add_child(hud)
+	var d := AudioStreamPlayer.new()
+	var q := Sprite2D.new()
+	var pp := Timer.new()
+	add_child(pp)
+	add_child(d)
+	hud.add_child(q)
+	q.position = Vector2(640,360)
+	
+	for i in 5:
+		pp.start(Conductor.beat_crochet)
+		await pp.timeout
+		if i < 4:
+			d.stream = countdown_streams[i]
+			d.play()
+			if i > 0:
+				var tween = create_tween()
+				q.texture = countdown_textures[i-1]
+				q.modulate.a = 1.0
+				tween.tween_property(q,"modulate:a",0.0,Conductor.beat_crochet - 0.001).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+				
+		print(i)
 
 var last_stream_time:float = 0.0
 var cur_event:int = 0
 func _process(delta):
+	Conductor.update(delta)
+	if Conductor.time >= 0.0 and not song_started:
+		song_started = true
+		Conductor.audio.play()
+	if not song_started: 
+		return
 	if last_stream_time != 0:
 		if (song_player.get_playback_position()) < last_stream_time:
 			get_tree().change_scene_to_file("res://game/menus/titlescreen.tscn")
 		# some dumb code to fix sync stream for beta 2 till this gets patched :3
 	
-	Conductor.update(delta)
 	last_stream_time = (song_player.get_playback_position())
 
 

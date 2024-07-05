@@ -53,8 +53,9 @@ func _process(delta):
 			bpm = i.bpm
 			continue
 	if audio:
-		if abs(audio.get_playback_position() - Conductor.time) > 0.015:
-			Conductor.time = audio.get_playback_position()
+		if Game.instance:
+			if abs(audio.get_playback_position() - Conductor.time) > 0.015 and Game.instance.song_started:
+				Conductor.time = audio.get_playback_position()
 func update(delta:float = get_process_delta_time()):
 	time += delta
 	var last_step = step

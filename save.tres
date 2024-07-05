@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SaveDat" load_steps=2 format=3 uid="uid://dioycggmyqg2n"]
+
+[ext_resource type="Script" path="res://game/save/SaveData.gd" id="1_oqvhj"]
+
+[resource]
+script = ExtResource("1_oqvhj")
+fps = 120
+vsync = false
+downscroll = true
+center_notefeild = false
+autoplay = false
+scroll_speed = 1.0
+volume = 0.1
+keybinds = {
+"note_down": ["down", "f"],
+"note_left": ["left", "d"],
+"note_right": ["right", "k"],
+"note_up": ["up", "j"],
+"volume_down": ["minus", "kp subtract"],
+"volume_up": ["equal", "kp add"]
+}

@@ -54,7 +54,11 @@ func queue_notes():
 		note.sustain.material.set_shader_parameter("col",note.note_colors[note.column%4])
 		note.sprite.play(Strum.column_to_str(note.column))
 		note.global_position.x = strums.get_child(note.column).global_position.x
-		note.sustain.points[1].y = ((450*note.sustain_length)*(note.scroll_speed/Conductor.rate)*down_scroll_mult)/note.scale.y -31 * down_scroll_mult
+		## sustain code by sword cube thx :3
+		var distance: float = (450 * note.sustain_length) * (note.scroll_speed / Conductor.rate)
+		var scale_shit: float = (note.scale.y / scale.y*scale.y)
+		var tail_distance: float = (31 * down_scroll_mult)
+		note.sustain.points[1].y = ((distance * down_scroll_mult) / scale_shit - tail_distance)
 		note.tail.position = note.sustain.get_point_position(1) + Vector2(0,31)*down_scroll_mult
 		if down_scroll_mult == -1:
 			note.tail.flip_v = true
@@ -71,10 +75,13 @@ func _process(delta):
 			note.missed = true
 			note.queue_free()
 			
-		note.global_position.y = strum.global_position.y - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
+		note.global_position.y = (strum.global_position.y) - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * scale.y * down_scroll_mult
 		if note.was_hit:
 			note.global_position = strum.global_position
-			note.sustain.points[1].y = ((450*note.sustain_length)*(note.scroll_speed/Conductor.rate)*down_scroll_mult)/note.scale.y -31 * down_scroll_mult
+			var distance: float = (450 * note.sustain_length) * (note.scroll_speed / Conductor.rate)
+			var scale_shit: float = (note.scale.y / scale.y*scale.y)
+			var tail_distance: float = (31 * down_scroll_mult)
+			note.sustain.points[1].y = ((distance * down_scroll_mult) / scale_shit - tail_distance)
 			note.tail.position = note.sustain.get_point_position(1) + Vector2(0,31)*down_scroll_mult
 		if note.missed:
 			note.global_position.y = strum.global_position.y - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
