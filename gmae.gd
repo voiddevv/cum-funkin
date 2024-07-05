@@ -148,6 +148,6 @@ func skip_time(time_to:float):
 		i.notefield.process_mode = Node.PROCESS_MODE_DISABLED
 		if i.does_input:
 			for n:Note in i.notefield.notes.get_children():
-				if (n.time) - Conductor.time < n.og_sustain_length:
+				if (n.time) - Conductor.time < n.og_sustain_length + 2.2:
 					n.free()
 		i.notefield.process_mode = Node.PROCESS_MODE_INHERIT

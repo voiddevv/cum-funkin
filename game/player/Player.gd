@@ -46,7 +46,6 @@ func _process(delta):
 					if note.sustain_length >= Conductor.step_crochet:
 						if not autoplay:
 							note.missed = true
-							stats.notes_hit -= 1
 							notemiss_callback.call(note)
 							notemiss.emit(self,note)
 							return
