@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://btmxbmpowbjym"
-path="res://.godot/imported/Floor.png-58719d019a342004b18aba2c50f8c6c7.ctex"
+path.bptc="res://.godot/imported/Floor.png-58719d019a342004b18aba2c50f8c6c7.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/stages/hog/hog 2/Floor.png"
-dest_files=["res://.godot/imported/Floor.png-58719d019a342004b18aba2c50f8c6c7.ctex"]
+dest_files=["res://.godot/imported/Floor.png-58719d019a342004b18aba2c50f8c6c7.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -14,6 +14,7 @@ class_name SaveDat extends Resource
 @export var center_notefeild:bool = false
 @export var autoplay:bool = false
 @export var scroll_speed:float = 1.0
+@export var note_offset:float = 0.0
 @export var volume:float = 1.0:
 	set(v):
 		volume = v

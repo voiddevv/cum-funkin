@@ -9,7 +9,9 @@ var notefield:NoteField = null
 var cumlumn:int:
 	get:
 		return column
-var time:float
+var time:float:
+	set(v):
+		time = v + SaveMan.get_data("note_offset",0.0)
 
 var column:int
 

@@ -10,7 +10,8 @@ downscroll = true
 center_notefeild = false
 autoplay = false
 scroll_speed = 1.0
-volume = 0.2
+note_offset = 0.0
+volume = 0.1
 keybinds = {
 "note_down": ["down", "f"],
 "note_left": ["left", "d"],
