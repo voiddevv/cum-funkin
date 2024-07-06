@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlkjsx2gslcsu"]
 
-[ext_resource type="SpriteFrames" uid="uid://bu4em153wbot4" path="res://assets/NOTE_assets.res" id="1_qse40"]
+[ext_resource type="SpriteFrames" uid="uid://s3jieq3t6mn2" path="res://assets/notes.res" id="1_3jyvn"]
 [ext_resource type="Script" path="res://game/player/Strum.gd" id="2_xpkvo"]
 
 [node name="normal" type="Node2D"]
@@ -8,34 +8,30 @@
 [node name="left" type="AnimatedSprite2D" parent="."]
 position = Vector2(-165, 0)
 scale = Vector2(0.7, 0.7)
-sprite_frames = ExtResource("1_qse40")
+sprite_frames = ExtResource("1_3jyvn")
 animation = &"arrowLEFT"
-frame_progress = 1.0
 script = ExtResource("2_xpkvo")
 
 [node name="down" type="AnimatedSprite2D" parent="."]
 position = Vector2(-55, 0)
 scale = Vector2(0.7, 0.7)
-sprite_frames = ExtResource("1_qse40")
+sprite_frames = ExtResource("1_3jyvn")
 animation = &"arrowDOWN"
-frame_progress = 1.0
 script = ExtResource("2_xpkvo")
 column = 1
 
 [node name="up" type="AnimatedSprite2D" parent="."]
 position = Vector2(55, 0)
 scale = Vector2(0.7, 0.7)
-sprite_frames = ExtResource("1_qse40")
+sprite_frames = ExtResource("1_3jyvn")
 animation = &"arrowUP"
-frame_progress = 1.0
 script = ExtResource("2_xpkvo")
 column = 2
 
 [node name="right" type="AnimatedSprite2D" parent="."]
 position = Vector2(165, 0)
 scale = Vector2(0.7, 0.7)
-sprite_frames = ExtResource("1_qse40")
+sprite_frames = ExtResource("1_3jyvn")
 animation = &"arrowRIGHT"
-frame_progress = 1.0
 script = ExtResource("2_xpkvo")
 column = 3

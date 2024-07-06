@@ -47,7 +47,7 @@ func queue_notes():
 		note.scroll_speed = scrollspeed
 		note.notefield = self
 		notes.add_child(note)
-		note.sustain.material.set_shader_parameter("col",note.note_colors[note.column%4])
+		note.material.set_shader_parameter("note_color",note.note_colors[note.column%4])
 		note.sprite.play(Strum.column_to_str(note.column))
 		note.global_position.x = strums.get_child(note.column).global_position.x
 		## sustain code by sword cube thx :3

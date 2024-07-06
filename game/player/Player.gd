@@ -102,7 +102,10 @@ func note_miss(note:Note):
 	pass
 	
 func note_hit(note:Note):
+	var strum:Strum = note.notefield.strums.get_child(note.column)
+	
 	if not note.sustain_ticking:
+		strum.material = note.material
 		stats.combo += 1
 		stats.notes_hit += 1
 		stats.health += 0.023
@@ -117,10 +120,10 @@ func note_hit(note:Note):
 			
 	note.sustain_tick_timer = Conductor.step_crochet
 	
-	var strum:Strum = note.notefield.strums.get_child(note.column)
 	strum.play_anim(Strum.CONFIRM,true)
 	if not strum.animation_finished.is_connected(strum.play_anim.bind(0)):
 		strum.animation_finished.connect(strum.play_anim.bind(0),CONNECT_ONE_SHOT)
+		
 		
 	for i in chars:
 		i.sing(note.column)
