@@ -35,18 +35,18 @@ func step(s):
 func change_bg():
 	new_loops = Sprite2D.new()
 	overlay.queue_free()
-	trees.texture = load("res://assets/stages/hog/hog 2/Plants.png")
+	trees.texture = preload("res://assets/stages/hog/hog 2/Plants.png")
 	trees.position.x += 200
 	trees.position.y += 60
-	mount_hog.texture = load("res://assets/stages/hog/hog 2/Mountains.png")
-	floor_spr.texture = load("res://assets/stages/hog/hog 2/Floor.png")
+	mount_hog.texture = preload("res://assets/stages/hog/hog 2/Mountains.png")
+	floor_spr.texture = preload("res://assets/stages/hog/hog 2/Floor.png")
 	floor_spr.position -= Vector2(-200, -30)
-	rocks.texture = load("res://assets/stages/hog/hog 2/Rocks.png")
-	bg.texture = load("res://assets/stages/hog/hog 2/Sunset.png")
+	rocks.texture = preload("res://assets/stages/hog/hog 2/Rocks.png")
+	bg.texture = preload("res://assets/stages/hog/hog 2/Sunset.png")
 	bg.position.y += 300.0
 	water.sprite_frames = preload("res://assets/stages/hog/hog 2/Waterfalls.res")
 	water.play("British instance 1")
-	new_loops.texture = load("res://assets/stages/hog/hog 2/Hills.png")
+	new_loops.texture = preload("res://assets/stages/hog/hog 2/Hills.png")
 	new_loops.position = Vector2(0, 230)
 	new_loops.centered = false
 	loops.add_sibling(new_loops)

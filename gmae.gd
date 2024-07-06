@@ -31,6 +31,11 @@ func _ready():
 		nfield.strums = load("res://game/player/strumlines/normal.tscn").instantiate()
 		hud.add_child(nfield)
 		var pler:Player = Player.new(nfield,config.has_input,config.autoplay)
+		print(SaveMan.get_data("opponent_play",false))
+		if SaveMan.get_data("opponent_play"):
+			pler.does_input = not pler.does_input
+			pler.autoplay = not pler.autoplay
+			
 		pler.id = i
 		nfield.player = pler
 		nfield.note_data = chart.notes.duplicate()
