@@ -1,6 +1,6 @@
 class_name Strum extends AnimatedSprite2D
 
-var column:int = 0
+@export var column:int = 0
 enum {
 	STATIC,
 	PRESSED,

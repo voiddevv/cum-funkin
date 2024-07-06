@@ -6,9 +6,11 @@
 layer = 128
 script = ExtResource("1_ndocp")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="RichTextLabel" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 48.0
-offset_bottom = 31.0
+offset_right = 204.0
+offset_bottom = 333.0
+bbcode_enabled = true
 text = "FPS:"
+scroll_active = false

@@ -8,9 +8,9 @@ fps = 0
 vsync = false
 downscroll = true
 center_notefeild = false
-autoplay = true
+autoplay = false
 scroll_speed = 1.0
-volume = 0.1
+volume = 0.2
 keybinds = {
 "note_down": ["down", "f"],
 "note_left": ["left", "d"],

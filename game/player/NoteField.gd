@@ -6,24 +6,27 @@ var note_data:Array[NoteData] = []:
 		note_data.sort_custom(func(a,b): return a.time < b.time)
 var notes:Node2D = Node2D.new()
 @export var player:Player = null
-@onready var strums:Node2D = Node2D.new()
+var strums:Node2D
 var temp_note = load("res://game/notes/normal.tscn")
+var strumline:PackedScene = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if SaveMan.get_data("downscroll",false):
 		position.y = 720 - position.y
 #region gen_strums
+	
 	add_child(strums)
 	add_child(notes)
-	for i in 4:
-		var strum:Strum = Strum.new()
-		strum.column = i
-		strum.sprite_frames = preload("res://assets/NOTE_assets.res")
-		strum.position.x += (-2 + i)*110.0
-		strum.position.x += 110.0/2.0
-		strum.scale = Vector2.ONE*0.7
-		strum.play_anim(Strum.STATIC)
-		strums.add_child(strum)
+	## stinky eww
+	#for i in 4:
+		#var strum:Strum = Strum.new()
+		#strum.column = i
+		#strum.sprite_frames = preload("res://assets/NOTE_assets.res")
+		#strum.position.x += (-2 + i)*110.0
+		#strum.position.x += 110.0/2.0
+		#strum.scale = Vector2.ONE*0.7
+		#strum.play_anim(Strum.STATIC)
+		#strums.add_child(strum)
 #endregion
 
 var note_index:int = 0
@@ -56,6 +59,7 @@ func queue_notes():
 		if down_scroll_mult == -1:
 			note.tail.flip_v = true
 		note_index += 1
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	queue_notes()

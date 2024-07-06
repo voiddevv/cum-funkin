@@ -13,7 +13,7 @@ var glitchamount:float = 0.3:
 	set(v):
 		glitchamount = min(v,1.0)
 		glitch.material.set_shader_parameter("Amount",glitchamount)
-var new_loops:Sprite2D = Sprite2D.new()
+var new_loops:Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,6 +33,7 @@ func step(s):
 			change_bg()
 
 func change_bg():
+	new_loops = Sprite2D.new()
 	overlay.queue_free()
 	trees.texture = load("res://assets/stages/hog/hog 2/Plants.png")
 	trees.position.x += 200
@@ -43,7 +44,7 @@ func change_bg():
 	rocks.texture = load("res://assets/stages/hog/hog 2/Rocks.png")
 	bg.texture = load("res://assets/stages/hog/hog 2/Sunset.png")
 	bg.position.y += 300.0
-	water.sprite_frames = load("res://assets/stages/hog/hog 2/Waterfalls.res")
+	water.sprite_frames = preload("res://assets/stages/hog/hog 2/Waterfalls.res")
 	water.play("British instance 1")
 	new_loops.texture = load("res://assets/stages/hog/hog 2/Hills.png")
 	new_loops.position = Vector2(0, 230)

@@ -27,6 +27,8 @@ func _ready():
 		var nfield:NoteField = NoteField.new()
 		nfield.global_position.y = 100
 		nfield.global_position.x = 110*3 + 640 * i
+		
+		nfield.strums = load("res://game/player/strumlines/normal.tscn").instantiate()
 		hud.add_child(nfield)
 		var pler:Player = Player.new(nfield,config.has_input,config.autoplay)
 		pler.id = i

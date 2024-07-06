@@ -55,15 +55,12 @@ func on_note_miss(player:Player,note:Note):
 	
 func on_note_hit(player:Player,note:Note):
 	if player.does_input:
-		#Conductor.rate += 0.1
 		update_score_text()
 		health_bar.value = stats.health
-	#else:
-		#Conductor.rate -= 0.1
+
 		
 	pass
 func _process(delta: float) -> void:
-	#Conductor.rate = lerp(Conductor.rate,1.0,(delta* Conductor.beat_crochet*10.0))
 	scale = lerp(scale,Vector2.ONE,delta*5.0)
 	var percent = (1.0 - health_bar.value / health_bar.max_value)
 	var bps = (Conductor.bpm/60.0)*4.0
