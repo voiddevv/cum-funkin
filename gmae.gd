@@ -54,13 +54,8 @@ func _ready():
 		p.notefield.visible = true
 		p.notefield.position.x = 640
 			
-	Conductor.time = -Conductor.beat_crochet*5.0
 
 	instance = self
-
-	
-	const countdown_streams = [preload("res://assets/countdown/intro3.ogg"), preload("res://assets/countdown/intro2.ogg"), preload("res://assets/countdown/intro1.ogg"), preload("res://assets/countdown/introGo.ogg")]
-	const countdown_textures = [preload("res://assets/countdown/ready.png"),preload("res://assets/countdown/set.png"),preload("res://assets/countdown/go.png")]
 #region music shits
 	var player:AudioStreamPlayer = AudioStreamPlayer.new()
 	player.stream = AudioStreamSynchronized.new()
@@ -112,32 +107,11 @@ func _ready():
 		song_script_objs.append(obj)
 #endregion
 	ui_layer.add_child(hud)
-	var d := AudioStreamPlayer.new()
-	var q := Sprite2D.new()
-	var pp := Timer.new()
-	add_child(pp)
-	add_child(d)
-	hud.add_child(q)
-	q.position = Vector2(640,360)
-	
-	for i in 5:
-		pp.start(Conductor.beat_crochet)
-		await pp.timeout
-		if i < 4:
-			d.stream = countdown_streams[i]
-			d.play()
-			if i > 0:
-				var tween = create_tween()
-				q.texture = countdown_textures[i-1]
-				q.modulate.a = 1.0
-				tween.tween_property(q,"modulate:a",0.0,Conductor.beat_crochet - 0.001).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-				
-		print(i)
 
 var last_stream_time:float = 0.0
 var cur_event:int = 0
 func _process(delta):
-	Conductor.update(delta)
+	Conductor.time += delta
 	if Conductor.time >= 0.0 and not song_started:
 		song_started = true
 		Conductor.audio.play()
@@ -153,7 +127,7 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventKey:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if event.keycode == KEY_F3:
 				skip_time(Conductor.time + 30.0)
 			if event.keycode == KEY_F5:
@@ -171,11 +145,8 @@ func skip_time(time_to:float):
 	for i in player_list:
 		song_player.seek(time_to)
 		Conductor.time = time_to
-		Conductor.update()
 		i.notefield.queue_notes()
-		i.notefield.process_mode = Node.PROCESS_MODE_DISABLED
-		if i.does_input:
+		if not i.autoplay:
 			for n:Note in i.notefield.notes.get_children():
 				if (n.time) - Conductor.time < n.og_sustain_length + 2.2:
 					n.free()
-		i.notefield.process_mode = Node.PROCESS_MODE_INHERIT

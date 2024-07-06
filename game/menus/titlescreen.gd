@@ -13,7 +13,7 @@ func _ready():
 	
 
 func _process(delta):
-	Conductor.update()
+	Conductor.time += delta
 	
 func beat(b):
 	logo.play("logo bumpin")

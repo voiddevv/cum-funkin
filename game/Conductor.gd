@@ -4,7 +4,7 @@ signal step_hit(step:int)
 
 var rate:float = 1.0:
 	set(v):
-		rate = v
+		rate = max(v,0.01)
 		Engine.time_scale = rate
 		if audio:
 			audio.pitch_scale = rate
@@ -34,7 +34,6 @@ var beati:int:
 var stepi:int:
 	get:
 		return floor(step)
-var _last_time:float = 0.0
 var _last_change:BpmChangeEvent = BpmChangeEvent.new()
 
 func queue_bpm_change(change_event:BpmChangeEvent):
@@ -56,8 +55,8 @@ func _process(delta):
 		if Game.instance:
 			if abs(audio.get_playback_position() - Conductor.time) > 0.015 and Game.instance.song_started:
 				Conductor.time = audio.get_playback_position()
-func update(delta:float = get_process_delta_time()):
-	time += delta
+	update(delta)
+func update(delta:float):
 	var last_step = step
 	var last_beat = beat
 	## fall back shit ig
@@ -72,11 +71,8 @@ func update(delta:float = get_process_delta_time()):
 	if floori(beat) != floori(last_beat):
 		for i in range(last_beat + 1, beat + 1):
 			beat_hit.emit(floori(i))
-	_last_time = time
 func reset():
 	bpm_changes.clear()
 	time = 0.0
-	_last_time = 0.0
 	bpm = 100.0
 	rate = 1.0
-	update()

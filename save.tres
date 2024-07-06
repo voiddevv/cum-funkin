@@ -4,13 +4,13 @@
 
 [resource]
 script = ExtResource("1_oqvhj")
-fps = 120
+fps = 0
 vsync = false
 downscroll = true
 center_notefeild = false
-autoplay = false
+autoplay = true
 scroll_speed = 1.0
-volume = 1.0
+volume = 0.1
 keybinds = {
 "note_down": ["down", "f"],
 "note_left": ["left", "d"],

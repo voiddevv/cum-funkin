@@ -28,13 +28,6 @@ func _ready():
 
 var note_index:int = 0
 func queue_notes():
-	var last_data:NoteData
-	for i in note_data:
-		if last_data:
-			if i.column == last_data.column and abs(i.time - last_data.time) <= 0.005:
-				#print("stack note found")
-				note_data.erase(last_data)
-		last_data = i
 		
 	for i in range(note_index,note_data.size()):
 		var data = note_data[i]

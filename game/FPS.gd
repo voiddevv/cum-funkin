@@ -13,4 +13,3 @@ func _process(delta):
 	var ram = String.humanize_size(OS.get_static_memory_usage())
 	var vram = String.humanize_size(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED))
 	label.text = "FPS: %s\nram:%s\nvram:%s"%[fps,ram,vram]
-	pass
