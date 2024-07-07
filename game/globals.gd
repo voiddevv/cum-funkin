@@ -30,7 +30,9 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_WM_WINDOW_FOCUS_IN:
 			get_tree().paused = false
+			Engine.max_fps = SaveMan.get_data("fps")
 		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+			Engine.max_fps = 5
 			get_tree().paused = true
 
 func _unhandled_input(event: InputEvent) -> void:

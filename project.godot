@@ -27,6 +27,7 @@ Globals="*res://game/Globals.tscn"
 VolumeMan="*res://game/volume_man.tscn"
 Conductor="*res://game/Conductor.gd"
 Fps="*res://game/FPS.tscn"
+SceneManager="*res://autoload/scene_manager.tscn"
 
 [display]
 

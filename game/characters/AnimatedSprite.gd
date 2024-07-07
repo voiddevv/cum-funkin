@@ -4,7 +4,6 @@ extends AnimatedSprite2D
 @export var playing:bool = false:
 	set(value):
 		if value:
-			frame = 0
 			play(animation)
 		else:
 			pause()

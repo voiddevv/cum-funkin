@@ -126,7 +126,7 @@ func _process(delta):
 		return
 	if last_stream_time != 0:
 		if (song_player.get_playback_position()) < last_stream_time:
-			get_tree().change_scene_to_file("res://game/menus/titlescreen.tscn")
+			SceneManager.switch_scene("res://game/menus/titlescreen.tscn")
 		# some dumb code to fix sync stream for beta 2 till this gets patched :3
 	
 	last_stream_time = (song_player.get_playback_position())

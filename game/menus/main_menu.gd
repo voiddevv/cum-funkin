@@ -25,6 +25,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		SceneManager.switch_scene("res://game/menus/titlescreen.tscn")
 	if Input.is_action_just_pressed("ui_down"):
 		change_item(1)
 	if Input.is_action_just_pressed("ui_up"):
@@ -56,7 +58,7 @@ func select_item():
 	## dumb code up ahead
 	
 	await get_tree().create_timer(1.0,false).timeout
-	get_tree().change_scene_to_file("res://gmae.tscn")
+	SceneManager.switch_scene("res://gmae.tscn")
 func change_item(c:int = 0):
 	cur_selected += c
 	menu_scroll.play()

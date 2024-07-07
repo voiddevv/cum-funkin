@@ -20,7 +20,7 @@ func beat(b):
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and not event.is_echo():
-		get_tree().change_scene_to_file("res://game/menus/main_menu.tscn")
+		SceneManager.switch_scene("res://game/menus/main_menu.tscn")
 		
 
 
