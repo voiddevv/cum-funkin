@@ -1,10 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlkjsx2gslcsu"]
+[gd_scene load_steps=8 format=3 uid="uid://dlkjsx2gslcsu"]
 
 [ext_resource type="SpriteFrames" uid="uid://s3jieq3t6mn2" path="res://assets/notes.res" id="1_3jyvn"]
 [ext_resource type="Shader" path="res://color_shader.gdshader" id="1_jdphh"]
 [ext_resource type="Script" path="res://game/player/Strum.gd" id="2_xpkvo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8io8i"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxgb1"]
+resource_local_to_scene = true
+shader = ExtResource("1_jdphh")
+shader_parameter/enabled = false
+shader_parameter/note_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fc70r"]
+resource_local_to_scene = true
+shader = ExtResource("1_jdphh")
+shader_parameter/enabled = false
+shader_parameter/note_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1vf0"]
+resource_local_to_scene = true
+shader = ExtResource("1_jdphh")
+shader_parameter/enabled = false
+shader_parameter/note_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhuxw"]
+resource_local_to_scene = true
 shader = ExtResource("1_jdphh")
 shader_parameter/enabled = false
 shader_parameter/note_color = null
@@ -12,7 +31,7 @@ shader_parameter/note_color = null
 [node name="normal" type="Node2D"]
 
 [node name="left" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_8io8i")
+material = SubResource("ShaderMaterial_yxgb1")
 position = Vector2(-165, 0)
 scale = Vector2(0.7, 0.7)
 sprite_frames = ExtResource("1_3jyvn")
@@ -20,7 +39,7 @@ animation = &"arrowLEFT"
 script = ExtResource("2_xpkvo")
 
 [node name="down" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_8io8i")
+material = SubResource("ShaderMaterial_fc70r")
 position = Vector2(-55, 0)
 scale = Vector2(0.7, 0.7)
 sprite_frames = ExtResource("1_3jyvn")
@@ -29,7 +48,7 @@ script = ExtResource("2_xpkvo")
 column = 1
 
 [node name="up" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_8io8i")
+material = SubResource("ShaderMaterial_o1vf0")
 position = Vector2(55, 0)
 scale = Vector2(0.7, 0.7)
 sprite_frames = ExtResource("1_3jyvn")
@@ -38,7 +57,7 @@ script = ExtResource("2_xpkvo")
 column = 2
 
 [node name="right" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_8io8i")
+material = SubResource("ShaderMaterial_mhuxw")
 position = Vector2(165, 0)
 scale = Vector2(0.7, 0.7)
 sprite_frames = ExtResource("1_3jyvn")
