@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource("2_lahc0")
 shader_parameter/enabled = true
-shader_parameter/note_color = Color(1, 0.423529, 0.356863, 1)
+shader_parameter/note_color = Color(0, 1, 0.916667, 1)
 
 [node name="Normal" type="Node2D"]
 material = SubResource("ShaderMaterial_nr0wq")
@@ -20,7 +20,6 @@ note_colors = Array[Color]([Color(0.760784, 0.294118, 0.6, 1), Color(0, 1, 1, 1)
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
-scale = Vector2(1, 1)
 sprite_frames = ExtResource("5_fqcuk")
 animation = &"left"
 
@@ -29,7 +28,6 @@ modulate = Color(1, 1, 1, 0.6)
 z_index = -1
 z_as_relative = false
 use_parent_material = true
-scale = Vector2(1, 1)
 points = PackedVector2Array(0, 0, 0, 220)
 width = 50.0
 texture = ExtResource("2_4ls32")

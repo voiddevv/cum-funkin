@@ -19,6 +19,7 @@ var selecting_something:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	change_item(0)
+	camera.align()
 	pass # Replace with function body.
 
 

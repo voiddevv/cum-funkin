@@ -105,7 +105,7 @@ func note_hit(note:Note):
 	var strum:Strum = note.notefield.strums.get_child(note.column)
 	
 	if not note.sustain_ticking:
-		strum.material = note.material
+		strum.material = note.material.duplicate(false)
 		stats.combo += 1
 		stats.notes_hit += 1
 		stats.health += 0.023
