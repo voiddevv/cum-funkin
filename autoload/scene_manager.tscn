@@ -10,15 +10,14 @@ colors = PackedColorArray(0, 0, 0, 0, 0.0980392, 0.0980392, 0.0980392, 1, 0.0999
 gradient = SubResource("Gradient_gbnsg")
 fill_to = Vector2(0, 1)
 
-[node name="SceneManager" type="Node2D"]
+[node name="SceneManager" type="CanvasLayer"]
 process_mode = 3
+process_priority = 56945
+process_physics_priority = 151185
+layer = 128
 script = ExtResource("1_vxw27")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 128
-follow_viewport_scale = 0.001
-
-[node name="trans" type="TextureRect" parent="CanvasLayer"]
+[node name="trans" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
