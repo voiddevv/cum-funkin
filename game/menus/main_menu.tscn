@@ -101,6 +101,8 @@ libraries = {
 
 [node name="desat_flicker_timer" type="Timer" parent="."]
 wait_time = 0.15
+one_shot = true
 
 [node name="menu_item_flicker_timer" type="Timer" parent="."]
 wait_time = 0.06
+one_shot = true

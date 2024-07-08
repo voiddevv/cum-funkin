@@ -45,7 +45,7 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float):
 	for i in bpm_changes:
 		if time > i.time and _last_change != i:
 			_last_change = i
@@ -75,4 +75,6 @@ func reset():
 	bpm_changes.clear()
 	time = 0.0
 	bpm = 100.0
+	beat = 0.0
+	step = 0.0
 	rate = 1.0

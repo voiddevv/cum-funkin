@@ -3,6 +3,7 @@ class_name Character extends Node2D
 @export var icon:Texture
 @export var sing_length:float = 4.0
 @export var dance_steps:PackedStringArray = ["idle"]
+@export var anim_suffix:StringName = &''
 @export var is_player:bool = false:
 	set = set_is_player 
 @export_category("nodes")
@@ -28,12 +29,12 @@ func play_anim(anim:StringName,force:bool = false) -> void:
 	if force:
 		sprite.frame = 0
 		
-	if not anim_player.has_animation(anim):
+	if not anim_player.has_animation(anim + anim_suffix):
 		push_error("character does not have anim named - %s"%anim)
 		return
 		
-	_cur_anim = anim
-	anim_player.play(anim)
+	_cur_anim = anim + anim_suffix
+	anim_player.play(anim + anim_suffix)
 	
 func dance():
 	_sing_timer = 0

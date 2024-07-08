@@ -8,9 +8,9 @@ script = ExtResource("1_ndocp")
 
 [node name="Label" type="RichTextLabel" parent="."]
 offset_left = 8.0
-offset_top = 8.0
+offset_top = 3.0
 offset_right = 40.0
-offset_bottom = 31.0
+offset_bottom = 26.0
 mouse_filter = 2
 bbcode_enabled = true
 text = "FPS:"

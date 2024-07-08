@@ -66,8 +66,8 @@ texture = ExtResource("3_jye8c")
 layout_mode = 0
 offset_left = 5.0
 offset_top = 4.0
-offset_right = 597.0
-offset_bottom = 16.0
+offset_right = 596.0
+offset_bottom = 15.0
 theme_override_styles/background = SubResource("StyleBoxFlat_i3hgo")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tp0u")
 max_value = 2.0
@@ -75,7 +75,7 @@ value = 1.0
 fill_mode = 1
 show_percentage = false
 
-[node name="icons" type="Node2D" parent="health_bar_overlay/bar"]
+[node name="icons" type="CanvasGroup" parent="health_bar_overlay/bar"]
 position = Vector2(296, 6)
 
 [node name="cpu_icon" type="Sprite2D" parent="health_bar_overlay/bar/icons"]

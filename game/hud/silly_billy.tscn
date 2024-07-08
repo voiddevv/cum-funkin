@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://dm02288habbhj"]
+
+[ext_resource type="Script" path="res://game/hud/silly_billy.gd" id="1_08n1e"]
+[ext_resource type="Texture2D" uid="uid://s4fnknfkheo8" path="res://assets/songs/silly-billy/extraAssets/vignette.png" id="2_lw3yk"]
+[ext_resource type="FontFile" uid="uid://chbqimpxeumbq" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="2_nnv87"]
+[ext_resource type="Texture2D" uid="uid://bsh61uo75nybm" path="res://game/hud/healthBar.png" id="3_0sfoi"]
+[ext_resource type="Texture2D" uid="uid://vycn3e3cqk2w" path="res://assets/icons/icon-sillyTheBilly.png" id="3_5ekgf"]
+[ext_resource type="Texture2D" uid="uid://bx72drm654hgv" path="res://assets/songs/silly-billy/extraAssets/bars.png" id="3_h88bj"]
+[ext_resource type="Script" path="res://game/hud/HealthIcon.gd" id="5_4qa8x"]
+[ext_resource type="Texture2D" uid="uid://cuiop6xirhq2p" path="res://assets/icons/icon-sillyBF.png" id="5_bcfjm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ut1k"]
+bg_color = Color(0.384314, 0.423529, 0.694118, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oox7e"]
+bg_color = Color(0.509804, 0.560784, 0.760784, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ckqc8"]
+font = ExtResource("2_nnv87")
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SillyHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-640, -360)
+script = ExtResource("1_08n1e")
+
+[node name="Root" type="Node2D" parent="."]
+z_index = -2
+position = Vector2(640, 360)
+
+[node name="Vignette" type="Sprite2D" parent="Root"]
+texture = ExtResource("2_lw3yk")
+metadata/_edit_lock_ = true
+
+[node name="Bars" type="Sprite2D" parent="Root"]
+texture = ExtResource("3_h88bj")
+metadata/_edit_lock_ = true
+
+[node name="health_bar_overlay" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.5
+offset_top = 100.0
+offset_right = 300.5
+offset_bottom = 119.0
+grow_horizontal = 2
+texture = ExtResource("3_0sfoi")
+
+[node name="bar" type="ProgressBar" parent="health_bar_overlay"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 596.0
+offset_bottom = 15.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3ut1k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oox7e")
+max_value = 2.0
+value = 1.0
+fill_mode = 1
+show_percentage = false
+
+[node name="icons" type="CanvasGroup" parent="health_bar_overlay/bar"]
+position = Vector2(296, 6)
+
+[node name="cpu_icon" type="Sprite2D" parent="health_bar_overlay/bar/icons"]
+position = Vector2(-58, -5)
+texture = ExtResource("3_5ekgf")
+hframes = 5
+script = ExtResource("5_4qa8x")
+
+[node name="player_icon" type="Sprite2D" parent="health_bar_overlay/bar/icons"]
+position = Vector2(70, -5)
+texture = ExtResource("5_bcfjm")
+hframes = 2
+script = ExtResource("5_4qa8x")
+
+[node name="score text" type="Label" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -220.0
+offset_bottom = -166.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score: 100; Combo Breaks: 0; Accuracy: 0%;"
+label_settings = SubResource("LabelSettings_ckqc8")
+horizontal_alignment = 1
+vertical_alignment = 1

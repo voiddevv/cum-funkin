@@ -1581,7 +1581,7 @@
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"gfSection": false,
-				"changeBPM": true,
+				"changeBPM": false,
 				"bpm": 172
 			},
 			{

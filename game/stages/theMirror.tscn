@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu1mjvdukin1e"]
+
+[ext_resource type="Script" path="res://game/stages/stage.gd" id="1_xgm6a"]
+[ext_resource type="Texture2D" uid="uid://pvlb11vkmvkh" path="res://assets/stages/cumFunkinTest314159265358979323846264/silly_mirror.png" id="2_s24q8"]
+[ext_resource type="Texture2D" uid="uid://cv38ip2dsexrj" path="res://assets/stages/cumFunkinTest314159265358979323846264/broken_mirror.png" id="3_cbgg8"]
+[ext_resource type="SpriteFrames" path="res://assets/stages/cumFunkinTest314159265358979323846264/bgAssets.res" id="4_i6gge"]
+
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("camera", "player", "cpu", "speaker")]
+script = ExtResource("1_xgm6a")
+zoom = 0.725
+camera = NodePath("Camera")
+player = NodePath("player")
+cpu = NodePath("cpu")
+speaker = NodePath("speaker")
+
+[node name="CumInMyFunkin" type="Node2D" parent="."]
+
+[node name="SillyMirror" type="Sprite2D" parent="CumInMyFunkin"]
+texture = ExtResource("2_s24q8")
+centered = false
+
+[node name="BreakCore" type="Sprite2D" parent="CumInMyFunkin/SillyMirror"]
+visible = false
+texture = ExtResource("3_cbgg8")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CumInMyFunkin"]
+sprite_frames = ExtResource("4_i6gge")
+animation = &"Silly_floor"
+centered = false
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CumInMyFunkin"]
+sprite_frames = ExtResource("4_i6gge")
+animation = &"Silly_idk_1"
+centered = false
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="CumInMyFunkin"]
+sprite_frames = ExtResource("4_i6gge")
+animation = &"Silly_idk_2"
+centered = false
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1742, 1050)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.4
+editor_draw_screen = false
+
+[node name="player" type="Marker2D" parent="."]
+position = Vector2(2080, 1756)
+
+[node name="speaker" type="Marker2D" parent="."]
+position = Vector2(7637, 3861)
+
+[node name="cpu" type="Marker2D" parent="."]
+position = Vector2(1270, 1495)

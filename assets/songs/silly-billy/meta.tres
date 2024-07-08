@@ -1,26 +1,39 @@
-[gd_resource type="Resource" script_class="ChartMeta" load_steps=11 format=3 uid="uid://cl31o2ai5m7u2"]
+[gd_resource type="Resource" script_class="ChartMeta" load_steps=16 format=3 uid="uid://cl31o2ai5m7u2"]
 
+[ext_resource type="PackedScene" uid="uid://bts1euq4qesho" path="res://game/characters/sillyTheBilly.tscn" id="1_aug4w"]
 [ext_resource type="Script" path="res://game/chart/ChartMeta.gd" id="1_j7mbi"]
-[ext_resource type="PackedScene" uid="uid://b4sj84ynwumgv" path="res://game/characters/dad.tscn" id="1_k3jau"]
 [ext_resource type="AudioStream" uid="uid://cdy1ytbs3fnhw" path="res://assets/songs/silly-billy/Inst.ogg" id="1_y55jn"]
 [ext_resource type="Script" path="res://game/events/Event.gd" id="2_do68c"]
-[ext_resource type="PackedScene" uid="uid://cyd7777vg0jb3" path="res://game/stages/stage.tscn" id="3_51t10"]
+[ext_resource type="PackedScene" uid="uid://dm02288habbhj" path="res://game/hud/silly_billy.tscn" id="3_181st"]
 [ext_resource type="AudioStream" uid="uid://dkaqvpr055ud" path="res://assets/songs/silly-billy/Voices.ogg" id="3_sq0yq"]
-[ext_resource type="PackedScene" uid="uid://bc6bkwlvdvn5k" path="res://game/characters/bf.tscn" id="4_dmpm2"]
+[ext_resource type="Script" path="res://game/player/data/player_config.gd" id="5_gerk8"]
+[ext_resource type="PackedScene" uid="uid://ckd7ef7cdg5th" path="res://game/characters/sillyBF.tscn" id="5_x1axh"]
 [ext_resource type="Script" path="res://assets/songs/default_song_scripts/cameraBump.gd" id="6_yf7sp"]
 [ext_resource type="Script" path="res://assets/songs/default_song_scripts/pause.gd" id="7_4qpy7"]
-[ext_resource type="PackedScene" uid="uid://bgjrf8fuyfn4p" path="res://game/characters/hog.tscn" id="8_x8nq4"]
+[ext_resource type="Script" path="res://assets/songs/silly-billy/scripts/videoLoader.gd" id="10_ikey0"]
+[ext_resource type="Script" path="res://assets/songs/silly-billy/scripts/mainScript.gd" id="11_vabho"]
+[ext_resource type="PackedScene" uid="uid://cu1mjvdukin1e" path="res://game/stages/theMirror.tscn" id="13_4qs5u"]
+
+[sub_resource type="Resource" id="Resource_1oaoc"]
+script = ExtResource("5_gerk8")
+has_input = false
+autoplay = true
+
+[sub_resource type="Resource" id="Resource_4fwft"]
+script = ExtResource("5_gerk8")
+has_input = true
+autoplay = false
 
 [resource]
 script = ExtResource("1_j7mbi")
 inst = ExtResource("1_y55jn")
 voices = Array[AudioStream]([ExtResource("3_sq0yq")])
-cpu_character = ExtResource("1_k3jau")
-player_character = ExtResource("4_dmpm2")
-speaker_character = ExtResource("8_x8nq4")
-song_scripts = Array[Script]([ExtResource("6_yf7sp"), ExtResource("7_4qpy7")])
+cpu_character = ExtResource("1_aug4w")
+player_character = ExtResource("5_x1axh")
+song_scripts = Array[Script]([ExtResource("6_yf7sp"), ExtResource("7_4qpy7"), ExtResource("10_ikey0"), ExtResource("11_vabho")])
 script_packs = Array[Script]([])
 events = Array[ExtResource("2_do68c")]([])
 format = 0
-stage = ExtResource("3_51t10")
-players = 2
+stage = ExtResource("13_4qs5u")
+players = Array[ExtResource("5_gerk8")]([SubResource("Resource_1oaoc"), SubResource("Resource_4fwft")])
+hud = ExtResource("3_181st")

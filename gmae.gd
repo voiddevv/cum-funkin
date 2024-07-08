@@ -16,7 +16,7 @@ func beat_hit(beat:int):
 	hud.on_beat_hit(beat)
 func _ready():
 	Conductor.reset()
-	chart = Chart.load_chart("manual-blast","hard")
+	chart = Chart.load_chart("manual-blast", "hard")
 	Conductor.beat_hit.connect(beat_hit)
 	hud.queue_free()
 	
@@ -146,7 +146,8 @@ func _input(event):
 func _exit_tree() -> void:
 	chart = null
 	for i:Object in song_script_objs:
-		i.free()
+		if is_instance_valid(i):
+			i.free()
 		
 func skip_time(time_to:float):
 	for i in player_list:
