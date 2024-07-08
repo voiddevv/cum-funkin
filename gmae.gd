@@ -15,7 +15,6 @@ var song_started:bool = false
 func beat_hit(beat:int):
 	hud.on_beat_hit(beat)
 func _ready():
-	var start = Time.get_ticks_usec()
 	Conductor.reset()
 	chart = Chart.load_chart("manual-blast","hard")
 	Conductor.beat_hit.connect(beat_hit)
@@ -115,7 +114,6 @@ func _ready():
 		song_script_objs.append(obj)
 #endregion
 	ui_layer.add_child(hud)
-	print((Time.get_ticks_usec() - start) * 0.001)
 
 var last_stream_time:float = 0.0
 var cur_event:int = 0
