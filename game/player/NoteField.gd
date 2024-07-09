@@ -2,7 +2,7 @@ class_name NoteField extends Node2D
 var note_data:Array[NoteData] = []:
 	set(v):
 		note_data = v
-		note_data = note_data.filter(func(a): if a.player == self.player.id: return a)
+		note_data = note_data.filter(func(a): if a.player%Game.meta.players.size() == self.player.id: return a)
 		note_data.sort_custom(func(a,b): return a.time < b.time)
 var notes:Node2D = Node2D.new()
 @export var player:Player = null
