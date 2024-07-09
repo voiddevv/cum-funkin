@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://q6e1kix7o3h5"]
+
+[ext_resource type="Script" path="res://game/menus/freeplay/freeplay.gd" id="1_hny3a"]
+[ext_resource type="Texture2D" uid="uid://b82b7frs61q87" path="res://assets/icons/icon-dad.png" id="2_iv2lb"]
+[ext_resource type="Script" path="res://game/menus/freeplay/data/freeplay_data.gd" id="2_qhr7w"]
+[ext_resource type="Texture2D" uid="uid://bagnam16f3om6" path="res://assets/icons/icon-scorched.png" id="3_785xi"]
+[ext_resource type="Texture2D" uid="uid://b1fbwmd82v8tb" path="res://assets/main_menu/menuDesat.png" id="3_g7ldo"]
+[ext_resource type="Texture2D" uid="uid://vycn3e3cqk2w" path="res://assets/icons/icon-sillyTheBilly.png" id="4_u6xjh"]
+
+[sub_resource type="Resource" id="Resource_xvvom"]
+script = ExtResource("2_qhr7w")
+icon_texture = ExtResource("3_785xi")
+icon_frames = 2
+bg_color = Color(0.0901961, 0.117647, 0.290196, 1)
+song_name = "manual-blast"
+display_name = ""
+difficultys = Array[String](["hard"])
+
+[sub_resource type="Resource" id="Resource_f5aov"]
+script = ExtResource("2_qhr7w")
+icon_texture = ExtResource("4_u6xjh")
+icon_frames = 5
+bg_color = Color(0.486275, 0.533333, 0.819608, 1)
+song_name = "silly-billy"
+display_name = ""
+difficultys = Array[String](["normal"])
+
+[sub_resource type="FontVariation" id="FontVariation_cgke3"]
+variation_embolden = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_dx06g"]
+font = SubResource("FontVariation_cgke3")
+font_size = 48
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Freeplay" type="Node2D"]
+script = ExtResource("1_hny3a")
+freeplay_list = Array[ExtResource("2_qhr7w")]([SubResource("Resource_xvvom"), SubResource("Resource_f5aov")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="menu_bg" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(640, 360)
+texture = ExtResource("3_g7ldo")
+
+[node name="temp_item" type="Node2D" parent="."]
+position = Vector2(75, 75)
+
+[node name="icon" type="Sprite2D" parent="temp_item"]
+texture = ExtResource("2_iv2lb")
+hframes = 2
+
+[node name="song_name" type="Label" parent="temp_item/icon"]
+offset_left = 75.0
+offset_top = -22.0
+offset_right = 235.0
+offset_bottom = 23.0
+text = "dad-battle"
+label_settings = SubResource("LabelSettings_dx06g")
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0

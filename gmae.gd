@@ -1,5 +1,6 @@
 class_name Game extends Node2D
 static var chart:Chart = null
+static var play_mode = 0
 static var instance:Game = null
 @onready var ui_layer = $"UI Layer"
 @onready var tracks = $tracks
@@ -12,11 +13,16 @@ var song_script_objs:Array[Object] = []
 var player_list:Array[Player] = []
 static var shaders:bool = true
 var song_started:bool = false
+enum PlayMode {
+	FREEPLAY = 0,
+	STORY = 1
+}
 func beat_hit(beat:int):
 	hud.on_beat_hit(beat)
 func _ready():
 	Conductor.reset()
-	chart = Chart.load_chart("silly-billy", "normal")
+	if chart == null:
+		chart = Chart.load_chart("silly-billy", "normal")
 	Conductor.beat_hit.connect(beat_hit)
 	hud.queue_free()
 	
@@ -126,12 +132,19 @@ func _process(delta):
 		return
 	if last_stream_time != 0:
 		if (song_player.get_playback_position()) < last_stream_time:
-			SceneManager.switch_scene("res://game/menus/titlescreen.tscn")
+			end_song()
 		# some dumb code to fix sync stream for beta 2 till this gets patched :3
 	
 	last_stream_time = (song_player.get_playback_position())
 
-
+func end_song():
+	match play_mode:
+		PlayMode.FREEPLAY:
+			SceneManager.switch_scene("res://game/menus/freeplay/freeplay.tscn")
+		PlayMode.STORY:
+			SceneManager.switch_scene("res://game/menus/main_menu.tscn")
+			
+			
 func _input(event):
 	if event is InputEventKey:
 		if event.is_pressed() and not event.is_echo():
