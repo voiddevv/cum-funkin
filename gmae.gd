@@ -166,10 +166,13 @@ func _input(event):
 				skip_time(Conductor.time + 30.0)
 			if event.keycode == KEY_F5:
 				if not event.is_echo():
-					if event.is_pressed(): 
-						Conductor.reset()
+					if event.is_pressed():
+						Conductor.audio.stop()
+						Conductor.reset() 
 						meta = load_meta(chart.song_name)
 						get_tree().reload_current_scene()
+						
+						
 	
 func _exit_tree() -> void:
 	for i:Object in song_script_objs:
