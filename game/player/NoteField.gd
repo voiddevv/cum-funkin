@@ -39,7 +39,7 @@ func queue_notes():
 		if data.time > Conductor.time + (2.2/(scrollspeed/Conductor.rate)):
 			break
 		
-		var note = temp_note.instantiate()
+		var note:Note = temp_note.instantiate()
 		note.column = data.column
 		note.time = data.time
 		note.sustain_length = max(data.length,0.0)
@@ -52,7 +52,7 @@ func queue_notes():
 		note.global_position.x = strums.get_child(note.column).global_position.x
 		## sustain code by sword cube thx :3
 		var distance: float = (450 * note.sustain_length) * (note.scroll_speed / Conductor.rate)
-		var scale_shit: float = (note.scale.y / scale.y*scale.y)
+		var scale_shit: float = (note.scale.y / pow(scale.y,2.0))
 		var tail_distance: float = (31 * down_scroll_mult)
 		note.sustain.points[1].y = ((distance * down_scroll_mult) / scale_shit - tail_distance)
 		note.tail.position = note.sustain.get_point_position(1) + Vector2(0,31)*down_scroll_mult
@@ -72,15 +72,15 @@ func _process(delta):
 			note.missed = true
 			note.queue_free()
 			
-		note.global_position.y = (strum.global_position.y) - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * scale.y * down_scroll_mult
+		#note.global_position.y = (strum.global_position.y) - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * scale.y * down_scroll_mult
+		note.position.y = (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * scale.y * (down_scroll_mult * -1.0)
 		if note.was_hit:
-			note.global_position = strum.global_position
+			note.position.y = 0
 			var distance: float = (450 * note.sustain_length) * (note.scroll_speed / Conductor.rate)
-			var scale_shit: float = (note.scale.y / scale.y*scale.y)
+			var scale_shit: float = (note.scale.y / pow(scale.y,2.0))
 			var tail_distance: float = (31 * down_scroll_mult)
 			note.sustain.points[1].y = ((distance * down_scroll_mult) / scale_shit - tail_distance)
 			note.tail.position = note.sustain.get_point_position(1) + Vector2(0,31)*down_scroll_mult
 		if note.missed:
-			note.global_position.y = strum.global_position.y - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
-
+			note.position.y = strum.position.y - (450 * (Conductor.time - (note.time + (note.og_sustain_length - note.sustain_length)))) * (note.scroll_speed/Conductor.rate) * down_scroll_mult
 	

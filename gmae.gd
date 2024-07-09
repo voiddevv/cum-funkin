@@ -16,7 +16,7 @@ func beat_hit(beat:int):
 	hud.on_beat_hit(beat)
 func _ready():
 	Conductor.reset()
-	chart = Chart.load_chart("manual-blast", "hard")
+	chart = Chart.load_chart("silly-billy", "normal")
 	Conductor.beat_hit.connect(beat_hit)
 	hud.queue_free()
 	
