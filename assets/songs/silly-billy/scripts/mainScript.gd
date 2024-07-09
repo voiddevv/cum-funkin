@@ -18,7 +18,7 @@ func _ready() -> void:
 	game = Game.instance
 	hud = game.hud
 	cam = game.stage.camera
-	events = Game.chart.meta.events
+	events = Game.instance.event_manager.events
 	events.sort_custom(func(a, b):
 		return a.time < b.time)
 	dad = game.player_list[0].chars[0]
@@ -110,5 +110,4 @@ func _event(event: Event) -> void:
 				_:
 					pass
 		_:
-			print(event)
 			pass

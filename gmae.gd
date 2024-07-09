@@ -1,4 +1,5 @@
 class_name Game extends Node2D
+static var meta:ChartMeta
 static var chart:Chart = null
 static var play_mode = 0
 static var instance:Game = null
@@ -19,16 +20,29 @@ enum PlayMode {
 }
 func beat_hit(beat:int):
 	hud.on_beat_hit(beat)
-func _ready():
+static func load_meta(song_name:String) -> ChartMeta:
+	var meta_path:String = "res://assets/songs/%s/meta.tres"%song_name
+	print(meta_path)
+	if ResourceLoader.exists(meta_path):
+		return ResourceLoader.load(meta_path,"",ResourceLoader.CACHE_MODE_IGNORE)
+	else:
+		return ChartMeta.new()
+		
+func _init() -> void:
 	Conductor.reset()
+	if meta == null:
+		meta = load_meta("silly-billy")
 	if chart == null:
 		chart = Chart.load_chart("silly-billy", "normal")
+func _ready():
+	event_manager.events = meta.events + chart.events
+	event_manager.events.sort_custom(func(a,b): return a.time < b.time)
 	Conductor.beat_hit.connect(beat_hit)
 	hud.queue_free()
 	
-	hud = chart.meta.hud.instantiate()
-	for i in chart.meta.players.size():
-		var config:PlayerConfig = chart.meta.players[i]
+	hud = meta.hud.instantiate()
+	for i in meta.players.size():
+		var config:PlayerConfig = meta.players[i]
 		
 		var nfield:NoteField = NoteField.new()
 		nfield.global_position.y = 100
@@ -37,7 +51,6 @@ func _ready():
 		nfield.strums = load("res://game/player/strumlines/normal.tscn").instantiate()
 		hud.add_child(nfield)
 		var pler:Player = Player.new(nfield,config.has_input,config.autoplay)
-		print(SaveMan.get_data("opponent_play",false))
 		if SaveMan.get_data("opponent_play"):
 			pler.does_input = not pler.does_input
 			pler.autoplay = not pler.autoplay
@@ -55,7 +68,7 @@ func _ready():
 	for i in chart.bpms:
 		Conductor.queue_bpm_change(i)
 	Conductor.bpm = chart.bpms[0].bpm
-	chart.meta.events.sort_custom(func(a,b): return a.time < b.time)
+	meta.events.sort_custom(func(a,b): return a.time < b.time)
 	var cool_players = player_list.filter(func(p:Player): return p.does_input)
 	## it is possible for you to make more than 1 player with input, thats just dumb
 	var p = cool_players.front()
@@ -72,49 +85,47 @@ func _ready():
 #region music shits
 	var player:AudioStreamPlayer = AudioStreamPlayer.new()
 	player.stream = AudioStreamSynchronized.new()
-	player.stream.stream_count = 1 + chart.meta.voices.size()
+	player.stream.stream_count = 1 + Game.meta.voices.size()
 	player.bus = "music"
-	player.stream.set_sync_stream(0,chart.meta.inst)
+	player.stream.set_sync_stream(0,meta.inst)
 	Conductor.audio = player
 	tracks.add_child(player)
 	var s = 0
-	for i in chart.meta.voices:
+	for i in Game.meta.voices:
 		player.stream.set_sync_stream(s+1,i)
 		s += 1
 	song_player = player
 		
 #endregion
 #region stage shits
-	if !chart.meta.stage.can_instantiate():
+	if !meta.stage.can_instantiate():
 		var col = ColorRect.new()
 		col.size = Vector2(1920,1080)
 		col.color = Color.BLACK
 		chart.meta.stage.pack(col)
-	stage = chart.meta.stage.instantiate()
+	stage = meta.stage.instantiate()
 	add_child(stage,true,Node.INTERNAL_MODE_FRONT)
 #endregion
 #region character shits
-	if chart.meta.player_character:
-		if chart.meta.player_character.can_instantiate():
-			var bf:Character = chart.meta.player_character.instantiate()
+	if meta.player_character:
+		if meta.player_character.can_instantiate():
+			var bf:Character = meta.player_character.instantiate()
 			bf.position = stage.player.position
 			stage.add_child(bf)
 			player_list[1].chars.append(bf)
 			
-	if chart.meta.cpu_character:
-		if chart.meta.cpu_character.can_instantiate():
-			var dad = chart.meta.cpu_character.instantiate()
+	if meta.cpu_character:
+		if meta.cpu_character.can_instantiate():
+			var dad = meta.cpu_character.instantiate()
 			dad.position = stage.cpu.position
 			stage.add_child(dad)
 			player_list[0].chars.append(dad)
 #endregion
 #region song scripts shits
-	for i:Script in chart.meta.song_scripts:
+	for i:Script in meta.song_scripts:
 		var type = i.get_instance_base_type()
 		var obj = ClassDB.instantiate(type)
-		print(obj)
 		obj.set_script(i)
-		print(i)
 		if obj is Node:
 			add_child(obj)
 		song_script_objs.append(obj)
@@ -138,6 +149,9 @@ func _process(delta):
 	last_stream_time = (song_player.get_playback_position())
 
 func end_song():
+	## unload cus erm sigma
+	chart = null
+	meta = null
 	match play_mode:
 		PlayMode.FREEPLAY:
 			SceneManager.switch_scene("res://game/menus/freeplay/freeplay.tscn")
@@ -154,10 +168,10 @@ func _input(event):
 				if not event.is_echo():
 					if event.is_pressed(): 
 						Conductor.reset()
+						meta = load_meta(chart.song_name)
 						get_tree().reload_current_scene()
 	
 func _exit_tree() -> void:
-	chart = null
 	for i:Object in song_script_objs:
 		if is_instance_valid(i):
 			i.free()

@@ -4,23 +4,19 @@ enum ChartFormat{
 	BASE = 1,
 	RESOURCE = 2,
 }
-var meta:ChartMeta = ChartMeta.new()
 var song_name:StringName = "none"
 var notes:Array[NoteData] = []
+var events:Array[Event] = []
 var bpms:Array[BpmChangeEvent] = []
 var scroll_speed:float = 1.0
 
 var bf:StringName = "bf"
 var cpu:StringName = "dad"
 var speaker:StringName = "gf"
-static func load_chart(name:String,diff:String):
+static func load_chart(name:String,diff:String,format:ChartFormat = ChartFormat.PSYCH):
 	
 	var _chart:Chart = Chart.new()
-	var meta_path:String = "res://assets/songs/%s/meta.tres"%name
-	_chart.meta = ChartMeta.new()
-	if ResourceLoader.exists(meta_path):
-		_chart.meta = ResourceLoader.load(meta_path,"",ResourceLoader.CACHE_MODE_REPLACE_DEEP)
-	match _chart.meta.format:
+	match format:
 		ChartFormat.PSYCH,_:
 			
 			_chart.song_name = name
@@ -52,7 +48,7 @@ static func load_chart(name:String,diff:String):
 						else:
 							e = PsychEvent.new(event[0] / 1000.0, raw_event[1 + mod], raw_event[2])
 							e.name = e_name
-						_chart.meta.events.push_back(e)
+						_chart.events.push_back(e)
 			
 			var sexi:int = 0
 			## bpm change shit
@@ -68,13 +64,13 @@ static func load_chart(name:String,diff:String):
 					_chart.bpms.append(BpmChangeEvent.new(_time,sex.get("bpm",100.0),16.0*sexi))
 				sexi += 1
 				cam_event = CameraFocusEvent.new(_time,sex.mustHitSection)
-				_chart.meta.events.append(cam_event)
+				_chart.events.append(cam_event)
 				
 				for cum in sex.sectionNotes:
 					var player_id:int = int(cum[1])/4
 					if sex.mustHitSection:
 						player_id += 1
-					var note_data:NoteData = NoteData.new(cum[0]*0.001,int(cum[1])%4,(cum[2])*0.001,"normal",player_id%_chart.meta.players.size())
+					var note_data:NoteData = NoteData.new(cum[0]*0.001,int(cum[1])%4,(cum[2])*0.001,"normal",player_id%Game.meta.players.size())
 					_chart.notes.append(note_data)
 	return _chart
 

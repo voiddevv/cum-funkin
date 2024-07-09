@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://q6e1kix7o3h5"]
+[gd_scene load_steps=9 format=3 uid="uid://q6e1kix7o3h5"]
 
 [ext_resource type="Script" path="res://game/menus/freeplay/freeplay.gd" id="1_hny3a"]
 [ext_resource type="Texture2D" uid="uid://b82b7frs61q87" path="res://assets/icons/icon-dad.png" id="2_iv2lb"]
@@ -22,17 +22,8 @@ icon_texture = ExtResource("4_u6xjh")
 icon_frames = 5
 bg_color = Color(0.486275, 0.533333, 0.819608, 1)
 song_name = "silly-billy"
-display_name = ""
+display_name = " [img=512x64]res://trans.png[/img]"
 difficultys = Array[String](["normal"])
-
-[sub_resource type="FontVariation" id="FontVariation_cgke3"]
-variation_embolden = 1.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_dx06g"]
-font = SubResource("FontVariation_cgke3")
-font_size = 48
-outline_size = 24
-outline_color = Color(0, 0, 0, 1)
 
 [node name="Freeplay" type="Node2D"]
 script = ExtResource("1_hny3a")
@@ -52,14 +43,22 @@ position = Vector2(75, 75)
 texture = ExtResource("2_iv2lb")
 hframes = 2
 
-[node name="song_name" type="Label" parent="temp_item/icon"]
+[node name="song_name" type="RichTextLabel" parent="temp_item/icon"]
+clip_contents = false
+anchors_preset = -1
+anchor_left = -0.0533333
+anchor_right = 5.74667
 offset_left = 75.0
 offset_top = -22.0
-offset_right = 235.0
-offset_bottom = 23.0
+offset_right = 371.0
+offset_bottom = 45.0
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
 text = "dad-battle"
-label_settings = SubResource("LabelSettings_dx06g")
-uppercase = true
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Camera" type="Camera2D" parent="."]

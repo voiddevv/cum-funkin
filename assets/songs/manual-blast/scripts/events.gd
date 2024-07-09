@@ -28,7 +28,7 @@ func step(_step:int) -> void:
 		var newchar = scorched.instantiate()
 		game.stage.add_child(newchar)
 		var cpu_player:Player = game.player_list[0] as Player
-		game.chart.meta.cpu_character = scorched
+		game.meta.cpu_character = scorched
 		for i in cpu_player.chars:
 			i.queue_free()
 		cpu_player.chars.clear()
@@ -43,7 +43,7 @@ func step(_step:int) -> void:
 		game.stage.add_child(newchar)
 		
 		var cpu_player:Player = game.player_list[0] as Player
-		game.chart.meta.cpu_character = scorched_glitch
+		game.meta.cpu_character = scorched_glitch
 		
 		for i in cpu_player.chars:
 			i.queue_free()

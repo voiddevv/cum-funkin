@@ -17,7 +17,6 @@ var cur_dance_step:int = 0
 
 func set_is_player(v:bool):
 	is_player = v
-	print(v)
 
 func _ready():
 	set_is_player(is_player)

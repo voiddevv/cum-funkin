@@ -1,5 +1,5 @@
 extends Stage
-@onready var overlay: Parallax2D = $Parallax2D4
+@onready var overlay: Sprite2D = $Parallax2D4/Overlay
 @onready var trees: Sprite2D = $Parallax2D2/trees
 @onready var mount_hog: Sprite2D = $"Parallax2D/mount hog"
 @onready var floor_spr: Sprite2D = $Sprite2D
@@ -34,7 +34,7 @@ func step(s):
 
 func change_bg():
 	new_loops = Sprite2D.new()
-	overlay.queue_free()
+	overlay.visible = false
 	trees.texture = preload("res://assets/stages/hog/hog 2/Plants.png")
 	trees.position.x += 200
 	trees.position.y += 60
@@ -50,7 +50,8 @@ func change_bg():
 	new_loops.position = Vector2(0, 230)
 	new_loops.centered = false
 	loops.add_sibling(new_loops)
-	loops.queue_free()
+	loops.sprite_frames.clear_all()
+	loops.visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if do_glitch:

@@ -18,7 +18,7 @@ func _ready() -> void:
 			i = FreeplayData.new()
 		var item:Node2D = temp_item.duplicate()
 		var item_icon:Sprite2D = item.get_node("icon")
-		var item_label:Label = item.get_node("icon/song_name")
+		var item_label:RichTextLabel = item.get_node("icon/song_name")
 		item_label.position.x = 75
 		item.position.y += 160*count
 		item.position.x += 40*count
@@ -54,7 +54,8 @@ func change_item(i:int):
 	camera.position.x = 640 + (cur_item * 40)
 	
 func select_song():
-	Game.chart = Chart.load_chart(freeplay_list[cur_item].song_name,freeplay_list[cur_item].difficultys[cur_diffuculty])
+	var song_name = freeplay_list[cur_item].song_name
 	SceneManager.switch_scene("res://gmae.tscn")
-	print(freeplay_list[cur_item].difficultys[cur_diffuculty])
+	Game.meta = Game.load_meta(song_name)
+	Game.chart = Chart.load_chart(song_name,freeplay_list[cur_item].difficultys[cur_diffuculty],Game.meta.format)
 	pass

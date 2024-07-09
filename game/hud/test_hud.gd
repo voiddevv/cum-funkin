@@ -39,7 +39,6 @@ func do_count_down():
 				q.modulate.a = 1.0
 				tween.tween_property(q,"modulate:a",0.0,Conductor.beat_crochet - 0.001).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 				
-		print(i)
 func _ready() -> void:
 	pivot_offset = Vector2(640,360)
 	reload_icon_textures()
