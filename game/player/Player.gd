@@ -81,6 +81,17 @@ func _unhandled_input(event):
 			var hit_notes = notefield.notes.get_children()
 			hit_notes = hit_notes.filter(func(n:Note): if n.can_hit and not n.too_late and not n.missed and not n.was_hit and n.column == dir: return n)
 			if not hit_notes.is_empty():
+				if hit_notes.size() > 1:
+					var last_note = null
+					for i:Note in hit_notes:
+						if last_note != null:
+							if abs(i.time - last_note.time) < 0.003:
+								print("dumb stacks :[")
+								i.was_hit = true
+								notehit_callback.call(i)
+								notehit.emit(self,i)
+								i.sustain_ticking = true
+						last_note = i
 				hit_notes.front().was_hit = true
 				notehit_callback.call(hit_notes.front())
 				notehit.emit(self,hit_notes.front())

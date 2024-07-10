@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8235xq70y2ii"]
+
+[ext_resource type="Texture2D" uid="uid://b1fbwmd82v8tb" path="res://assets/main_menu/menuDesat.png" id="1_ts4b0"]
+[ext_resource type="Script" path="res://game/menus/options_menu/options_menu.gd" id="1_vd6yg"]
+[ext_resource type="Script" path="res://game/menus/options_menu/scripts/options_checkbox.gd" id="3_rh5dl"]
+[ext_resource type="Script" path="res://game/menus/options_menu/options_spinbox.gd" id="4_h83eq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crrhl"]
+bg_color = Color(0, 0, 0, 0.4)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="OptionsMenu" type="Node2D"]
+script = ExtResource("1_vd6yg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(0.379237, 0.232766, 0.337434, 1)
+texture = ExtResource("1_ts4b0")
+centered = false
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="pages" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="gameplay" type="PanelContainer" parent="UI/pages"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -270.0
+offset_right = 480.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_crrhl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/pages/gameplay"]
+layout_mode = 2
+alignment = 1
+
+[node name="numbers" type="HBoxContainer" parent="UI/pages/gameplay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="fps" type="SpinBox" parent="UI/pages/gameplay/VBoxContainer/numbers"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "sets the fps cap, max of 1000 set to 0 for unlimted"
+max_value = 1000.0
+rounded = true
+alignment = 1
+suffix = "FPS"
+custom_arrow_step = 10.0
+script = ExtResource("4_h83eq")
+
+[node name="scroll speed" type="SpinBox" parent="UI/pages/gameplay/VBoxContainer/numbers"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+tooltip_text = "scroll speed, the speed the notes are on the note field, set to 1.0 for chart based speed"
+max_value = 10.0
+step = 0.1
+alignment = 1
+suffix = "scroll speed"
+custom_arrow_step = 0.1
+script = ExtResource("4_h83eq")
+linked_field = "scroll_speed"
+
+[node name="bools" type="HBoxContainer" parent="UI/pages/gameplay/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+alignment = 1
+
+[node name="downscroll" type="CheckBox" parent="UI/pages/gameplay/VBoxContainer/bools"]
+layout_mode = 2
+text = "downscroll"
+script = ExtResource("3_rh5dl")
+
+[node name="centernotefield" type="CheckBox" parent="UI/pages/gameplay/VBoxContainer/bools"]
+layout_mode = 2
+text = "center notefield"
+script = ExtResource("3_rh5dl")
+linked_field = "center_notefield"
+
+[node name="opponentplay" type="CheckBox" parent="UI/pages/gameplay/VBoxContainer/bools"]
+layout_mode = 2
+text = "opponent play"
+script = ExtResource("3_rh5dl")
+linked_field = "opponent_play"
+
+[node name="autoplay" type="CheckBox" parent="UI/pages/gameplay/VBoxContainer/bools"]
+layout_mode = 2
+text = "autoplay
+"
+script = ExtResource("3_rh5dl")
+linked_field = "autoplay"
+
+[node name="vsync" type="CheckBox" parent="UI/pages/gameplay/VBoxContainer/bools"]
+layout_mode = 2
+text = "vsync"
+script = ExtResource("3_rh5dl")
+linked_field = "vsync"

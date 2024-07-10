@@ -61,6 +61,9 @@ func select_item():
 	match options[cur_selected]:
 		"freeplay":
 			SceneManager.switch_scene("res://game/menus/freeplay/freeplay.tscn")
+		"options":
+			SceneManager.switch_scene("res://game/menus/options_menu/options_menu.tscn")
+			
 func change_item(c:int = 0):
 	cur_selected += c
 	menu_scroll.play()

@@ -11,7 +11,7 @@ class_name SaveDat extends Resource
 		else:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 @export var downscroll:bool = true
-@export var center_notefeild:bool = false
+@export var center_notefield:bool = false
 @export var autoplay:bool = false
 @export var scroll_speed:float = 1.0
 @export var note_offset:float = 0.0

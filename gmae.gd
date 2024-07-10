@@ -74,7 +74,7 @@ func _ready():
 	var p = cool_players.front()
 	if SaveMan.get_data("autoplay"):
 		p.autoplay = true
-	if SaveMan.get_data("center_notefeild"):
+	if SaveMan.get_data("center_notefield"):
 		for i in player_list:
 			i.notefield.visible = false
 		p.notefield.visible = true
@@ -167,9 +167,9 @@ func _input(event):
 			if event.keycode == KEY_F5:
 				if not event.is_echo():
 					if event.is_pressed():
+						meta = load_meta(chart.song_name)
 						Conductor.audio.stop()
 						Conductor.reset() 
-						meta = load_meta(chart.song_name)
 						get_tree().reload_current_scene()
 						
 						
