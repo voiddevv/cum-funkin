@@ -82,6 +82,10 @@ custom_arrow_step = 0.1
 script = ExtResource("4_h83eq")
 linked_field = "scroll_speed"
 
+[node name="HSeparator" type="HSeparator" parent="UI/pages/gameplay/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
 [node name="bools" type="HBoxContainer" parent="UI/pages/gameplay/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4

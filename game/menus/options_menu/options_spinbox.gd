@@ -9,6 +9,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 func on_changed(v:float):
 	SaveMan.save.set(linked_field,v)
+	SaveMan.save_data()
 	print(v)
 	pass
 

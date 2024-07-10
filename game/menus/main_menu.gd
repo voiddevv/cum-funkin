@@ -62,6 +62,7 @@ func select_item():
 		"freeplay":
 			SceneManager.switch_scene("res://game/menus/freeplay/freeplay.tscn")
 		"options":
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			SceneManager.switch_scene("res://game/menus/options_menu/options_menu.tscn")
 			
 func change_item(c:int = 0):

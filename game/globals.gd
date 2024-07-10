@@ -13,6 +13,7 @@ func hide_overlay():
 	overlay_pos = Vector2(-overlay.size.x,0.0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	overlay_pos = -overlay.size
 	show_overlay()
 	pass # Replace with function body.

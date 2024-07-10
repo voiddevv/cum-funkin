@@ -10,5 +10,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		SceneManager.switch_scene("res://game/menus/main_menu.tscn")
 	pass
