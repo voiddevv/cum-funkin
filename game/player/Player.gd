@@ -49,7 +49,10 @@ func _process(delta):
 							notemiss_callback.call(note)
 							notemiss.emit(self,note)
 							return
-			note.sustain_length -= delta
+			if note.og_sustain_length > 0.0:
+				note.sustain_length = (note.time + note.og_sustain_length) - Conductor.time
+			else:
+				note.sustain_length -= delta
 			if note.sustain_ticking:
 				note.sustain_tick_timer -= delta
 			if note.sustain_length < 0:

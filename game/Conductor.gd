@@ -17,6 +17,7 @@ var bpm_changes:Array[BpmChangeEvent] = []:
 		print("changed bpm map")
 
 var time:float = 0.0
+var last_time:float = 0.0
 # beat shit
 var bpm:float = 100.0
 var beat_crochet:float:
@@ -51,10 +52,6 @@ func _process(delta:float):
 			_last_change = i
 			bpm = i.bpm
 			continue
-	if audio:
-		if Game.instance:
-			if abs(audio.get_playback_position() - Conductor.time) > 0.015 and Game.instance.song_started:
-				Conductor.time = audio.get_playback_position()
 	update(delta)
 func update(delta:float):
 	var last_step = step
@@ -74,6 +71,7 @@ func update(delta:float):
 func reset():
 	bpm_changes.clear()
 	time = 0.0
+	last_time = 0
 	bpm = 100.0
 	beat = 0.0
 	step = 0.0

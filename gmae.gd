@@ -135,18 +135,23 @@ func _ready():
 var last_stream_time:float = 0.0
 var cur_event:int = 0
 func _process(delta):
-	Conductor.time += delta
+	var song_time:float = Conductor.audio.get_playback_position() + AudioServer.get_time_since_last_mix()
+	if Conductor.last_time == song_time or not song_started:
+		Conductor.time += delta
+	else:
+		Conductor.time = song_time
+		Conductor.last_time = song_time
 	if Conductor.time >= 0.0 and not song_started:
 		song_started = true
 		Conductor.audio.play()
-	if not song_started: 
-		return
-	if last_stream_time != 0:
-		if (song_player.get_playback_position()) < last_stream_time:
-			end_song()
-		# some dumb code to fix sync stream for beta 2 till this gets patched :3
-	
-	last_stream_time = (song_player.get_playback_position())
+	if song_started:
+		
+		if last_stream_time != 0:
+			if (song_player.get_playback_position()) < last_stream_time:
+				end_song()
+			# some dumb code to fix sync stream for beta 2 till this gets patched :3
+
+		last_stream_time = (song_player.get_playback_position())
 
 func end_song():
 	## unload cus erm sigma
@@ -170,7 +175,8 @@ func _input(event):
 						meta = load_meta(chart.song_name)
 						Conductor.audio.stop()
 						Conductor.reset() 
-						get_tree().reload_current_scene()
+						get_tree().unload_current_scene()
+						SceneManager.switch_scene("res://gmae.tscn")
 						
 						
 	

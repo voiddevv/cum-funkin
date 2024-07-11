@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b1fbwmd82v8tb" path="res://assets/main_menu/menuDesat.png" id="1_ts4b0"]
 [ext_resource type="Script" path="res://game/menus/options_menu/options_menu.gd" id="1_vd6yg"]
 [ext_resource type="Script" path="res://game/menus/options_menu/scripts/options_checkbox.gd" id="3_rh5dl"]
-[ext_resource type="Script" path="res://game/menus/options_menu/options_spinbox.gd" id="4_h83eq"]
+[ext_resource type="Script" path="res://game/menus/options_menu/scripts/options_spinbox.gd" id="4_h83eq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crrhl"]
 bg_color = Color(0, 0, 0, 0.4)
@@ -122,3 +122,13 @@ layout_mode = 2
 text = "vsync"
 script = ExtResource("3_rh5dl")
 linked_field = "vsync"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/pages/gameplay/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="keybinds button" type="Button" parent="UI/pages/gameplay/VBoxContainer"]
+layout_mode = 2
+text = "change keybinds"
+
+[connection signal="pressed" from="UI/pages/gameplay/VBoxContainer/keybinds button" to="." method="_on_keybinds_button_pressed"]
